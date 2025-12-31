@@ -48,7 +48,7 @@ if (isForge) {
 
     // Exclude files marked as "fabric only"
     sourceSets.main.java.exclude '**/*_Fabric.java'
-    artifact_id = "${mod_id}-forge"
+    artifact_id = "${mod_id}_forge"
 
     dependencies {
         minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
@@ -77,7 +77,7 @@ else if (isFabric) {
 
     // Exclude files marked as "forge only"
     sourceSets.main.java.exclude '**/*_Forge.java'
-    artifact_id = "${mod_id}-fabric"
+    artifact_id = "${mod_id}_fabric"
 
     dependencies {
         minecraft "com.mojang:minecraft:${minecraft_version}"
@@ -109,7 +109,7 @@ else {
 
     // Exclude files marked as "fabric only"
     sourceSets.main.java.exclude '**/*_Fabric.java'
-    artifact_id = "${mod_id}-neoforge"
+    artifact_id = "${mod_id}_neoforge"
 
     dependencies {
         // minecraft "net.neoforged:forge:${minecraft_version}-${neoforge_version}"

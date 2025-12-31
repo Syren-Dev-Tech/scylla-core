@@ -10,7 +10,7 @@ build-forge:
 	sdk use gradle ${FORGE_GRADLE_VERSION} && \
 	gradle clean build -Pforge=true && \
 	mkdir -p ./dist && \
-	cp build/libs/*.jar ./dist/scylla-forge.jar
+	cp build/libs/*.jar ./dist/scylla_forge.jar
 
 build-fabric: SHELL := /bin/bash
 build-fabric:
@@ -18,7 +18,7 @@ build-fabric:
 	sdk use gradle ${FABRIC_GRADLE_VERSION} && \
 	gradle clean build -Pfabric=true && \
 	mkdir -p ./dist && \
-	cp build/libs/*.jar ./dist/scylla-fabric.jar
+	cp build/libs/*.jar ./dist/scylla_fabric.jar
 
 build-neoforge: SHELL := /bin/bash
 build-neoforge:
@@ -26,7 +26,7 @@ build-neoforge:
 	sdk use gradle ${FORGE_GRADLE_VERSION} && \
 	gradle clean build -Pneoforge=true && \
 	mkdir -p ./dist && \
-	cp build/libs/*.jar ./dist/scylla-neoforge.jar
+	cp build/libs/*.jar ./dist/scylla_neoforge.jar
 
 publish-forge: SHELL := /bin/bash
 publish-forge:

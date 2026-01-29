@@ -11,8 +11,7 @@ import net.minecraft.world.item.Item.Properties;
 
 public class ModItem {
 
-    private ModItem() {
-    }
+    private ModItem() {}
 
     public static final Supplier<Item> create(ModRegister register, String name) {
         return create(register, name, new Item.Properties());

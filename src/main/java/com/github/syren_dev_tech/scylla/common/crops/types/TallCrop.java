@@ -5,13 +5,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.monster.Ravager;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
@@ -36,12 +31,8 @@ public class TallCrop extends DoublePlantBlock implements BonemealableBlock {
     private static final int DOUBLE_PLANT_AGE_INTERSECTION = 3;
     // private static final int BONEMEAL_INCREASE = 1; // NOSONAR
 
-    private static final VoxelShape FULL_UPPER_SHAPE = Block.box(3.0D, 0.0D, 3.0D, 13.0D, 15.0D, 13.0D);
-    private static final VoxelShape FULL_LOWER_SHAPE = Block.box(3.0D, -1.0D, 3.0D, 13.0D, 16.0D, 13.0D);
     private static final VoxelShape COLLISION_SHAPE_BULB = Block.box(5.0D, -1.0D, 5.0D, 11.0D, 3.0D, 11.0D);
     private static final VoxelShape COLLISION_SHAPE_CROP = Block.box(3.0D, -1.0D, 3.0D, 13.0D, 5.0D, 13.0D);
-    private static final VoxelShape[] UPPER_SHAPE_BY_AGE = new VoxelShape[] {Block.box(3.0D, 0.0D, 3.0D, 13.0D, 11.0D, 13.0D), FULL_UPPER_SHAPE};
-    private static final VoxelShape[] LOWER_SHAPE_BY_AGE = new VoxelShape[] {COLLISION_SHAPE_BULB, Block.box(3.0D, -1.0D, 3.0D, 13.0D, 14.0D, 13.0D), FULL_LOWER_SHAPE, FULL_LOWER_SHAPE, FULL_LOWER_SHAPE};
 
     public TallCrop(Properties properties) {
         super(properties);
@@ -80,24 +71,6 @@ public class TallCrop extends DoublePlantBlock implements BonemealableBlock {
     }
 
     @Override
-    public boolean canSurvive(BlockState blockState, LevelReader levelReader, BlockPos blockPos) { // NOSONAR - Ignore deprecation warning
-        if (!isLower(blockState)) {
-            return super.canSurvive(blockState, levelReader, blockPos);
-        }
-
-        BlockPos below = blockPos.below();
-        boolean isSoil = this.mayPlaceOn(levelReader.getBlockState(below), levelReader, below);
-
-        // Forge: This function is called during world gen and placement, before
-        // this block is set, so if we are not 'here' then assume it's the
-        // pre-check.
-        if (blockState.getBlock() == this)
-            isSoil = levelReader.getBlockState(below).canSustainPlant(levelReader, below, Direction.UP, this);
-
-        return isSoil && sufficientLight(levelReader, blockPos) && (blockState.getValue(AGE) < MAX_AGE - 1 || isUpper(levelReader.getBlockState(blockPos.above())));
-    }
-
-    @Override
     protected boolean mayPlaceOn(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
         return blockState.is(Blocks.FARMLAND);
     }
@@ -106,29 +79,6 @@ public class TallCrop extends DoublePlantBlock implements BonemealableBlock {
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(AGE);
         super.createBlockStateDefinition(builder);
-    }
-
-    @Override
-    public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext context) { // NOSONAR - Ignore deprecation warning
-        return blockState.getValue(HALF) == DoubleBlockHalf.UPPER ? UPPER_SHAPE_BY_AGE[Math.min(Math.abs(MAX_AGE - (blockState.getValue(AGE) + 1)), UPPER_SHAPE_BY_AGE.length - 1)] : LOWER_SHAPE_BY_AGE[blockState.getValue(AGE)];
-    }
-
-    @Override
-    public void entityInside(BlockState blockState, Level level, BlockPos blockPos, Entity entity) { // NOSONAR - Ignore deprecation warning
-        if (entity instanceof Ravager && level.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING))
-            level.destroyBlock(blockPos, true, entity);
-
-        // super.entityInside(blockState, level, blockPos, entity); // NOSONAR - Ignore
-    }
-
-    @Override
-    public boolean canBeReplaced(BlockState blockState, BlockPlaceContext context) { // NOSONAR - Ignore deprecation warning
-        return false;
-    }
-
-    @Override
-    public void setPlacedBy(Level level, BlockPos blockPos, BlockState blockState, LivingEntity entity, ItemStack itemStack) { // NOSONAR - Ignore deprecation warning
-        super.setPlacedBy(level, blockPos, blockState, entity, itemStack);
     }
 
     protected static float getGrowthSpeed(Block block, BlockGetter blockGetter, BlockPos blockPos) { // NOSONAR - Ignore complexity warning
@@ -172,16 +122,6 @@ public class TallCrop extends DoublePlantBlock implements BonemealableBlock {
         return f;
     }
 
-    @Override
-    public void randomTick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource) { // NOSONAR - Ignore deprecation warning
-        float f = getGrowthSpeed(this, serverLevel, blockPos);
-        boolean flag = randomSource.nextInt((int) (25.0F / f) + 1) == 0;
-        if (flag) {
-            this.grow(serverLevel, blockState, blockPos, 1);
-        }
-
-    }
-
     private void grow(ServerLevel serverLevel, BlockState blockState, BlockPos blockPos, int growthAmount) {
         int i = Math.min(blockState.getValue(AGE) + growthAmount, MAX_AGE);
         if (this.canGrow(serverLevel, blockPos, blockState, i)) {
@@ -205,10 +145,6 @@ public class TallCrop extends DoublePlantBlock implements BonemealableBlock {
 
     private static boolean isLower(BlockState blockState) {
         return blockState.is(Blocks.PITCHER_CROP) && blockState.getValue(HALF) == DoubleBlockHalf.LOWER;
-    }
-
-    private static boolean isUpper(BlockState blockState) {
-        return blockState.is(Blocks.PITCHER_CROP) && blockState.getValue(HALF) == DoubleBlockHalf.UPPER;
     }
 
     private boolean canGrow(LevelReader levelReader, BlockPos blockPos, BlockState blockState, int growthAmount) {

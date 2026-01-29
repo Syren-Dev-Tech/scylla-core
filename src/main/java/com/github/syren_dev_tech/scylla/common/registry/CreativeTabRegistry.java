@@ -8,7 +8,7 @@ import java.util.function.Supplier;
 
 import com.github.syren_dev_tech.scylla.common.util.ResourcePath;
 
-import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -24,7 +24,7 @@ public class CreativeTabRegistry {
 
     public final Supplier<CreativeModeTab> register(String name, Supplier<Item> icon) {
         Supplier<CreativeModeTab> tagRegistry = registrar.register(registry.modId, name, () -> {
-            ResourceKey<CreativeModeTab> tabKey = ResourceKey.create(BuiltInRegistries.CREATIVE_MODE_TAB.key(), new ResourcePath(registry.modId, name));
+            ResourceKey<CreativeModeTab> tabKey = ResourceKey.create(Registries.CREATIVE_MODE_TAB, new ResourcePath(registry.modId, name));
             return CreativeModeTab.builder(CreativeModeTab.Row.BOTTOM, 0).title(Component.translatable(tabKey.location().toString())).icon(() -> icon.get().getDefaultInstance()).displayItems((params, output) -> {
                 List<Supplier<? extends Item>> items = creativeTabs.get(tabKey);
                 if (items != null) {

@@ -30,11 +30,11 @@ public class Stairs {
     }
 
     public static final Supplier<StairBlock> create(ModRegister register, String name, Properties properties, Supplier<Block> sourceBlock) {
-        return register.blockRegistry.register(name, () -> new StairBlock(() -> sourceBlock.get().defaultBlockState(), properties));
+        return register.blockRegistry.register(name, () -> new StairBlock(sourceBlock.get().defaultBlockState(), properties));
     }
 
     public static final Supplier<StairBlock> create(ModRegister register, String name, Properties properties, Supplier<Block> sourceBlock, ResourceKey<CreativeModeTab> creativeTab) {
-        return register.blockRegistry.register(name, () -> new StairBlock(() -> sourceBlock.get().defaultBlockState(), properties), creativeTab);
+        return register.blockRegistry.register(name, () -> new StairBlock(sourceBlock.get().defaultBlockState(), properties), creativeTab);
     }
 
     private Stairs() {

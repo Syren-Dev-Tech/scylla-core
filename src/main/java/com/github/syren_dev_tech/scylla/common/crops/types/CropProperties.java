@@ -10,16 +10,24 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 public class CropProperties {
 
     private final Properties blockProperties;
+    private final Block soilBlock;
     private IntegerProperty age = BlockStateProperties.AGE_3;
     private int maxAge = 3;
-    private VoxelShape[] shapeByAge = new VoxelShape[] { Block.box(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 4.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 6.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D) };
+    private VoxelShape[] shapeByAge = new VoxelShape[] {Block.box(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 4.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 6.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D)};
 
     public CropProperties() {
         this.blockProperties = Properties.copy(Blocks.WHEAT);
+        this.soilBlock = Blocks.FARMLAND;
     }
 
     public CropProperties(Properties properties) {
         this.blockProperties = properties;
+        this.soilBlock = Blocks.FARMLAND;
+    }
+
+    public CropProperties(Properties properties, Block soilBlock) {
+        this.blockProperties = properties;
+        this.soilBlock = soilBlock;
     }
 
     public Properties get() {
@@ -48,5 +56,9 @@ public class CropProperties {
 
     public IntegerProperty getAgeProperty() {
         return this.age;
+    }
+
+    public Block getSoilBlock() {
+        return this.soilBlock;
     }
 }

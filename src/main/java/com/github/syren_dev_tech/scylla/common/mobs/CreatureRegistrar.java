@@ -18,8 +18,7 @@ public class CreatureRegistrar<T extends CustomCreature> {
     private final Supplier<EntityType<T>> entityType;
     private final Supplier<AttributeSupplier.Builder> attributes;
 
-    public CreatureRegistrar(CreatureBuilder<T> builder, Supplier<EntityType<T>> entityType,
-            Supplier<AttributeSupplier.Builder> attributes) {
+    public CreatureRegistrar(CreatureBuilder<T> builder, Supplier<EntityType<T>> entityType, Supplier<AttributeSupplier.Builder> attributes) {
         this.builder = builder;
         this.entityType = entityType;
         this.attributes = attributes;
@@ -30,10 +29,10 @@ public class CreatureRegistrar<T extends CustomCreature> {
     }
 
     public void registerAttributes(IMobRegistrar<EntityType<? extends LivingEntity>> registrar) {
-        ScyllaCommon.LOGGER.info("Registering attributes for entity: " + this.builder.name);
+        ScyllaCommon.LOGGER.info("Registering attributes for entity: {}", this.builder.getName());
 
         if (entityType == null) {
-            ScyllaCommon.LOGGER.error("Failed to register attributes for entity: " + this.builder.name);
+            ScyllaCommon.LOGGER.error("Failed to register attributes for entity: {}", this.builder.getName());
             return;
         }
 
@@ -44,13 +43,13 @@ public class CreatureRegistrar<T extends CustomCreature> {
     }
 
     public void register() {
-        ScyllaCommon.LOGGER.info("Registering entity model for entity: " + this.builder.name);
+        ScyllaCommon.LOGGER.info("Registering entity model for entity: {}", this.builder.getName());
 
         if (entityType == null) {
-            ScyllaCommon.LOGGER.error("Failed to register entity model for entity: " + this.builder.name);
+            ScyllaCommon.LOGGER.error("Failed to register entity model for entity: {}", this.builder.getName());
             return;
         }
 
-        EntityRenderers.register(entityType.get(), (context) -> new CustomCreatureRenderer<T>(this.builder, context));
+        EntityRenderers.register(entityType.get(), context -> new CustomCreatureRenderer<T>(this.builder, context));
     }
 }

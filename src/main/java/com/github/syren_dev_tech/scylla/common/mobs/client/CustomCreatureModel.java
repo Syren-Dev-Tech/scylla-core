@@ -1,9 +1,5 @@
 package com.github.syren_dev_tech.scylla.common.mobs.client;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import com.github.syren_dev_tech.scylla.common.ScyllaCommon;
 import com.github.syren_dev_tech.scylla.common.mobs.CreatureBuilder;
 import com.github.syren_dev_tech.scylla.common.mobs.creatures.CustomCreature;
 import com.github.syren_dev_tech.scylla.common.util.ResourcePath;
@@ -16,8 +12,7 @@ public class CustomCreatureModel<T extends CustomCreature> extends GeoModel<T> {
     private final CreatureBuilder<T> builder;
 
     private ResourceLocation model;
-    private final Map<String, ResourceLocation> textures = new HashMap<>();
-    private final Map<String, ResourceLocation> animations = new HashMap<>();
+    private ResourceLocation animations;
 
     public CustomCreatureModel(CreatureBuilder<T> builder) {
         super();
@@ -27,17 +22,10 @@ public class CustomCreatureModel<T extends CustomCreature> extends GeoModel<T> {
     }
 
     private void defineResources() {
-        var registry = this.builder.register;
+        var registry = this.builder.getRegister();
 
-        this.model = new ResourcePath(registry.modId, "geo/" + this.builder.name + ".geo.json");
-
-        for (String tex : this.builder.textures)
-            this.textures.put(tex, new ResourcePath(registry.modId,
-                    "textures/entity/" + this.builder.name + "." + tex + ".png"));
-
-        for (String anim : this.builder.animations)
-            this.animations.put(anim, new ResourcePath(registry.modId,
-                    "animations/" + this.builder.name + "." + anim + ".json"));
+        this.model = new ResourcePath(registry.modId, "geo/" + this.builder.getName() + ".geo.json");
+        this.animations = new ResourcePath(registry.modId, "animations/" + this.builder.getName() + ".json");
     }
 
     @Override
@@ -47,15 +35,11 @@ public class CustomCreatureModel<T extends CustomCreature> extends GeoModel<T> {
 
     @Override
     public ResourceLocation getTextureResource(T animatable) {
-        ScyllaCommon.LOGGER.debug("Getting texture resource for {}", this.builder.name);
-
-        return this.textures.get("air");
+        return this.builder.getTextures().apply(animatable.getState());
     }
 
     @Override
     public ResourceLocation getAnimationResource(T animatable) {
-        ScyllaCommon.LOGGER.debug("Getting animation resource for {}", this.builder.name);
-
-        return this.animations.get(CustomCreature.DEFAULT_ANIMATION);
+        return this.animations;
     }
 }

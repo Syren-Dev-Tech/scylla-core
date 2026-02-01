@@ -1,5 +1,6 @@
 buildscript {
     repositories {
+        mavenLocal()
         mavenCentral()
         gradlePluginPortal()
         maven { url = 'maven.neoforged.net' }
@@ -155,11 +156,6 @@ publishing {
         register('mavenJava', MavenPublication) {
             artifactId "${artifact_id}"
             artifact jar
-        }
-    }
-    repositories {
-        maven {
-            url "file://${project.projectDir}/dist"
         }
     }
 }

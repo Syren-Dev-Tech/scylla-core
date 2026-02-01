@@ -19,11 +19,15 @@ public class BlockRegistry {
     public final Map<String, Supplier<? extends Block>> transparentBlocks = new HashMap<>();
 
     public final <T extends Block> Supplier<T> register(String name, Supplier<T> block) {
-        return this.registrar.register(registry.modId, name, block);
+        var newBlock = this.registrar.register(registry.modId, name, block);
+        this.blocks.put(name, newBlock);
+
+        return newBlock;
     }
 
     public final <T extends Block> Supplier<T> register(String name, Supplier<T> block, ResourceKey<CreativeModeTab> creativeTab) {
         var newBlock = this.registrar.register(registry.modId, name, block);
+        this.blocks.put(name, newBlock);
 
         this.registry.itemRegistry.register(name, () -> new BlockItem(newBlock.get(), new Item.Properties()), creativeTab);
 

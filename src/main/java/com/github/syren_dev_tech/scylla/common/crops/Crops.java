@@ -10,10 +10,9 @@ import net.minecraft.world.item.Item;
 
 public class Crops {
 
-    private Crops() {
-    }
+    private Crops() {}
 
-    public static final Supplier<Crop> create(ModRegister register, String name, CropProperties properties, Supplier<Item> seed) {
+    public static final Supplier<Crop> create(ModRegister register, String name, CropProperties properties, Supplier<? extends Item> seed) {
         return register.blockRegistry.register(name, () -> new Crop(properties, seed));
     }
 }

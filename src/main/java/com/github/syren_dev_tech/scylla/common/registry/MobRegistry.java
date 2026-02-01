@@ -31,10 +31,13 @@ public class MobRegistry {
 
     public final <T extends CustomCreature> Supplier<EntityType<T>> register(CreatureBuilder<T> builder) {
         if (ScyllaCommon.LOGGER.isInfoEnabled())
-            ScyllaCommon.LOGGER.info("Registering entity: {}", builder.name);
+            ScyllaCommon.LOGGER.info("Registering entity: {}", builder.getName());
 
-        return this.registrar.register(registry.modId, builder.name, () -> EntityType.Builder
-                .of(builder.factory, MobCategory.CREATURE).sized(0.6F, 1.8F).build(builder.name));
+        // Convert CreatureFactory to EntityFactory
+        var creatureFactory = builder.getFactory();
+        var entityFactory = (EntityType.EntityFactory<T>) (entityType, level) -> creatureFactory.create(entityType, level, builder);
+
+        return this.registrar.register(registry.modId, builder.getName(), () -> EntityType.Builder.of(entityFactory, MobCategory.CREATURE).sized(0.6F, 1.8F).build(builder.getName()));
     }
 
     public void registerEntityAttributes(Object event) {

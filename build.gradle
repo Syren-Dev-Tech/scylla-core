@@ -1,10 +1,10 @@
 buildscript {
     repositories {
         mavenCentral()
-        mavenLocal()
         gradlePluginPortal()
         maven { url = 'maven.neoforged.net' }
         maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
+        mavenLocal()
     }
     dependencies {
         classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'

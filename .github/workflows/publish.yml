@@ -31,7 +31,7 @@ jobs:
           source "$HOME/.sdkman/bin/sdkman-init.sh"
           sdk install gradle ${{ env.GRADLE_VERSION }}
 
-      - name: Run publich task
+      - name: Run publish task
         run: make publish
         env:
           USERNAME: ${{ github.actor }}

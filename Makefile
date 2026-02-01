@@ -1,8 +1,6 @@
 FORGE_GRADLE_VERSION=8.8
 FABRIC_GRADLE_VERSION=8.8
 
-all: build publish-local
-
 build: build-forge build-neoforge
 publish: publish-forge publish-neoforge
 publish-local: publish-forge-local publish-neoforge-local

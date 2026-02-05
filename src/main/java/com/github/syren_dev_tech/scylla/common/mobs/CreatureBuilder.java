@@ -27,6 +27,7 @@ public class CreatureBuilder<T extends CustomCreature> {
 
     private List<Goal> goals = new ArrayList<>();
     private Function<CreatureState<T>, ResourceLocation> textures;
+    private Function<CreatureState<T>, ResourceLocation> masks;
     private TextureRenderer<T> textureRenderer;
     private Map<String, Animator<T>> animators = new HashMap<>();
     private CreatureFactory<T> factory;
@@ -47,6 +48,11 @@ public class CreatureBuilder<T extends CustomCreature> {
 
     public CreatureBuilder<T> withTextures(Function<CreatureState<T>, ResourceLocation> textures) {
         this.textures = textures;
+        return this;
+    }
+
+    public CreatureBuilder<T> withMasks(Function<CreatureState<T>, ResourceLocation> masks) {
+        this.masks = masks;
         return this;
     }
 
@@ -89,6 +95,10 @@ public class CreatureBuilder<T extends CustomCreature> {
 
     public Function<CreatureState<T>, ResourceLocation> getTextures() {
         return textures;
+    }
+
+    public Function<CreatureState<T>, ResourceLocation> getMasks() {
+        return masks;
     }
 
     public float getShadowSize() {

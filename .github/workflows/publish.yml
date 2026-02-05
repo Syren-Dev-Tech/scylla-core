@@ -33,9 +33,6 @@ jobs:
 
       - name: Run publish task
         run: make publish
-        env:
-          USERNAME: ${{ github.actor }}
-          PASSWORD: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload Maven artifacts
         uses: actions/upload-artifact@v4

@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class TallSeaFoliage {
 
     public static final Supplier<TallSeagrassBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.TALL_SEAGRASS));
+        return create(register, name, Properties.ofFullCopy(Blocks.TALL_SEAGRASS));
     }
 
     public static final Supplier<TallSeagrassBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.TALL_SEAGRASS), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.TALL_SEAGRASS), creativeTab);
     }
 
     public static final Supplier<TallSeagrassBlock> create(ModRegister register, String name, Properties properties) {

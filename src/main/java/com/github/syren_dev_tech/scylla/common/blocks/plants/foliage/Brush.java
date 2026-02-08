@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class Brush {
 
     public static final Supplier<DeadBushBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.DEAD_BUSH));
+        return create(register, name, Properties.ofFullCopy(Blocks.DEAD_BUSH));
     }
 
     public static final Supplier<DeadBushBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.DEAD_BUSH), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.DEAD_BUSH), creativeTab);
     }
 
     public static final Supplier<DeadBushBlock> create(ModRegister register, String name, Properties properties) {

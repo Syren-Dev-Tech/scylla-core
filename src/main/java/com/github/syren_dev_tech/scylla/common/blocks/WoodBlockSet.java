@@ -20,7 +20,6 @@ import net.minecraft.world.item.BoatItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.PressurePlateBlock.Sensitivity;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.WoodType;
@@ -49,7 +48,7 @@ public class WoodBlockSet {
             WoodType woodType = new WoodType(name, blockSetType);
             WoodType.register(woodType);
 
-            var plankProperties = Properties.copy(Blocks.OAK_PLANKS);
+            var plankProperties = Properties.ofFullCopy(Blocks.OAK_PLANKS);
             var planks = FullBlocks.create(register, name + "_planks", plankProperties, creativeTab);
 
             Slabs.create(register, name + "_slab", plankProperties, creativeTab);
@@ -59,7 +58,7 @@ public class WoodBlockSet {
             Doors.create(register, name + "_door", plankProperties, blockSetType, creativeTab);
             TrapDoors.create(register, name + "_trapdoor", plankProperties, blockSetType, creativeTab);
 
-            PressurePlates.create(register, name + "_pressure_plate", plankProperties, Sensitivity.EVERYTHING, blockSetType, creativeTab);
+            PressurePlates.create(register, name + "_pressure_plate", plankProperties, blockSetType, creativeTab);
             Buttons.create(register, name + "_button", plankProperties, creativeTab);
 
             Signs.create(register, name, plankProperties, creativeTab);

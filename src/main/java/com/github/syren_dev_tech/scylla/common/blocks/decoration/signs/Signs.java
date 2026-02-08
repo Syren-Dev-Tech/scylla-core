@@ -18,11 +18,11 @@ public class Signs {
     public static class StandingSigns {
 
         public static final Supplier<StandingSignBlock> create(ModRegister register, String name) {
-            return create(register, name, Properties.copy(Blocks.OAK_SIGN), WoodType.OAK);
+            return create(register, name, Properties.ofFullCopy(Blocks.OAK_SIGN), WoodType.OAK);
         }
 
         public static final Supplier<StandingSignBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-            return create(register, name, Properties.copy(Blocks.OAK_SIGN), WoodType.OAK, creativeTab);
+            return create(register, name, Properties.ofFullCopy(Blocks.OAK_SIGN), WoodType.OAK, creativeTab);
         }
 
         public static final Supplier<StandingSignBlock> create(ModRegister register, String name, Properties properties) {
@@ -34,11 +34,11 @@ public class Signs {
         }
 
         public static final Supplier<StandingSignBlock> create(ModRegister register, String name, Properties properties, WoodType woodType) {
-            return register.blockRegistry.register(name, () -> new StandingSignBlock(properties, woodType));
+            return register.blockRegistry.register(name, () -> new StandingSignBlock(woodType, properties));
         }
 
         public static final Supplier<StandingSignBlock> create(ModRegister register, String name, Properties properties, WoodType woodType, ResourceKey<CreativeModeTab> creativeTab) {
-            return register.blockRegistry.register(name, () -> new StandingSignBlock(properties, woodType), creativeTab);
+            return register.blockRegistry.register(name, () -> new StandingSignBlock(woodType, properties), creativeTab);
         }
 
         private StandingSigns() {
@@ -49,7 +49,7 @@ public class Signs {
     public static class WallSigns {
 
         public static final Supplier<WallSignBlock> create(ModRegister register, String name) {
-            return create(register, name, Properties.copy(Blocks.OAK_SIGN), WoodType.OAK);
+            return create(register, name, Properties.ofFullCopy(Blocks.OAK_SIGN), WoodType.OAK);
         }
 
         public static final Supplier<WallSignBlock> create(ModRegister register, String name, Properties properties) {
@@ -57,7 +57,7 @@ public class Signs {
         }
 
         public static final Supplier<WallSignBlock> create(ModRegister register, String name, Properties properties, WoodType woodType) {
-            return register.blockRegistry.register(name, () -> new WallSignBlock(properties, woodType));
+            return register.blockRegistry.register(name, () -> new WallSignBlock(woodType, properties));
         }
 
         private WallSigns() {

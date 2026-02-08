@@ -13,11 +13,11 @@ import net.minecraft.resources.ResourceKey;
 public class Fires {
 
     public static final Supplier<FireBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.FIRE));
+        return create(register, name, Properties.ofFullCopy(Blocks.FIRE));
     }
 
     public static final Supplier<FireBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.FIRE), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.FIRE), creativeTab);
     }
 
     public static final Supplier<FireBlock> create(ModRegister register, String name, Properties properties) {

@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class DetectorRails {
 
     public static final Supplier<DetectorRailBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.DETECTOR_RAIL));
+        return create(register, name, Properties.ofFullCopy(Blocks.DETECTOR_RAIL));
     }
 
     public static final Supplier<DetectorRailBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.DETECTOR_RAIL), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.DETECTOR_RAIL), creativeTab);
     }
 
     public static final Supplier<DetectorRailBlock> create(ModRegister register, String name, Properties properties) {

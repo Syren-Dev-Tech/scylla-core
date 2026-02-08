@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class SeaPickles {
 
     public static final Supplier<SeaPickleBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.SEA_PICKLE));
+        return create(register, name, Properties.ofFullCopy(Blocks.SEA_PICKLE));
     }
 
     public static final Supplier<SeaPickleBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.SEA_PICKLE), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.SEA_PICKLE), creativeTab);
     }
 
     public static final Supplier<SeaPickleBlock> create(ModRegister register, String name, Properties properties) {

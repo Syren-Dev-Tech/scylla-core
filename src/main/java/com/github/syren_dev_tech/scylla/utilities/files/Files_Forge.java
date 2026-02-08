@@ -1,13 +1,13 @@
-package com.github.syren_dev_tech.scylla.common.util;
+package com.github.syren_dev_tech.scylla.utilities.files;
 
 import java.io.File;
 import java.io.PrintWriter;
 import java.nio.file.Path;
 import java.util.Arrays;
 import com.github.syren_dev_tech.scylla.common.ScyllaCommon;
-import net.fabricmc.loader.api.FabricLoader;
+import net.neoforged.fml.loading.FMLPaths;
 
-public class Files_Fabric {
+public class Files_Forge {
 
     public static final void write(String path, String name, String data, String ext) {
         Path p = getGameDir().resolve(path);
@@ -48,8 +48,7 @@ public class Files_Fabric {
         }
     }
 
-
     public static Path getGameDir() {
-        return FabricLoader.getInstance().getGameDir();
+        return FMLPaths.GAMEDIR.get();
     }
 }

@@ -14,19 +14,19 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class Buttons {
 
     public static final Supplier<ButtonBase> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.STONE_BUTTON));
+        return create(register, name, Properties.ofFullCopy(Blocks.STONE_BUTTON));
     }
 
     public static final Supplier<ButtonBase> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.STONE_BUTTON), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.STONE_BUTTON), creativeTab);
     }
 
     public static final Supplier<ButtonBase> create(ModRegister register, String name, Block sourceBlock) {
-        return create(register, name, Properties.copy(sourceBlock));
+        return create(register, name, Properties.ofFullCopy(sourceBlock));
     }
 
     public static final Supplier<ButtonBase> create(ModRegister register, String name, Block sourceBlock, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(sourceBlock), creativeTab);
+        return create(register, name, Properties.ofFullCopy(sourceBlock), creativeTab);
     }
 
     public static final Supplier<ButtonBase> create(ModRegister register, String name, Properties properties) {

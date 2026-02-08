@@ -14,11 +14,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class Leaves {
 
     public static final Supplier<CustomLeaves> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.OAK_LEAVES));
+        return create(register, name, Properties.ofFullCopy(Blocks.OAK_LEAVES));
     }
 
     public static final Supplier<CustomLeaves> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.OAK_LEAVES), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.OAK_LEAVES), creativeTab);
     }
 
     public static final Supplier<CustomLeaves> create(ModRegister register, String name, Properties properties) {

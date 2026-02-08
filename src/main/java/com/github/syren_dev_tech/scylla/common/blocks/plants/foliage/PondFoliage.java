@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class PondFoliage {
 
     public static final Supplier<SmallDripleafBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.SMALL_DRIPLEAF));
+        return create(register, name, Properties.ofFullCopy(Blocks.SMALL_DRIPLEAF));
     }
 
     public static final Supplier<SmallDripleafBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.SMALL_DRIPLEAF), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.SMALL_DRIPLEAF), creativeTab);
     }
 
     public static final Supplier<SmallDripleafBlock> create(ModRegister register, String name, Properties properties) {

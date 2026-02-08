@@ -30,7 +30,7 @@ public class CustomCreatureRenderer<T extends CustomCreature> extends GeoEntityR
 
     @Override
     public ResourceLocation getTextureLocation(T pEntity) {
-        return builder.getTextures().apply(pEntity.getState());
+        return builder.getTextures().apply(pEntity.getState()).get();
     }
 
     public class MyColorLayer extends GeoRenderLayer<T> {
@@ -41,13 +41,18 @@ public class CustomCreatureRenderer<T extends CustomCreature> extends GeoEntityR
 
         @Override
         public void render(PoseStack poseStack, T animatable, BakedGeoModel model, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
-            float red = 0.0f;
-            float green = 1.0f;
-            float blue = 0.0f;
+            int red = 0;
+            int green = 255;
+            int blue = 0;
+            int alpha = 255;
 
             var mask = builder.getMasks().apply(animatable.getState());
 
-            getRenderer().reRender(model, poseStack, bufferSource, animatable, RenderType.entityCutoutNoCull(mask), bufferSource.getBuffer(RenderType.entityCutoutNoCull(mask)), partialTick, packedLight, packedOverlay, red, green, blue, 1.0f);
+            var renderType2 = RenderType.entityCutoutNoCull(mask.get());
+            var buffer2 = bufferSource.getBuffer(RenderType.entityCutoutNoCull(mask.get()));
+            var rgb = (red << 24) + (green << 16) + (blue << 8) + (alpha);
+
+            getRenderer().reRender(model, poseStack, bufferSource, animatable, renderType2, buffer2, partialTick, packedLight, packedOverlay, rgb);
         }
     }
 }

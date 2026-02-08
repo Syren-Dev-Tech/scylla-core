@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class Composters {
 
     public static final Supplier<ComposterBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.COMPOSTER));
+        return create(register, name, Properties.ofFullCopy(Blocks.COMPOSTER));
     }
 
     public static final Supplier<ComposterBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.COMPOSTER), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.COMPOSTER), creativeTab);
     }
 
     public static final Supplier<ComposterBlock> create(ModRegister register, String name, Properties properties) {

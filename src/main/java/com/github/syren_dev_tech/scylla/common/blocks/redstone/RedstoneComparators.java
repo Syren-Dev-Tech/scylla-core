@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class RedstoneComparators {
 
     public static final Supplier<ComparatorBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.COMPARATOR));
+        return create(register, name, Properties.ofFullCopy(Blocks.COMPARATOR));
     }
 
     public static final Supplier<ComparatorBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.COMPARATOR), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.COMPARATOR), creativeTab);
     }
 
     public static final Supplier<ComparatorBlock> create(ModRegister register, String name, Properties properties) {

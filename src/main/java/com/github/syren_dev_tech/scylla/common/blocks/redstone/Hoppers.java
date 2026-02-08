@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class Hoppers {
 
     public static final Supplier<HopperBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.HOPPER));
+        return create(register, name, Properties.ofFullCopy(Blocks.HOPPER));
     }
 
     public static final Supplier<HopperBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.HOPPER), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.HOPPER), creativeTab);
     }
 
     public static final Supplier<HopperBlock> create(ModRegister register, String name, Properties properties) {

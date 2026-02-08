@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class RedstoneRepeaters {
 
     public static final Supplier<RepeaterBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.REPEATER));
+        return create(register, name, Properties.ofFullCopy(Blocks.REPEATER));
     }
 
     public static final Supplier<RepeaterBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.REPEATER), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.REPEATER), creativeTab);
     }
 
     public static final Supplier<RepeaterBlock> create(ModRegister register, String name, Properties properties) {

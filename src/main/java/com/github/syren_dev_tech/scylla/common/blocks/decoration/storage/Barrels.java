@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class Barrels {
 
     public static final Supplier<BarrelBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.BARREL));
+        return create(register, name, Properties.ofFullCopy(Blocks.BARREL));
     }
 
     public static final Supplier<BarrelBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.BARREL), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.BARREL), creativeTab);
     }
 
     public static final Supplier<BarrelBlock> create(ModRegister register, String name, Properties properties) {

@@ -13,8 +13,7 @@ import net.minecraft.world.level.material.Fluids;
 
 public class Buckets {
 
-    private Buckets() {
-    }
+    private Buckets() {}
 
     public static final Supplier<BucketItem> create(ModRegister register, String name) {
         return create(register, name, new Properties());
@@ -33,14 +32,14 @@ public class Buckets {
     }
 
     public static final Supplier<BucketItem> create(ModRegister register, String name, Properties properties, Fluid fluid) {
-        var bucket = register.itemRegistry.register(name, () -> new BucketItem(() -> fluid, properties));
+        var bucket = register.itemRegistry.register(name, () -> new BucketItem(fluid, properties));
         register.itemRegistry.tools.put(name, bucket);
 
         return bucket;
     }
 
     public static final Supplier<BucketItem> create(ModRegister register, String name, Properties properties, Fluid fluid, ResourceKey<CreativeModeTab> creativeTab) {
-        var bucket = register.itemRegistry.register(name, () -> new BucketItem(() -> fluid, properties), creativeTab);
+        var bucket = register.itemRegistry.register(name, () -> new BucketItem(fluid, properties), creativeTab);
         register.itemRegistry.tools.put(name, bucket);
 
         return bucket;

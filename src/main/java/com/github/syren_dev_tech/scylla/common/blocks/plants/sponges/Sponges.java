@@ -17,11 +17,11 @@ public class Sponges {
     public static class WetSponges {
 
         public static final Supplier<WetSpongeBlock> create(ModRegister register, String name) {
-            return create(register, name, Properties.copy(Blocks.WET_SPONGE));
+            return create(register, name, Properties.ofFullCopy(Blocks.WET_SPONGE));
         }
 
         public static final Supplier<WetSpongeBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-            return create(register, name, Properties.copy(Blocks.WET_SPONGE), creativeTab);
+            return create(register, name, Properties.ofFullCopy(Blocks.WET_SPONGE), creativeTab);
         }
 
         public static final Supplier<WetSpongeBlock> create(ModRegister register, String name, Properties properties) {

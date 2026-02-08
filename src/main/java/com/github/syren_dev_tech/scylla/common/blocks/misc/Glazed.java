@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class Glazed {
 
     public static final Supplier<GlazedTerracottaBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.WHITE_GLAZED_TERRACOTTA));
+        return create(register, name, Properties.ofFullCopy(Blocks.WHITE_GLAZED_TERRACOTTA));
     }
 
     public static final Supplier<GlazedTerracottaBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.WHITE_GLAZED_TERRACOTTA), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.WHITE_GLAZED_TERRACOTTA), creativeTab);
     }
 
     public static final Supplier<GlazedTerracottaBlock> create(ModRegister register, String name, Properties properties) {

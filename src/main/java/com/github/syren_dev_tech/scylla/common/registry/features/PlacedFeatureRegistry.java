@@ -6,12 +6,10 @@ import java.util.Map;
 
 import com.github.syren_dev_tech.scylla.common.ScyllaCommon;
 import com.github.syren_dev_tech.scylla.common.registry.features.FeatureRegistry.OreFeatureRegistry;
-import com.github.syren_dev_tech.scylla.common.util.ResourcePath;
-
+import com.github.syren_dev_tech.scylla.utilities.files.ResourcePath;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
@@ -27,8 +25,7 @@ public class PlacedFeatureRegistry {
     public class PlacedOreFeatureRegistry {
         protected static final Map<String, ResourceKey<PlacedFeature>> keys = new HashMap<>();
 
-        private PlacedOreFeatureRegistry() {
-        }
+        private PlacedOreFeatureRegistry() {}
 
         public static final Map<String, ResourceKey<PlacedFeature>> getKeys() {
             return keys;
@@ -54,26 +51,22 @@ public class PlacedFeatureRegistry {
         }
     }
 
-    public static void bootstrap(BootstapContext<PlacedFeature> context) {
-        HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
+    // public static void bootstrap(BootstapContext<PlacedFeature> context) {
+    // HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
 
-        PlacedOreFeatureRegistry.getKeys().forEach((key, value) -> {
-            var placedFeatureKey = PlacedOreFeatureRegistry.keys.get(key);
-            var oreFeatureKey = OreFeatureRegistry.ORES.get(key).x;
+    // PlacedOreFeatureRegistry.getKeys().forEach((key, value) -> {
+    // var placedFeatureKey = PlacedOreFeatureRegistry.keys.get(key);
+    // var oreFeatureKey = OreFeatureRegistry.ORES.get(key).x;
 
-            register(context, placedFeatureKey, configuredFeatures.getOrThrow(oreFeatureKey),
-                    PlacedOreFeatureRegistry.commonOrePlacement(12,
-                            HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(80))));
-        });
-    }
+    // register(context, placedFeatureKey, configuredFeatures.getOrThrow(oreFeatureKey), PlacedOreFeatureRegistry.commonOrePlacement(12, HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(80))));
+    // });
+    // }
 
     private static ResourceKey<PlacedFeature> registerKey(String name) {
-        return ResourceKey.create(Registries.PLACED_FEATURE,
-                new ResourcePath(ScyllaCommon.MOD_ID, name));
+        return ResourceKey.create(Registries.PLACED_FEATURE, new ResourcePath(ScyllaCommon.MOD_ID, name).get());
     }
 
-    private static void register(BootstapContext<PlacedFeature> context, ResourceKey<PlacedFeature> key,
-            Holder<ConfiguredFeature<?, ?>> configuration, List<PlacementModifier> modifiers) {
-        context.register(key, new PlacedFeature(configuration, List.copyOf(modifiers)));
-    }
+    // private static void register(BootstapContext<PlacedFeature> context, ResourceKey<PlacedFeature> key, Holder<ConfiguredFeature<?, ?>> configuration, List<PlacementModifier> modifiers) {
+    // context.register(key, new PlacedFeature(configuration, List.copyOf(modifiers)));
+    // }
 }

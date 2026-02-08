@@ -16,11 +16,11 @@ public class Kelp {
     public static class KelpStalks {
 
         public static final Supplier<KelpPlantBlock> create(ModRegister register, String name) {
-            return create(register, name, Properties.copy(Blocks.KELP_PLANT));
+            return create(register, name, Properties.ofFullCopy(Blocks.KELP_PLANT));
         }
 
         public static final Supplier<KelpPlantBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-            return create(register, name, Properties.copy(Blocks.KELP_PLANT), creativeTab);
+            return create(register, name, Properties.ofFullCopy(Blocks.KELP_PLANT), creativeTab);
         }
 
         public static final Supplier<KelpPlantBlock> create(ModRegister register, String name, Properties properties) {
@@ -39,11 +39,11 @@ public class Kelp {
     public static class KelpTops {
 
         public static final Supplier<KelpBlock> create(ModRegister register, String name) {
-            return create(register, name, Properties.copy(Blocks.KELP));
+            return create(register, name, Properties.ofFullCopy(Blocks.KELP));
         }
 
         public static final Supplier<KelpBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-            return create(register, name, Properties.copy(Blocks.KELP), creativeTab);
+            return create(register, name, Properties.ofFullCopy(Blocks.KELP), creativeTab);
         }
 
         public static final Supplier<KelpBlock> create(ModRegister register, String name, Properties properties) {
@@ -60,11 +60,11 @@ public class Kelp {
     }
 
     public static final Tuple<Supplier<KelpPlantBlock>, Supplier<KelpBlock>> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.KELP), Properties.copy(Blocks.KELP_PLANT));
+        return create(register, name, Properties.ofFullCopy(Blocks.KELP), Properties.ofFullCopy(Blocks.KELP_PLANT));
     }
 
     public static final Tuple<Supplier<KelpPlantBlock>, Supplier<KelpBlock>> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.KELP), Properties.copy(Blocks.KELP_PLANT), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.KELP), Properties.ofFullCopy(Blocks.KELP_PLANT), creativeTab);
     }
 
     public static final Tuple<Supplier<KelpPlantBlock>, Supplier<KelpBlock>> create(ModRegister register, String name, Properties kelpProperties, Properties kelpPlantProperties) {

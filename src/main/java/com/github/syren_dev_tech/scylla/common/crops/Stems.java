@@ -2,60 +2,65 @@ package com.github.syren_dev_tech.scylla.common.crops;
 
 import java.util.function.Supplier;
 
-import com.github.syren_dev_tech.scylla.common.collections.Tuple;
 import com.github.syren_dev_tech.scylla.common.registry.ModRegister;
-
+import com.github.syren_dev_tech.scylla.utilities.files.ResourcePath;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.AttachedStemBlock;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.StemBlock;
-import net.minecraft.world.level.block.StemGrownBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
+import net.minecraft.core.registries.Registries;
+
 
 public class Stems {
 
-    private Stems() {
-    }
+    private Stems() {}
 
     public static class AttachedStems {
 
-        private AttachedStems() {
+        private AttachedStems() {}
+
+        public static final Supplier<AttachedStemBlock> create(ModRegister register, String name, ResourceKey<Block> stem, ResourceKey<Block> fruit, ResourceKey<Item> seed) {
+            return register.blockRegistry.register(name, () -> new AttachedStemBlock(stem, fruit, seed, Properties.ofFullCopy(Blocks.PUMPKIN_STEM)));
         }
 
-        public static final Supplier<AttachedStemBlock> create(ModRegister register, String name, StemGrownBlock fruit, Item seeds) {
-            return register.blockRegistry.register(name, () -> new AttachedStemBlock(fruit, () -> seeds, Properties.copy(Blocks.ATTACHED_PUMPKIN_STEM)));
-        }
-
-        public static final Supplier<AttachedStemBlock> create(ModRegister register, String name, Properties properties, StemGrownBlock fruit, Item seeds) {
-            return register.blockRegistry.register(name, () -> new AttachedStemBlock(fruit, () -> seeds, properties));
+        public static final Supplier<AttachedStemBlock> create(ModRegister register, String name, ResourceKey<Block> stem, ResourceKey<Block> fruit, ResourceKey<Item> seed, Properties properties) {
+            return register.blockRegistry.register(name, () -> new AttachedStemBlock(stem, fruit, seed, properties));
         }
     }
 
     public static class GrowingStems {
 
-        private GrowingStems() {
+        private GrowingStems() {}
+
+        public static final Supplier<StemBlock> create(ModRegister register, String name, ResourceKey<Block> fruit, ResourceKey<Block> attachedStem, ResourceKey<Item> seed) {
+            return register.blockRegistry.register(name, () -> new StemBlock(fruit, attachedStem, seed, Properties.ofFullCopy(Blocks.PUMPKIN_STEM)));
         }
 
-        public static final Supplier<StemBlock> create(ModRegister register, String name, StemGrownBlock fruit, Item seeds) {
-            return register.blockRegistry.register(name, () -> new StemBlock(fruit, () -> seeds, Properties.copy(Blocks.PUMPKIN_STEM)));
-        }
-
-        public static final Supplier<StemBlock> create(ModRegister register, String name, Properties properties, StemGrownBlock fruit, Item seeds) {
-            return register.blockRegistry.register(name, () -> new StemBlock(fruit, () -> seeds, properties));
+        public static final Supplier<StemBlock> create(ModRegister register, String name, ResourceKey<Block> fruit, ResourceKey<Block> attachedStem, ResourceKey<Item> seed, Properties properties) {
+            return register.blockRegistry.register(name, () -> new StemBlock(fruit, attachedStem, seed, properties));
         }
     }
 
-    public static final Tuple<Supplier<StemBlock>, Supplier<AttachedStemBlock>> create(ModRegister register, String name, Properties properties, StemGrownBlock fruit, Item seeds) {
-        var stem = GrowingStems.create(register, name, properties, fruit, seeds);
-        var attachedStem = AttachedStems.create(register, "attached_" + name, properties, fruit, seeds);
+    public static final StemDefinition create(ModRegister register, String name, ResourceKey<Block> fruit, ResourceKey<Item> seed) {
+        ResourceKey<Block> stemKey = ResourceKey.create(Registries.BLOCK, new ResourcePath(register.modId, name).get());
+        ResourceKey<Block> attachedStemKey = ResourceKey.create(Registries.BLOCK, new ResourcePath(register.modId, name + "_attached").get());
 
-        return new Tuple<>(stem, attachedStem);
+        var stem = GrowingStems.create(register, name, fruit, attachedStemKey, seed);
+        var attachedStem = AttachedStems.create(register, name, stemKey, fruit, seed);
+
+        return new StemDefinition(stem, attachedStem, stemKey, attachedStemKey);
     }
 
-    public static final Tuple<Supplier<StemBlock>, Supplier<AttachedStemBlock>> create(ModRegister register, String name, StemGrownBlock fruit, Item seeds) {
-        var stem = GrowingStems.create(register, name, fruit, seeds);
-        var attachedStem = AttachedStems.create(register, "attached_" + name, fruit, seeds);
+    public static final StemDefinition create(ModRegister register, String name, ResourceKey<Block> fruit, ResourceKey<Item> seed, Properties properties) {
+        ResourceKey<Block> stemKey = ResourceKey.create(Registries.BLOCK, new ResourcePath(register.modId, name).get());
+        ResourceKey<Block> attachedStemKey = ResourceKey.create(Registries.BLOCK, new ResourcePath(register.modId, name + "_attached").get());
 
-        return new Tuple<>(stem, attachedStem);
+        var stem = GrowingStems.create(register, name, fruit, attachedStemKey, seed, properties);
+        var attachedStem = AttachedStems.create(register, name, stemKey, fruit, seed, properties);
+
+        return new StemDefinition(stem, attachedStem, stemKey, attachedStemKey);
     }
 }

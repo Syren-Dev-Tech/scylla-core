@@ -14,11 +14,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class ShulkerBoxes {
 
     public static final Supplier<ShulkerBoxBlock> create(ModRegister register, String name, DyeColor color) {
-        return create(register, name, color, Properties.copy(Blocks.WHITE_SHULKER_BOX));
+        return create(register, name, color, Properties.ofFullCopy(Blocks.WHITE_SHULKER_BOX));
     }
 
     public static final Supplier<ShulkerBoxBlock> create(ModRegister register, String name, DyeColor color, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, color, Properties.copy(Blocks.WHITE_SHULKER_BOX), creativeTab);
+        return create(register, name, color, Properties.ofFullCopy(Blocks.WHITE_SHULKER_BOX), creativeTab);
     }
 
     public static final Supplier<ShulkerBoxBlock> create(ModRegister register, String name, DyeColor color, Properties properties) {

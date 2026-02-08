@@ -1,10 +1,10 @@
 package com.github.syren_dev_tech.scylla.common.blocks.plants.melons.types;
 
 import net.minecraft.world.level.block.AttachedStemBlock;
+import net.minecraft.world.level.block.PumpkinBlock;
 import net.minecraft.world.level.block.StemBlock;
-import net.minecraft.world.level.block.StemGrownBlock;
 
-public class Melon extends StemGrownBlock {
+public class Melon extends PumpkinBlock {
 
     private StemBlock stemBlock;
     private AttachedStemBlock attachedStemBlock;

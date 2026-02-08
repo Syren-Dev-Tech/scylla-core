@@ -16,11 +16,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class BrushableStones {
 
     public static final Supplier<CustomBrushableBlock> create(ModRegister register, String name, Supplier<Block> dustedBlock) {
-        return create(register, name, Properties.copy(Blocks.STONE), dustedBlock);
+        return create(register, name, Properties.ofFullCopy(Blocks.STONE), dustedBlock);
     }
 
     public static final Supplier<CustomBrushableBlock> create(ModRegister register, String name, Supplier<Block> dustedBlock, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.STONE), dustedBlock, SoundEvents.BRUSH_SAND, SoundEvents.BRUSH_SAND_COMPLETED, creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.STONE), dustedBlock, SoundEvents.BRUSH_SAND, SoundEvents.BRUSH_SAND_COMPLETED, creativeTab);
     }
 
     public static final Supplier<CustomBrushableBlock> create(ModRegister register, String name, Properties properties, Supplier<Block> dustedBlock) {

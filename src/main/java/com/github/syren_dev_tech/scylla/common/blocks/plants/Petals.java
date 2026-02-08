@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class Petals {
 
     public static final Supplier<PinkPetalsBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.PINK_PETALS));
+        return create(register, name, Properties.ofFullCopy(Blocks.PINK_PETALS));
     }
 
     public static final Supplier<PinkPetalsBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.PINK_PETALS), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.PINK_PETALS), creativeTab);
     }
 
     public static final Supplier<PinkPetalsBlock> create(ModRegister register, String name, Properties properties) {

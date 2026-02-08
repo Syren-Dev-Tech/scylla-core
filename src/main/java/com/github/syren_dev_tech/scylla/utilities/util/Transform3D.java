@@ -1,4 +1,4 @@
-package com.github.syren_dev_tech.scylla.common.util;
+package com.github.syren_dev_tech.scylla.utilities.util;
 
 import com.github.syren_dev_tech.scylla.common.collections.PrimitiveTriplet.PrimDoubleTriplet;
 import com.github.syren_dev_tech.scylla.common.ScyllaCommon;

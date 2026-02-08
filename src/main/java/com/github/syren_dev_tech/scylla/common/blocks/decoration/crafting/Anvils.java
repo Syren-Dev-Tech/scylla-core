@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class Anvils {
 
     public static final Supplier<AnvilBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.ANVIL));
+        return create(register, name, Properties.ofFullCopy(Blocks.ANVIL));
     }
 
     public static final Supplier<AnvilBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.ANVIL), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.ANVIL), creativeTab);
     }
 
     public static final Supplier<AnvilBlock> create(ModRegister register, String name, Properties properties) {

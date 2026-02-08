@@ -14,8 +14,7 @@ import net.minecraft.world.item.Tiers;
 
 public class Shovels {
 
-    private Shovels() {
-    }
+    private Shovels() {}
 
     public static final Supplier<ShovelItem> create(ModRegister register, String name) {
         return create(register, name, new Item.Properties());
@@ -26,38 +25,23 @@ public class Shovels {
     }
 
     public static final Supplier<ShovelItem> create(ModRegister register, String name, Properties properties) {
-        return create(register, name, properties, Tiers.IRON, 2, -3.0F);
+        return create(register, name, properties, Tiers.IRON);
     }
 
     public static final Supplier<ShovelItem> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, properties, Tiers.IRON, 2, -3.0F, creativeTab);
+        return create(register, name, properties, Tiers.IRON, creativeTab);
     }
+
 
     public static final Supplier<ShovelItem> create(ModRegister register, String name, Properties properties, Tier tier) {
-        return create(register, name, properties, tier, 2, -3.0F);
-    }
-
-    public static final Supplier<ShovelItem> create(ModRegister register, String name, Properties properties, Tier tier, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, properties, tier, 2, -3.0F, creativeTab);
-    }
-
-    public static final Supplier<ShovelItem> create(ModRegister register, String name, Tier tier, Integer attackDamage, Float attackSpeed) {
-        return create(register, name, new Item.Properties(), tier, attackDamage, attackSpeed);
-    }
-
-    public static final Supplier<ShovelItem> create(ModRegister register, String name, Tier tier, Integer attackDamage, Float attackSpeed, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, new Item.Properties(), tier, attackDamage, attackSpeed, creativeTab);
-    }
-
-    public static final Supplier<ShovelItem> create(ModRegister register, String name, Properties properties, Tier tier, Integer attackDamage, Float attackSpeed) {
-        var shovel = register.itemRegistry.register(name, () -> new ShovelItem(tier, attackDamage, attackSpeed, properties));
+        var shovel = register.itemRegistry.register(name, () -> new ShovelItem(tier, properties));
         register.itemRegistry.tools.put(name, shovel);
 
         return shovel;
     }
 
-    public static final Supplier<ShovelItem> create(ModRegister register, String name, Properties properties, Tier tier, Integer attackDamage, Float attackSpeed, ResourceKey<CreativeModeTab> creativeTab) {
-        var shovel = register.itemRegistry.register(name, () -> new ShovelItem(tier, attackDamage, attackSpeed, properties), creativeTab);
+    public static final Supplier<ShovelItem> create(ModRegister register, String name, Properties properties, Tier tier, ResourceKey<CreativeModeTab> creativeTab) {
+        var shovel = register.itemRegistry.register(name, () -> new ShovelItem(tier, properties), creativeTab);
         register.itemRegistry.tools.put(name, shovel);
 
         return shovel;

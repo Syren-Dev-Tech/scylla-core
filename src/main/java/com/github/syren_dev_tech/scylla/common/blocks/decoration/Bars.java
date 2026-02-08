@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class Bars {
 
     public static final Supplier<IronBarsBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.IRON_BARS));
+        return create(register, name, Properties.ofFullCopy(Blocks.IRON_BARS));
     }
 
     public static final Supplier<IronBarsBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.IRON_BARS), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.IRON_BARS), creativeTab);
     }
 
     public static final Supplier<IronBarsBlock> create(ModRegister register, String name, Properties properties) {

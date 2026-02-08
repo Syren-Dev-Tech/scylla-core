@@ -14,11 +14,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class Corals {
 
     public static final Supplier<CoralBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.FIRE_CORAL_BLOCK), Blocks.DEAD_FIRE_CORAL_BLOCK);
+        return create(register, name, Properties.ofFullCopy(Blocks.FIRE_CORAL_BLOCK), Blocks.DEAD_FIRE_CORAL_BLOCK);
     }
 
     public static final Supplier<CoralBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.FIRE_CORAL_BLOCK), Blocks.DEAD_FIRE_CORAL_BLOCK, creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.FIRE_CORAL_BLOCK), Blocks.DEAD_FIRE_CORAL_BLOCK, creativeTab);
     }
 
     public static final Supplier<CoralBlock> create(ModRegister register, String name, Properties properties) {
@@ -30,11 +30,11 @@ public class Corals {
     }
 
     public static final Supplier<CoralBlock> create(ModRegister register, String name, Block deadBlock) {
-        return create(register, name, Properties.copy(Blocks.FIRE_CORAL_BLOCK), deadBlock);
+        return create(register, name, Properties.ofFullCopy(Blocks.FIRE_CORAL_BLOCK), deadBlock);
     }
 
     public static final Supplier<CoralBlock> create(ModRegister register, String name, Block deadBlock, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.FIRE_CORAL_BLOCK), deadBlock, creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.FIRE_CORAL_BLOCK), deadBlock, creativeTab);
     }
 
     public static final Supplier<CoralBlock> create(ModRegister register, String name, Properties properties, Block deadBlock) {

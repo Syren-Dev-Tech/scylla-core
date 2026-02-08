@@ -16,11 +16,11 @@ public class ChorusPlants {
     public static class ChorusStalks {
 
         public static final Supplier<ChorusPlantBlock> create(ModRegister register, String name) {
-            return create(register, name, Properties.copy(Blocks.CHORUS_PLANT));
+            return create(register, name, Properties.ofFullCopy(Blocks.CHORUS_PLANT));
         }
 
         public static final Supplier<ChorusPlantBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-            return create(register, name, Properties.copy(Blocks.CHORUS_PLANT), creativeTab);
+            return create(register, name, Properties.ofFullCopy(Blocks.CHORUS_PLANT), creativeTab);
         }
 
         public static final Supplier<ChorusPlantBlock> create(ModRegister register, String name, Properties properties) {
@@ -39,19 +39,19 @@ public class ChorusPlants {
     public static class ChorusFlowers {
 
         public static final Supplier<ChorusFlowerBlock> create(ModRegister register, String name) {
-            return create(register, name, Properties.copy(Blocks.CHORUS_FLOWER));
+            return create(register, name, Properties.ofFullCopy(Blocks.CHORUS_FLOWER));
         }
 
         public static final Supplier<ChorusFlowerBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-            return create(register, name, Properties.copy(Blocks.CHORUS_FLOWER), creativeTab);
+            return create(register, name, Properties.ofFullCopy(Blocks.CHORUS_FLOWER), creativeTab);
         }
 
         public static final Supplier<ChorusFlowerBlock> create(ModRegister register, String name, ChorusPlantBlock plantBlock) {
-            return create(register, name, Properties.copy(Blocks.CHORUS_FLOWER), plantBlock);
+            return create(register, name, Properties.ofFullCopy(Blocks.CHORUS_FLOWER), plantBlock);
         }
 
         public static final Supplier<ChorusFlowerBlock> create(ModRegister register, String name, ChorusPlantBlock plantBlock, ResourceKey<CreativeModeTab> creativeTab) {
-            return create(register, name, Properties.copy(Blocks.CHORUS_FLOWER), plantBlock, creativeTab);
+            return create(register, name, Properties.ofFullCopy(Blocks.CHORUS_FLOWER), plantBlock, creativeTab);
         }
 
         public static final Supplier<ChorusFlowerBlock> create(ModRegister register, String name, Properties properties) {

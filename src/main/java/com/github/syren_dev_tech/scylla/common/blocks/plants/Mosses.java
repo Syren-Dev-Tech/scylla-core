@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class Mosses {
 
     public static final Supplier<MossBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.MOSS_BLOCK));
+        return create(register, name, Properties.ofFullCopy(Blocks.MOSS_BLOCK));
     }
 
     public static final Supplier<MossBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.MOSS_BLOCK), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.MOSS_BLOCK), creativeTab);
     }
 
     public static final Supplier<MossBlock> create(ModRegister register, String name, Properties properties) {

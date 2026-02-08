@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class Piles {
 
     public static final Supplier<SnowLayerBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.SNOW));
+        return create(register, name, Properties.ofFullCopy(Blocks.SNOW));
     }
 
     public static final Supplier<SnowLayerBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.SNOW), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.SNOW), creativeTab);
     }
 
     public static final Supplier<SnowLayerBlock> create(ModRegister register, String name, Properties properties) {

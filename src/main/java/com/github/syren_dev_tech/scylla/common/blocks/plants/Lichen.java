@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class Lichen {
 
     public static final Supplier<GlowLichenBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.GLOW_LICHEN));
+        return create(register, name, Properties.ofFullCopy(Blocks.GLOW_LICHEN));
     }
 
     public static final Supplier<GlowLichenBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.GLOW_LICHEN), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.GLOW_LICHEN), creativeTab);
     }
 
     public static final Supplier<GlowLichenBlock> create(ModRegister register, String name, Properties properties) {

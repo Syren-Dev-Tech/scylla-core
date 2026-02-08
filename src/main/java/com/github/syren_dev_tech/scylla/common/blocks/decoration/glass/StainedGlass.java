@@ -14,19 +14,19 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class StainedGlass {
 
     public static final Supplier<StainedGlassBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.IRON_BARS));
+        return create(register, name, Properties.ofFullCopy(Blocks.IRON_BARS));
     }
 
     public static final Supplier<StainedGlassBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.GLASS_PANE), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.GLASS_PANE), creativeTab);
     }
 
     public static final Supplier<StainedGlassBlock> create(ModRegister register, String name, DyeColor color) {
-        return create(register, name, Properties.copy(Blocks.WHITE_STAINED_GLASS), color);
+        return create(register, name, Properties.ofFullCopy(Blocks.WHITE_STAINED_GLASS), color);
     }
 
     public static final Supplier<StainedGlassBlock> create(ModRegister register, String name, DyeColor color, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.WHITE_STAINED_GLASS), color, creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.WHITE_STAINED_GLASS), color, creativeTab);
     }
 
     public static final Supplier<StainedGlassBlock> create(ModRegister register, String name, Properties properties) {

@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class FlamableLand {
 
     public static final Supplier<NetherrackBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.NETHERRACK));
+        return create(register, name, Properties.ofFullCopy(Blocks.NETHERRACK));
     }
 
     public static final Supplier<NetherrackBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.NETHERRACK), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.NETHERRACK), creativeTab);
     }
 
     public static final Supplier<NetherrackBlock> create(ModRegister register, String name, Properties properties) {

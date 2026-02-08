@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class BrewingStands {
 
     public static final Supplier<BrewingStandBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.BREWING_STAND));
+        return create(register, name, Properties.ofFullCopy(Blocks.BREWING_STAND));
     }
 
     public static final Supplier<BrewingStandBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.BREWING_STAND), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.BREWING_STAND), creativeTab);
     }
 
     public static final Supplier<BrewingStandBlock> create(ModRegister register, String name, Properties properties) {

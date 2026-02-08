@@ -17,11 +17,11 @@ public class Concrete {
     public static class ConcretePowders {
 
         public static final Supplier<ConcretePowderBlock> create(ModRegister register, String name, Block hardenedBlock) {
-            return create(register, name, Properties.copy(Blocks.WHITE_GLAZED_TERRACOTTA), hardenedBlock);
+            return create(register, name, Properties.ofFullCopy(Blocks.WHITE_GLAZED_TERRACOTTA), hardenedBlock);
         }
 
         public static final Supplier<ConcretePowderBlock> create(ModRegister register, String name, Block hardenedBlock, ResourceKey<CreativeModeTab> creativeTab) {
-            return create(register, name, Properties.copy(Blocks.WHITE_GLAZED_TERRACOTTA), hardenedBlock, creativeTab);
+            return create(register, name, Properties.ofFullCopy(Blocks.WHITE_GLAZED_TERRACOTTA), hardenedBlock, creativeTab);
         }
 
         public static final Supplier<ConcretePowderBlock> create(ModRegister register, String name, Properties properties, Block hardenedBlock) {
@@ -38,11 +38,11 @@ public class Concrete {
     }
 
     public static final Tuple<Supplier<Block>, Supplier<ConcretePowderBlock>> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.WHITE_CONCRETE), Properties.copy(Blocks.WHITE_CONCRETE_POWDER));
+        return create(register, name, Properties.ofFullCopy(Blocks.WHITE_CONCRETE), Properties.ofFullCopy(Blocks.WHITE_CONCRETE_POWDER));
     }
 
     public static final Tuple<Supplier<Block>, Supplier<ConcretePowderBlock>> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.WHITE_CONCRETE), Properties.copy(Blocks.WHITE_CONCRETE_POWDER), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.WHITE_CONCRETE), Properties.ofFullCopy(Blocks.WHITE_CONCRETE_POWDER), creativeTab);
     }
 
     public static final Tuple<Supplier<Block>, Supplier<ConcretePowderBlock>> create(ModRegister register, String name, Properties hardenedProperties, Properties powderProperties) {

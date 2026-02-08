@@ -15,11 +15,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class Chests {
 
     public static final Supplier<ChestBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.CHEST), BlockEntityType.CHEST);
+        return create(register, name, Properties.ofFullCopy(Blocks.CHEST), BlockEntityType.CHEST);
     }
 
     public static final Supplier<ChestBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.CHEST), BlockEntityType.CHEST, creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.CHEST), BlockEntityType.CHEST, creativeTab);
     }
 
     public static final Supplier<ChestBlock> create(ModRegister register, String name, Properties properties) {

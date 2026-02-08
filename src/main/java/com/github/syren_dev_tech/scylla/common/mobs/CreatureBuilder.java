@@ -12,7 +12,7 @@ import com.github.syren_dev_tech.scylla.common.mobs.creatures.Animator;
 import com.github.syren_dev_tech.scylla.common.mobs.creatures.CreatureState;
 import com.github.syren_dev_tech.scylla.common.mobs.creatures.CustomCreature;
 import com.github.syren_dev_tech.scylla.common.registry.ModRegister;
-import net.minecraft.resources.ResourceLocation;
+import com.github.syren_dev_tech.scylla.utilities.files.ResourcePath;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -26,8 +26,8 @@ public class CreatureBuilder<T extends CustomCreature> {
     private final String name;
 
     private List<Goal> goals = new ArrayList<>();
-    private Function<CreatureState<T>, ResourceLocation> textures;
-    private Function<CreatureState<T>, ResourceLocation> masks;
+    private Function<CreatureState<T>, ResourcePath> textures;
+    private Function<CreatureState<T>, ResourcePath> masks;
     private TextureRenderer<T> textureRenderer;
     private Map<String, Animator<T>> animators = new HashMap<>();
     private CreatureFactory<T> factory;
@@ -39,19 +39,19 @@ public class CreatureBuilder<T extends CustomCreature> {
         this.register = register;
         this.factory = factory;
 
-        this.textures = t -> new ResourceLocation(register.modId, "textures/entity/" + name + ".png");
+        this.textures = t -> new ResourcePath(register.modId, "textures/entity/" + name + ".png");
     }
 
     public ModRegister getRegister() {
         return register;
     }
 
-    public CreatureBuilder<T> withTextures(Function<CreatureState<T>, ResourceLocation> textures) {
+    public CreatureBuilder<T> withTextures(Function<CreatureState<T>, ResourcePath> textures) {
         this.textures = textures;
         return this;
     }
 
-    public CreatureBuilder<T> withMasks(Function<CreatureState<T>, ResourceLocation> masks) {
+    public CreatureBuilder<T> withMasks(Function<CreatureState<T>, ResourcePath> masks) {
         this.masks = masks;
         return this;
     }
@@ -93,11 +93,11 @@ public class CreatureBuilder<T extends CustomCreature> {
         return name;
     }
 
-    public Function<CreatureState<T>, ResourceLocation> getTextures() {
+    public Function<CreatureState<T>, ResourcePath> getTextures() {
         return textures;
     }
 
-    public Function<CreatureState<T>, ResourceLocation> getMasks() {
+    public Function<CreatureState<T>, ResourcePath> getMasks() {
         return masks;
     }
 

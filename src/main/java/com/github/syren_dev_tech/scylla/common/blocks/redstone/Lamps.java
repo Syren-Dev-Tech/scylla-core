@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class Lamps {
 
     public static final Supplier<RedstoneLampBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.REDSTONE_LAMP));
+        return create(register, name, Properties.ofFullCopy(Blocks.REDSTONE_LAMP));
     }
 
     public static final Supplier<RedstoneLampBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.REDSTONE_LAMP), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.REDSTONE_LAMP), creativeTab);
     }
 
     public static final Supplier<RedstoneLampBlock> create(ModRegister register, String name, Properties properties) {

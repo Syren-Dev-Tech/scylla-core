@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class EndRods {
 
     public static Supplier<EndRodBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.END_ROD));
+        return create(register, name, Properties.ofFullCopy(Blocks.END_ROD));
     }
 
     public static Supplier<EndRodBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.END_ROD), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.END_ROD), creativeTab);
     }
 
     public static Supplier<EndRodBlock> create(ModRegister register, String name, Properties properties) {

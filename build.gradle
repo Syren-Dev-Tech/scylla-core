@@ -2,7 +2,7 @@ buildscript {
     repositories {
         mavenCentral()
         gradlePluginPortal()
-        maven { url = 'maven.neoforged.net' }
+        maven { url = 'https://maven.neoforged.net/releases' }
         maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
         mavenLocal()
     }
@@ -16,12 +16,13 @@ plugins {
     id 'idea'
     id 'groovy'
     id 'eclipse'
+    id 'java-library'
     id 'maven-publish'
-    id 'fabric-loom' version "${loom_version}" apply false
+    // id 'fabric-loom' version "${loom_version}" apply false
     id 'net.minecraftforge.gradle' version '[6.0,6.2)' apply false
-    id 'net.neoforged.moddev.legacyforge' version "${neoforge_version}" apply false
     id 'org.parchmentmc.librarian.forgegradle' version '1.+' apply false
     id 'org.spongepowered.mixin' version '0.7.+' apply false
+    id 'net.neoforged.moddev' version '2.0.140' apply false
 }
 
 group = mod_group_id
@@ -32,7 +33,7 @@ def artifact_id = ""
 
 java {
     toolchain {
-        languageVersion.set(JavaLanguageVersion.of(17))
+        languageVersion.set(JavaLanguageVersion.of(21))
     }
 }
 
@@ -106,30 +107,112 @@ else if (isFabric) {
 else {
     println "Building with NeoForge"
 
-    apply plugin: 'net.neoforged.moddev.legacyforge'
+    apply plugin: 'net.neoforged.moddev'
 
     // Exclude files marked as "fabric only"
     sourceSets.main.java.exclude '**/*_Fabric.java'
     artifact_id = "${mod_id}_neoforge"
 
     dependencies {
-        // minecraft "net.neoforged:forge:${minecraft_version}-${neoforge_version}"
         implementation "software.bernie.geckolib:geckolib-forge-${minecraft_version}:${geckolib_version}"
-        implementation "org.parchmentmc.data:parchment-1.20.1:2023.09.03@zip"
         implementation "com.eliotlash.mclib:mclib:20"
-        implementation 'org.slf4j:slf4j-api:2.0.17'
+        implementation 'org.slf4j:slf4j-api:2.0.9'
         implementation 'com.electronwill.night-config:core:3.8.3'
         implementation 'org.jspecify:jspecify:0.3.0'
     }
 
-    legacyForge {
-        version = "${minecraft_version}-${forge_version}"
-        // mappings {
-        //     parchment {
-        //         minecraftVersion = '1.20.1'
-        //         mappingsVersion = '2023.09.03'
-        //     }
-        // }
+    neoForge {
+        // Specify the version of NeoForge to use.
+        version = project.neoforge_version
+
+        parchment {
+            mappingsVersion = project.parchment_version
+            minecraftVersion = project.minecraft_version
+        }
+
+        // This line is optional. Access Transformers are automatically detected
+        // accessTransformers = project.files('src/main/resources/META-INF/accesstransformer.cfg')
+
+        // Default run configurations.
+        // These can be tweaked, removed, or duplicated as needed.
+        runs {
+            client {
+                client()
+
+                // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
+                systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+            }
+
+            server {
+                server()
+                programArgument '--nogui'
+                systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+            }
+
+            // This run config launches GameTestServer and runs all registered gametests, then exits.
+            // By default, the server will crash when no gametests are provided.
+            // The gametest system is also enabled by default for other run configs under the /test command.
+            gameTestServer {
+                type = "gameTestServer"
+                systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+            }
+
+            data {
+                clientData()
+
+                // example of overriding the workingDirectory set in configureEach above, uncomment if you want to use it
+                // gameDirectory = project.file('run-data')
+
+                // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
+                programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
+            }
+
+            // applies to all the run configs above
+            configureEach {
+                // Recommended logging data for a userdev environment
+                // The markers can be added/remove as needed separated by commas.
+                // "SCAN": For mods scan.
+                // "REGISTRIES": For firing of registry events.
+                // "REGISTRYDUMP": For getting the contents of all registries.
+                systemProperty 'forge.logging.markers', 'REGISTRIES'
+
+                // Recommended logging level for the console
+                // You can set various levels here.
+                // Please read: https://stackoverflow.com/questions/2031163/when-to-use-the-different-log-levels
+                logLevel = org.slf4j.event.Level.DEBUG
+            }
+        }
+
+        mods {
+            // define mod <-> source bindings
+            // these are used to tell the game which sources are for which mod
+            // mostly optional in a single mod project
+            // but multi mod projects should define one per mod
+            "${mod_id}" {
+                sourceSet(sourceSets.main)
+            }
+        }
+    }
+
+    tasks.withType(ProcessResources).configureEach {
+        var replaceProperties = [
+                minecraft_version      : minecraft_version,
+                minecraft_version_range: minecraft_version_range,
+                neo_version            : neoforge_version,
+                neo_version_range      : neoforge_version_range,
+                loader_version_range   : neoforge_loader_version_range,
+                mod_id                 : mod_id,
+                mod_name               : mod_name,
+                mod_license            : mod_license,
+                mod_version            : mod_version,
+                mod_authors            : mod_authors,
+                mod_description        : mod_description
+        ]
+        inputs.properties replaceProperties
+
+        filesMatching(['META-INF/neoforge.mods.toml']) {
+            expand replaceProperties
+        }
     }
 }
 
@@ -157,5 +240,12 @@ publishing {
             artifactId "${artifact_id}"
             artifact jar
         }
+    }
+}
+
+idea {
+    module {
+        downloadSources = true
+        downloadJavadoc = true
     }
 }

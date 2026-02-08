@@ -14,19 +14,19 @@ import net.minecraft.world.item.CreativeModeTab;
 public class Stairs {
 
     public static final Supplier<StairBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.STONE_STAIRS), () -> Blocks.STONE);
+        return create(register, name, Properties.ofFullCopy(Blocks.STONE_STAIRS), () -> Blocks.STONE);
     }
 
     public static final Supplier<StairBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.STONE_STAIRS), () -> Blocks.STONE, creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.STONE_STAIRS), () -> Blocks.STONE, creativeTab);
     }
 
     public static final Supplier<StairBlock> create(ModRegister register, String name, Supplier<Block> sourceBlock) {
-        return create(register, name, Properties.copy(Blocks.STONE_STAIRS), sourceBlock);
+        return create(register, name, Properties.ofFullCopy(Blocks.STONE_STAIRS), sourceBlock);
     }
 
     public static final Supplier<StairBlock> create(ModRegister register, String name, Supplier<Block> sourceBlock, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.STONE_STAIRS), sourceBlock, creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.STONE_STAIRS), sourceBlock, creativeTab);
     }
 
     public static final Supplier<StairBlock> create(ModRegister register, String name, Properties properties, Supplier<Block> sourceBlock) {

@@ -15,11 +15,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class Paths {
 
     public static final Supplier<DirtPathBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.DIRT_PATH));
+        return create(register, name, Properties.ofFullCopy(Blocks.DIRT_PATH));
     }
 
     public static final Supplier<DirtPathBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.DIRT_PATH), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.DIRT_PATH), creativeTab);
     }
 
     public static final Supplier<DirtPathBlock> create(ModRegister register, String name, Properties properties) {

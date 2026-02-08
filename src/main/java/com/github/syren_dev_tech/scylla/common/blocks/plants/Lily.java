@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class Lily {
 
     public static final Supplier<WaterlilyBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.LILY_PAD));
+        return create(register, name, Properties.ofFullCopy(Blocks.LILY_PAD));
     }
 
     public static final Supplier<WaterlilyBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.LILY_PAD), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.LILY_PAD), creativeTab);
     }
 
     public static final Supplier<WaterlilyBlock> create(ModRegister register, String name, Properties properties) {

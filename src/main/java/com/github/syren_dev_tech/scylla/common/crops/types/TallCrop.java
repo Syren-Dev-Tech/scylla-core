@@ -22,7 +22,6 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.common.IPlantable;
 
 public class TallCrop extends DoublePlantBlock implements BonemealableBlock {
     public static final IntegerProperty AGE = BlockStateProperties.AGE_4;
@@ -90,7 +89,7 @@ public class TallCrop extends DoublePlantBlock implements BonemealableBlock {
                 float f1 = 0.0F;
 
                 BlockState blockstate = blockGetter.getBlockState(blockpos.offset(i, 0, j));
-                if (blockstate.canSustainPlant(blockGetter, blockpos.offset(i, 0, j), Direction.UP, (IPlantable) block)) {
+                if (blockstate.canSustainPlant(blockGetter, blockpos.offset(i, 0, j), Direction.UP, block.defaultBlockState()).isTrue()) {
                     f1 = 1.0F;
 
                     if (blockstate.isFertile(blockGetter, blockPos.offset(i, 0, j)))
@@ -162,12 +161,6 @@ public class TallCrop extends DoublePlantBlock implements BonemealableBlock {
         }
     }
 
-    public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState, boolean unused) {
-        PosAndState posAndState = this.getLowerHalf(levelReader, blockPos, blockState);
-
-        return posAndState != null && this.canGrow(levelReader, posAndState.pos, posAndState.state, posAndState.state.getValue(AGE) + 1);
-    }
-
     public boolean isBonemealSuccess(Level level, RandomSource randomSource, BlockPos blockPos, BlockState blockState) {
         return true;
     }
@@ -180,5 +173,12 @@ public class TallCrop extends DoublePlantBlock implements BonemealableBlock {
     }
 
     static record PosAndState(BlockPos pos, BlockState state) {
+    }
+
+    @Override
+    public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState) {
+        PosAndState posAndState = this.getLowerHalf(levelReader, blockPos, blockState);
+
+        return posAndState != null && this.canGrow(levelReader, posAndState.pos, posAndState.state, posAndState.state.getValue(AGE) + 1);
     }
 }

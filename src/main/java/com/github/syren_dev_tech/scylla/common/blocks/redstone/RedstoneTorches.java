@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class RedstoneTorches {
 
     public static final Supplier<RedstoneTorchBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.REDSTONE_TORCH));
+        return create(register, name, Properties.ofFullCopy(Blocks.REDSTONE_TORCH));
     }
 
     public static final Supplier<RedstoneTorchBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.REDSTONE_TORCH), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.REDSTONE_TORCH), creativeTab);
     }
 
     public static final Supplier<RedstoneTorchBlock> create(ModRegister register, String name, Properties properties) {

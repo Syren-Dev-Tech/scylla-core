@@ -15,11 +15,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class TreeBushes {
 
     public static final Supplier<AzaleaBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.AZALEA));
+        return create(register, name, Properties.ofFullCopy(Blocks.AZALEA));
     }
 
     public static final Supplier<AzaleaBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.AZALEA), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.AZALEA), creativeTab);
     }
 
     public static final Supplier<AzaleaBlock> create(ModRegister register, String name, Properties properties) {

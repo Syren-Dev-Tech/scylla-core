@@ -15,11 +15,11 @@ import net.minecraft.world.level.block.state.properties.BlockSetType;
 public class TrapDoors {
 
     public static final Supplier<TrapDoorBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.OAK_TRAPDOOR), BlockSetType.OAK);
+        return create(register, name, Properties.ofFullCopy(Blocks.OAK_TRAPDOOR), BlockSetType.OAK);
     }
 
     public static final Supplier<TrapDoorBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.OAK_TRAPDOOR), BlockSetType.OAK, creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.OAK_TRAPDOOR), BlockSetType.OAK, creativeTab);
     }
 
     public static final Supplier<TrapDoorBlock> create(ModRegister register, String name, Properties properties) {
@@ -31,27 +31,27 @@ public class TrapDoors {
     }
 
     public static final Supplier<TrapDoorBlock> create(ModRegister register, String name, Block block) {
-        return create(register, name, Properties.copy(block), BlockSetType.OAK);
+        return create(register, name, Properties.ofFullCopy(block), BlockSetType.OAK);
     }
 
     public static final Supplier<TrapDoorBlock> create(ModRegister register, String name, Block block, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(block), BlockSetType.OAK, creativeTab);
+        return create(register, name, Properties.ofFullCopy(block), BlockSetType.OAK, creativeTab);
     }
 
     public static final Supplier<TrapDoorBlock> create(ModRegister register, String name, BlockSetType blockSetType) {
-        return create(register, name, Properties.copy(Blocks.OAK_TRAPDOOR), blockSetType);
+        return create(register, name, Properties.ofFullCopy(Blocks.OAK_TRAPDOOR), blockSetType);
     }
 
     public static final Supplier<TrapDoorBlock> create(ModRegister register, String name, BlockSetType blockSetType, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.OAK_TRAPDOOR), blockSetType, creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.OAK_TRAPDOOR), blockSetType, creativeTab);
     }
 
     public static final Supplier<TrapDoorBlock> create(ModRegister register, String name, Properties properties, BlockSetType blockSetType) {
-        return register.blockRegistry.register(name, () -> new TrapDoorBlock(properties, blockSetType));
+        return register.blockRegistry.register(name, () -> new TrapDoorBlock(blockSetType, properties));
     }
 
     public static final Supplier<TrapDoorBlock> create(ModRegister register, String name, Properties properties, BlockSetType blockSetType, ResourceKey<CreativeModeTab> creativeTab) {
-        return register.blockRegistry.register(name, () -> new TrapDoorBlock(properties, blockSetType), creativeTab);
+        return register.blockRegistry.register(name, () -> new TrapDoorBlock(blockSetType, properties), creativeTab);
     }
 
     private TrapDoors() {

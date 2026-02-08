@@ -14,11 +14,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class StainedGlassPanes {
 
     public static final Supplier<StainedGlassPaneBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.WHITE_STAINED_GLASS_PANE), DyeColor.WHITE);
+        return create(register, name, Properties.ofFullCopy(Blocks.WHITE_STAINED_GLASS_PANE), DyeColor.WHITE);
     }
 
     public static final Supplier<StainedGlassPaneBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.WHITE_STAINED_GLASS_PANE), DyeColor.WHITE, creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.WHITE_STAINED_GLASS_PANE), DyeColor.WHITE, creativeTab);
     }
 
     public static final Supplier<StainedGlassPaneBlock> create(ModRegister register, String name, Properties properties) {
@@ -30,11 +30,11 @@ public class StainedGlassPanes {
     }
 
     public static final Supplier<StainedGlassPaneBlock> create(ModRegister register, String name, DyeColor color) {
-        return create(register, name, Properties.copy(Blocks.WHITE_STAINED_GLASS_PANE), color);
+        return create(register, name, Properties.ofFullCopy(Blocks.WHITE_STAINED_GLASS_PANE), color);
     }
 
     public static final Supplier<StainedGlassPaneBlock> create(ModRegister register, String name, DyeColor color, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.WHITE_STAINED_GLASS_PANE), color, creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.WHITE_STAINED_GLASS_PANE), color, creativeTab);
     }
 
     public static final Supplier<StainedGlassPaneBlock> create(ModRegister register, String name, Properties properties, DyeColor color) {

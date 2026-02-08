@@ -15,11 +15,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class Blossoms {
 
     public static final Supplier<SporeBlossomBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.SPORE_BLOSSOM));
+        return create(register, name, Properties.ofFullCopy(Blocks.SPORE_BLOSSOM));
     }
 
     public static final Supplier<SporeBlossomBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.SPORE_BLOSSOM), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.SPORE_BLOSSOM), creativeTab);
     }
 
     public static final Supplier<SporeBlossomBlock> create(ModRegister register, String name, Properties properties) {

@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class Scaffoldings {
 
     public static final Supplier<ScaffoldingBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.SCAFFOLDING));
+        return create(register, name, Properties.ofFullCopy(Blocks.SCAFFOLDING));
     }
 
     public static final Supplier<ScaffoldingBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.SCAFFOLDING), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.SCAFFOLDING), creativeTab);
     }
 
     public static final Supplier<ScaffoldingBlock> create(ModRegister register, String name, Properties properties) {

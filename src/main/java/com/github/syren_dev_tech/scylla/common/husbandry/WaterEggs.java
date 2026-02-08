@@ -17,11 +17,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class WaterEggs {
 
     public static final <T extends Animal> Supplier<WaterEgg<T>> create(ModRegister register, String name, WaterEggData<T> eggData) {
-        return create(register, name, Properties.copy(Blocks.FROGSPAWN), eggData);
+        return create(register, name, Properties.ofFullCopy(Blocks.FROGSPAWN), eggData);
     }
 
     public static final <T extends Animal> Supplier<WaterEgg<T>> create(ModRegister register, String name, WaterEggData<T> eggData, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.FROGSPAWN), eggData, creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.FROGSPAWN), eggData, creativeTab);
     }
 
     public static final <T extends Animal> Supplier<WaterEgg<T>> create(ModRegister register, String name, Properties properties, WaterEggData<T> eggData) {

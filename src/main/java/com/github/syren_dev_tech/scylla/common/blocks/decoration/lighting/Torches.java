@@ -5,8 +5,8 @@ import java.util.function.Supplier;
 import com.github.syren_dev_tech.scylla.common.collections.Tuple;
 import com.github.syren_dev_tech.scylla.common.registry.ModRegister;
 
-import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.Blocks;
@@ -19,11 +19,11 @@ public class Torches {
     public static class StandingTorches {
 
         public static final Supplier<TorchBlock> create(ModRegister register, String name) {
-            return create(register, name, Properties.copy(Blocks.TORCH), ParticleTypes.FLAME);
+            return create(register, name, Properties.ofFullCopy(Blocks.TORCH), ParticleTypes.FLAME);
         }
 
         public static final Supplier<TorchBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-            return create(register, name, Properties.copy(Blocks.TORCH), ParticleTypes.FLAME, creativeTab);
+            return create(register, name, Properties.ofFullCopy(Blocks.TORCH), ParticleTypes.FLAME, creativeTab);
         }
 
         public static final Supplier<TorchBlock> create(ModRegister register, String name, Properties properties) {
@@ -34,12 +34,12 @@ public class Torches {
             return create(register, name, properties, ParticleTypes.FLAME, creativeTab);
         }
 
-        public static final Supplier<TorchBlock> create(ModRegister register, String name, Properties properties, ParticleOptions particle) {
-            return register.blockRegistry.register(name, () -> new TorchBlock(properties, particle));
+        public static final Supplier<TorchBlock> create(ModRegister register, String name, Properties properties, SimpleParticleType particle) {
+            return register.blockRegistry.register(name, () -> new TorchBlock(particle, properties));
         }
 
-        public static final Supplier<TorchBlock> create(ModRegister register, String name, Properties properties, ParticleOptions particle, ResourceKey<CreativeModeTab> creativeTab) {
-            return register.blockRegistry.register(name, () -> new TorchBlock(properties, particle), creativeTab);
+        public static final Supplier<TorchBlock> create(ModRegister register, String name, Properties properties, SimpleParticleType particle, ResourceKey<CreativeModeTab> creativeTab) {
+            return register.blockRegistry.register(name, () -> new TorchBlock(particle, properties), creativeTab);
         }
 
         private StandingTorches() {
@@ -50,11 +50,11 @@ public class Torches {
     public static class WallTorches {
 
         public static final Supplier<WallTorchBlock> create(ModRegister register, String name) {
-            return create(register, name, Properties.copy(Blocks.TORCH), ParticleTypes.FLAME);
+            return create(register, name, Properties.ofFullCopy(Blocks.TORCH), ParticleTypes.FLAME);
         }
 
         public static final Supplier<WallTorchBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-            return create(register, name, Properties.copy(Blocks.TORCH), ParticleTypes.FLAME, creativeTab);
+            return create(register, name, Properties.ofFullCopy(Blocks.TORCH), ParticleTypes.FLAME, creativeTab);
         }
 
         public static final Supplier<WallTorchBlock> create(ModRegister register, String name, Properties properties) {
@@ -65,12 +65,12 @@ public class Torches {
             return create(register, name, properties, ParticleTypes.FLAME, creativeTab);
         }
 
-        public static final Supplier<WallTorchBlock> create(ModRegister register, String name, Properties properties, ParticleOptions particle) {
-            return register.blockRegistry.register(name, () -> new WallTorchBlock(properties, particle));
+        public static final Supplier<WallTorchBlock> create(ModRegister register, String name, Properties properties, SimpleParticleType particle) {
+            return register.blockRegistry.register(name, () -> new WallTorchBlock(particle, properties));
         }
 
-        public static final Supplier<WallTorchBlock> create(ModRegister register, String name, Properties properties, ParticleOptions particle, ResourceKey<CreativeModeTab> creativeTab) {
-            return register.blockRegistry.register(name, () -> new WallTorchBlock(properties, particle), creativeTab);
+        public static final Supplier<WallTorchBlock> create(ModRegister register, String name, Properties properties, SimpleParticleType particle, ResourceKey<CreativeModeTab> creativeTab) {
+            return register.blockRegistry.register(name, () -> new WallTorchBlock(particle, properties), creativeTab);
         }
 
         private WallTorches() {

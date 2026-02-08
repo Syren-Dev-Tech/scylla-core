@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class CarvedGourds {
 
     public static final Supplier<CarvedGourd> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.CARVED_PUMPKIN));
+        return create(register, name, Properties.ofFullCopy(Blocks.CARVED_PUMPKIN));
     }
 
     public static final Supplier<CarvedGourd> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.CARVED_PUMPKIN), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.CARVED_PUMPKIN), creativeTab);
     }
 
     public static final Supplier<CarvedGourd> create(ModRegister register, String name, Properties properties) {

@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class Droppers {
 
     public static final Supplier<DropperBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.DROPPER));
+        return create(register, name, Properties.ofFullCopy(Blocks.DROPPER));
     }
 
     public static final Supplier<DropperBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.DROPPER), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.DROPPER), creativeTab);
     }
 
     public static final Supplier<DropperBlock> create(ModRegister register, String name, Properties properties) {

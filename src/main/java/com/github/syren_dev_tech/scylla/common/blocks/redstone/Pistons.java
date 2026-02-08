@@ -18,11 +18,11 @@ public class Pistons {
     public static class PistonBases {
 
         public static Supplier<PistonBaseBlock> create(ModRegister register, String name, boolean sticky) {
-            return create(register, name, Properties.copy(Blocks.PISTON), sticky);
+            return create(register, name, Properties.ofFullCopy(Blocks.PISTON), sticky);
         }
 
         public static Supplier<PistonBaseBlock> create(ModRegister register, String name, boolean sticky, ResourceKey<CreativeModeTab> creativeTab) {
-            return create(register, name, Properties.copy(Blocks.PISTON), sticky, creativeTab);
+            return create(register, name, Properties.ofFullCopy(Blocks.PISTON), sticky, creativeTab);
         }
 
         public static Supplier<PistonBaseBlock> create(ModRegister register, String name, Properties properties, boolean sticky) {
@@ -41,11 +41,11 @@ public class Pistons {
     public static class PistonHeads {
 
         public static Supplier<PistonHeadBlock> create(ModRegister register, String name) {
-            return create(register, name, Properties.copy(Blocks.PISTON_HEAD));
+            return create(register, name, Properties.ofFullCopy(Blocks.PISTON_HEAD));
         }
 
         public static Supplier<PistonHeadBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-            return create(register, name, Properties.copy(Blocks.PISTON_HEAD), creativeTab);
+            return create(register, name, Properties.ofFullCopy(Blocks.PISTON_HEAD), creativeTab);
         }
 
         public static Supplier<PistonHeadBlock> create(ModRegister register, String name, Properties properties) {
@@ -64,11 +64,11 @@ public class Pistons {
     public static class MovingPistons {
 
         public static Supplier<MovingPistonBlock> create(ModRegister register, String name) {
-            return create(register, name, Properties.copy(Blocks.MOVING_PISTON));
+            return create(register, name, Properties.ofFullCopy(Blocks.MOVING_PISTON));
         }
 
         public static Supplier<MovingPistonBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-            return create(register, name, Properties.copy(Blocks.MOVING_PISTON), creativeTab);
+            return create(register, name, Properties.ofFullCopy(Blocks.MOVING_PISTON), creativeTab);
         }
 
         public static Supplier<MovingPistonBlock> create(ModRegister register, String name, Properties properties) {

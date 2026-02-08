@@ -18,11 +18,11 @@ public class Candles {
     public static class CakeCandles {
 
         public static final Supplier<CandleCakeBlock> create(ModRegister register, String name, Block standingCandle) {
-            return create(register, name, Properties.copy(Blocks.CANDLE_CAKE), standingCandle);
+            return create(register, name, Properties.ofFullCopy(Blocks.CANDLE_CAKE), standingCandle);
         }
 
         public static final Supplier<CandleCakeBlock> create(ModRegister register, String name, Block standingCandle, ResourceKey<CreativeModeTab> creativeTab) {
-            return create(register, name, Properties.copy(Blocks.CANDLE_CAKE), standingCandle, creativeTab);
+            return create(register, name, Properties.ofFullCopy(Blocks.CANDLE_CAKE), standingCandle, creativeTab);
         }
 
         public static final Supplier<CandleCakeBlock> create(ModRegister register, String name, Properties properties, Block standingCandle) {
@@ -41,11 +41,11 @@ public class Candles {
     public static class PlainCandles {
 
         public static final Supplier<CandleBlock> create(ModRegister register, String name) {
-            return create(register, name, Properties.copy(Blocks.FIRE));
+            return create(register, name, Properties.ofFullCopy(Blocks.FIRE));
         }
 
         public static final Supplier<CandleBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-            return create(register, name, Properties.copy(Blocks.FIRE), creativeTab);
+            return create(register, name, Properties.ofFullCopy(Blocks.FIRE), creativeTab);
         }
 
         public static final Supplier<CandleBlock> create(ModRegister register, String name, Properties properties) {
@@ -62,11 +62,11 @@ public class Candles {
     }
 
     public static final Tuple<Supplier<CandleBlock>, Supplier<CandleCakeBlock>> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.WHITE_CANDLE));
+        return create(register, name, Properties.ofFullCopy(Blocks.WHITE_CANDLE));
     }
 
     public static final Tuple<Supplier<CandleBlock>, Supplier<CandleCakeBlock>> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.WHITE_CANDLE), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.WHITE_CANDLE), creativeTab);
     }
 
     public static final Tuple<Supplier<CandleBlock>, Supplier<CandleCakeBlock>> create(ModRegister register, String name, Properties properties) {

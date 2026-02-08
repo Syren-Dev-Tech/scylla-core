@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class Magma {
 
     public static final Supplier<MagmaBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.MAGMA_BLOCK));
+        return create(register, name, Properties.ofFullCopy(Blocks.MAGMA_BLOCK));
     }
 
     public static final Supplier<MagmaBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.MAGMA_BLOCK), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.MAGMA_BLOCK), creativeTab);
     }
 
     public static final Supplier<MagmaBlock> create(ModRegister register, String name, Properties properties) {

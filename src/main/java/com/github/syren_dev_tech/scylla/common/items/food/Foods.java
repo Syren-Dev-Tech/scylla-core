@@ -13,11 +13,10 @@ import net.minecraft.world.item.Item.Properties;
 
 public class Foods {
 
-    private Foods() {
-    }
+    private Foods() {}
 
     public static final FoodProperties properties(Integer hunger, Float saturation) {
-        return new FoodProperties.Builder().saturationMod(saturation).nutrition(hunger).build();
+        return new FoodProperties.Builder().saturationModifier(saturation).nutrition(hunger).build();
     }
 
     public static final Supplier<Item> create(ModRegister register, String name) {

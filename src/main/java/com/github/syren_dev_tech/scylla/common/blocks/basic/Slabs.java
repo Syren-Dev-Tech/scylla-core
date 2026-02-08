@@ -14,19 +14,19 @@ import net.minecraft.world.item.CreativeModeTab;
 public class Slabs {
 
     public static final Supplier<SlabBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.SMOOTH_STONE_SLAB));
+        return create(register, name, Properties.ofFullCopy(Blocks.SMOOTH_STONE_SLAB));
     }
 
     public static final Supplier<SlabBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.SMOOTH_STONE_SLAB), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.SMOOTH_STONE_SLAB), creativeTab);
     }
 
     public static final Supplier<SlabBlock> create(ModRegister register, String name, Block sourceBlock) {
-        return create(register, name, Properties.copy(sourceBlock));
+        return create(register, name, Properties.ofFullCopy(sourceBlock));
     }
 
     public static final Supplier<SlabBlock> create(ModRegister register, String name, Block sourceBlock, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(sourceBlock), creativeTab);
+        return create(register, name, Properties.ofFullCopy(sourceBlock), creativeTab);
     }
 
     public static final Supplier<SlabBlock> create(ModRegister register, String name, Properties properties) {

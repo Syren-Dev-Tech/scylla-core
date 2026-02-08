@@ -18,11 +18,11 @@ public class RoofVines {
     public static class RoofVineBodies {
 
         public static final Supplier<RoofVineBodyBlock> create(ModRegister register, String name) {
-            return create(register, name, Properties.copy(Blocks.TWISTING_VINES_PLANT), (GrowingPlantHeadBlock) Blocks.TWISTING_VINES);
+            return create(register, name, Properties.ofFullCopy(Blocks.TWISTING_VINES_PLANT), (GrowingPlantHeadBlock) Blocks.TWISTING_VINES);
         }
 
         public static final Supplier<RoofVineBodyBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-            return create(register, name, Properties.copy(Blocks.TWISTING_VINES_PLANT), (GrowingPlantHeadBlock) Blocks.TWISTING_VINES, creativeTab);
+            return create(register, name, Properties.ofFullCopy(Blocks.TWISTING_VINES_PLANT), (GrowingPlantHeadBlock) Blocks.TWISTING_VINES, creativeTab);
         }
 
         public static final Supplier<RoofVineBodyBlock> create(ModRegister register, String name, Properties properties) {
@@ -34,11 +34,11 @@ public class RoofVines {
         }
 
         public static final Supplier<RoofVineBodyBlock> create(ModRegister register, String name, GrowingPlantHeadBlock headBlock) {
-            return create(register, name, Properties.copy(Blocks.TWISTING_VINES_PLANT), headBlock);
+            return create(register, name, Properties.ofFullCopy(Blocks.TWISTING_VINES_PLANT), headBlock);
         }
 
         public static final Supplier<RoofVineBodyBlock> create(ModRegister register, String name, GrowingPlantHeadBlock headBlock, ResourceKey<CreativeModeTab> creativeTab) {
-            return create(register, name, Properties.copy(Blocks.TWISTING_VINES_PLANT), headBlock, creativeTab);
+            return create(register, name, Properties.ofFullCopy(Blocks.TWISTING_VINES_PLANT), headBlock, creativeTab);
         }
 
         public static final Supplier<RoofVineBodyBlock> create(ModRegister register, String name, Properties properties, GrowingPlantHeadBlock headBlock) {
@@ -56,11 +56,11 @@ public class RoofVines {
 
     public static class RoofVineTips {
         public static final Supplier<RoofVineHeadBlock> create(ModRegister register, String name) {
-            return create(register, name, Properties.copy(Blocks.TWISTING_VINES), Blocks.TWISTING_VINES_PLANT);
+            return create(register, name, Properties.ofFullCopy(Blocks.TWISTING_VINES), Blocks.TWISTING_VINES_PLANT);
         }
 
         public static final Supplier<RoofVineHeadBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-            return create(register, name, Properties.copy(Blocks.TWISTING_VINES), Blocks.TWISTING_VINES_PLANT, creativeTab);
+            return create(register, name, Properties.ofFullCopy(Blocks.TWISTING_VINES), Blocks.TWISTING_VINES_PLANT, creativeTab);
         }
 
         public static final Supplier<RoofVineHeadBlock> create(ModRegister register, String name, Properties properties) {
@@ -72,11 +72,11 @@ public class RoofVines {
         }
 
         public static final Supplier<RoofVineHeadBlock> create(ModRegister register, String name, Block bodyBlock) {
-            return create(register, name, Properties.copy(Blocks.TWISTING_VINES), bodyBlock);
+            return create(register, name, Properties.ofFullCopy(Blocks.TWISTING_VINES), bodyBlock);
         }
 
         public static final Supplier<RoofVineHeadBlock> create(ModRegister register, String name, Block bodyBlock, ResourceKey<CreativeModeTab> creativeTab) {
-            return create(register, name, Properties.copy(Blocks.TWISTING_VINES), bodyBlock, creativeTab);
+            return create(register, name, Properties.ofFullCopy(Blocks.TWISTING_VINES), bodyBlock, creativeTab);
         }
 
         public static final Supplier<RoofVineHeadBlock> create(ModRegister register, String name, Properties properties, Block bodyBlock) {
@@ -93,11 +93,11 @@ public class RoofVines {
     }
 
     public static final Tuple<Supplier<RoofVineHeadBlock>, Supplier<RoofVineBodyBlock>> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.TWISTING_VINES), Properties.copy(Blocks.TWISTING_VINES_PLANT));
+        return create(register, name, Properties.ofFullCopy(Blocks.TWISTING_VINES), Properties.ofFullCopy(Blocks.TWISTING_VINES_PLANT));
     }
 
     public static final Tuple<Supplier<RoofVineHeadBlock>, Supplier<RoofVineBodyBlock>> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.TWISTING_VINES), Properties.copy(Blocks.TWISTING_VINES_PLANT), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.TWISTING_VINES), Properties.ofFullCopy(Blocks.TWISTING_VINES_PLANT), creativeTab);
     }
 
     public static final Tuple<Supplier<RoofVineHeadBlock>, Supplier<RoofVineBodyBlock>> create(ModRegister register, String name, Properties topProperties, Properties bodyProperties) {

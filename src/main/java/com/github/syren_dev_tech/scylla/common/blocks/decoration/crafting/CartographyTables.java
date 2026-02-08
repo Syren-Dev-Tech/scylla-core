@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class CartographyTables {
 
     public static final Supplier<CartographyTableBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.CARTOGRAPHY_TABLE));
+        return create(register, name, Properties.ofFullCopy(Blocks.CARTOGRAPHY_TABLE));
     }
 
     public static final Supplier<CartographyTableBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.CARTOGRAPHY_TABLE), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.CARTOGRAPHY_TABLE), creativeTab);
     }
 
     public static final Supplier<CartographyTableBlock> create(ModRegister register, String name, Properties properties) {

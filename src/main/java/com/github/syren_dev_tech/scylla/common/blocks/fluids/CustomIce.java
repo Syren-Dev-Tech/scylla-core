@@ -3,11 +3,11 @@ package com.github.syren_dev_tech.scylla.common.blocks.fluids;
 import org.jspecify.annotations.Nullable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.EnchantmentTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.block.Block;
@@ -26,44 +26,46 @@ public class CustomIce extends HalfTransparentBlock {
         super(properties);
     }
 
-    public CustomIce(Properties properties, Block liquid) {
+    public CustomIce(Properties properties, Block meltedBlock) {
         super(properties);
-        this.liquid = liquid;
+        this.liquid = meltedBlock;
     }
 
-    // This is static in IceBlock, but cannot be used like that here.
     public BlockState meltsInto() {
         return this.liquid.defaultBlockState();
     }
 
     @Override
-    public void playerDestroy(Level level, Player player, BlockPos blockPos, BlockState blockState, @Nullable BlockEntity blockEntity, ItemStack itemStack) {
-        super.playerDestroy(level, player, blockPos, blockState, blockEntity, itemStack);
-        if (EnchantmentHelper.getTagEnchantmentLevel(Enchantments.SILK_TOUCH, itemStack) == 0) {
+    public void playerDestroy(Level level, Player player, BlockPos pos, BlockState state, @Nullable BlockEntity te, ItemStack stack) {
+        super.playerDestroy(level, player, pos, state, te, stack);
+        if (!EnchantmentHelper.hasTag(stack, EnchantmentTags.PREVENTS_ICE_MELTING)) {
             if (level.dimensionType().ultraWarm()) {
-                level.removeBlock(blockPos, false);
+                level.removeBlock(pos, false);
                 return;
             }
 
-            level.setBlockAndUpdate(blockPos, meltsInto());
+            BlockState blockstate = level.getBlockState(pos.below());
+            if (blockstate.blocksMotion() || blockstate.liquid()) {
+                level.setBlockAndUpdate(pos, meltsInto());
+            }
         }
-
     }
 
     @Override
-    public void randomTick(BlockState blockState, ServerLevel level, BlockPos blockPos, RandomSource randomSource) { // NOSONAR - Ignore deprecation warning
-        if (level.getBrightness(LightLayer.BLOCK, blockPos) > 11 - blockState.getLightBlock(level, blockPos)) {
-            this.melt(blockState, level, blockPos);
+    protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        if (level.getBrightness(LightLayer.BLOCK, pos) > 11 - state.getLightBlock(level, pos)) {
+            this.melt(level, pos);
         }
 
     }
 
-    protected void melt(BlockState blockState, Level level, BlockPos blockPos) { // NOSONAR - Ignore unused warning
+    protected void melt(Level level, BlockPos pos) {
         if (level.dimensionType().ultraWarm()) {
-            level.removeBlock(blockPos, false);
+            level.removeBlock(pos, false);
         } else {
-            level.setBlockAndUpdate(blockPos, meltsInto());
-            level.neighborChanged(blockPos, meltsInto().getBlock(), blockPos);
+            level.setBlockAndUpdate(pos, meltsInto());
+            level.neighborChanged(pos, meltsInto().getBlock(), pos);
         }
+
     }
 }

@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class Beehives {
 
     public static final Supplier<BeehiveBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.BEEHIVE));
+        return create(register, name, Properties.ofFullCopy(Blocks.BEEHIVE));
     }
 
     public static final Supplier<BeehiveBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.BEEHIVE), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.BEEHIVE), creativeTab);
     }
 
     public static final Supplier<BeehiveBlock> create(ModRegister register, String name, Properties properties) {

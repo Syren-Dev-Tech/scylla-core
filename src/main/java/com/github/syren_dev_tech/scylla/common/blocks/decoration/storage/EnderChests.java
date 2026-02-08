@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class EnderChests {
 
     public static final Supplier<EnderChestBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.ENDER_CHEST));
+        return create(register, name, Properties.ofFullCopy(Blocks.ENDER_CHEST));
     }
 
     public static final Supplier<EnderChestBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.ENDER_CHEST), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.ENDER_CHEST), creativeTab);
     }
 
     public static final Supplier<EnderChestBlock> create(ModRegister register, String name, Properties properties) {

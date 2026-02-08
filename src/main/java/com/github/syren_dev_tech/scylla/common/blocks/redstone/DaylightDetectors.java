@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class DaylightDetectors {
 
     public static final Supplier<DaylightDetectorBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.DAYLIGHT_DETECTOR));
+        return create(register, name, Properties.ofFullCopy(Blocks.DAYLIGHT_DETECTOR));
     }
 
     public static final Supplier<DaylightDetectorBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.DAYLIGHT_DETECTOR), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.DAYLIGHT_DETECTOR), creativeTab);
     }
 
     public static final Supplier<DaylightDetectorBlock> create(ModRegister register, String name, Properties properties) {

@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class ActivatorRails {
 
     public static final Supplier<PoweredRailBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.ACTIVATOR_RAIL));
+        return create(register, name, Properties.ofFullCopy(Blocks.ACTIVATOR_RAIL));
     }
 
     public static final Supplier<PoweredRailBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.ACTIVATOR_RAIL), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.ACTIVATOR_RAIL), creativeTab);
     }
 
     public static final Supplier<PoweredRailBlock> create(ModRegister register, String name, Properties properties) {

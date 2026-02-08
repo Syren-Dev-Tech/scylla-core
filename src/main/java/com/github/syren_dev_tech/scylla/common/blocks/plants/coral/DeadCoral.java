@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class DeadCoral {
 
     public static final Supplier<BaseCoralPlantBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.DEAD_FIRE_CORAL));
+        return create(register, name, Properties.ofFullCopy(Blocks.DEAD_FIRE_CORAL));
     }
 
     public static final Supplier<BaseCoralPlantBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.DEAD_FIRE_CORAL), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.DEAD_FIRE_CORAL), creativeTab);
     }
 
     public static final Supplier<BaseCoralPlantBlock> create(ModRegister register, String name, Properties properties) {

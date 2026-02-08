@@ -2,8 +2,7 @@ package com.github.syren_dev_tech.scylla.common.mobs.client;
 
 import com.github.syren_dev_tech.scylla.common.mobs.CreatureBuilder;
 import com.github.syren_dev_tech.scylla.common.mobs.creatures.CustomCreature;
-import com.github.syren_dev_tech.scylla.common.util.ResourcePath;
-
+import com.github.syren_dev_tech.scylla.utilities.files.ResourcePath;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.model.GeoModel;
 
@@ -11,8 +10,8 @@ public class CustomCreatureModel<T extends CustomCreature> extends GeoModel<T> {
 
     private final CreatureBuilder<T> builder;
 
-    private ResourceLocation model;
-    private ResourceLocation animations;
+    private ResourcePath model;
+    private ResourcePath animations;
 
     public CustomCreatureModel(CreatureBuilder<T> builder) {
         super();
@@ -30,16 +29,16 @@ public class CustomCreatureModel<T extends CustomCreature> extends GeoModel<T> {
 
     @Override
     public ResourceLocation getModelResource(T animatable) {
-        return this.model;
+        return this.model.get();
     }
 
     @Override
     public ResourceLocation getTextureResource(T animatable) {
-        return this.builder.getTextures().apply(animatable.getState());
+        return this.builder.getTextures().apply(animatable.getState()).get();
     }
 
     @Override
     public ResourceLocation getAnimationResource(T animatable) {
-        return this.animations;
+        return this.animations.get();
     }
 }

@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class CraftingTables {
 
     public static final Supplier<CraftingTableBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.CRAFTING_TABLE));
+        return create(register, name, Properties.ofFullCopy(Blocks.CRAFTING_TABLE));
     }
 
     public static final Supplier<CraftingTableBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.CRAFTING_TABLE), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.CRAFTING_TABLE), creativeTab);
     }
 
     public static final Supplier<CraftingTableBlock> create(ModRegister register, String name, Properties properties) {

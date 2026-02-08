@@ -15,11 +15,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class Cauldrons {
 
     public static final Supplier<CauldronBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.CAULDRON));
+        return create(register, name, Properties.ofFullCopy(Blocks.CAULDRON));
     }
 
     public static final Supplier<CauldronBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.CAULDRON), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.CAULDRON), creativeTab);
     }
 
     public static final Supplier<CauldronBlock> create(ModRegister register, String name, Properties properties) {

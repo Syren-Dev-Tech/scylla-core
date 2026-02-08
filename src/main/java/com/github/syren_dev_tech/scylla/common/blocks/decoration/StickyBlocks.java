@@ -15,11 +15,11 @@ public class StickyBlocks {
     public static class SlimeBlocks {
 
         public static final Supplier<SlimeBlock> create(ModRegister register, String name) {
-            return create(register, name, Properties.copy(Blocks.SLIME_BLOCK));
+            return create(register, name, Properties.ofFullCopy(Blocks.SLIME_BLOCK));
         }
 
         public static final Supplier<SlimeBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-            return create(register, name, Properties.copy(Blocks.SLIME_BLOCK), creativeTab);
+            return create(register, name, Properties.ofFullCopy(Blocks.SLIME_BLOCK), creativeTab);
         }
 
         public static final Supplier<SlimeBlock> create(ModRegister register, String name, Properties properties) {
@@ -38,11 +38,11 @@ public class StickyBlocks {
     public static class HoneyBlocks {
 
         public static final Supplier<HoneyBlock> create(ModRegister register, String name) {
-            return create(register, name, Properties.copy(Blocks.HONEY_BLOCK));
+            return create(register, name, Properties.ofFullCopy(Blocks.HONEY_BLOCK));
         }
 
         public static final Supplier<HoneyBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-            return create(register, name, Properties.copy(Blocks.HONEY_BLOCK), creativeTab);
+            return create(register, name, Properties.ofFullCopy(Blocks.HONEY_BLOCK), creativeTab);
         }
 
         public static final Supplier<HoneyBlock> create(ModRegister register, String name, Properties properties) {

@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class RespawnAnchors {
 
     public static final Supplier<RespawnAnchorBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.RESPAWN_ANCHOR));
+        return create(register, name, Properties.ofFullCopy(Blocks.RESPAWN_ANCHOR));
     }
 
     public static final Supplier<RespawnAnchorBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.RESPAWN_ANCHOR), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.RESPAWN_ANCHOR), creativeTab);
     }
 
     public static final Supplier<RespawnAnchorBlock> create(ModRegister register, String name, Properties properties) {

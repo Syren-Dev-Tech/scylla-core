@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class Explosives {
 
     public static final Supplier<TntBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.TNT));
+        return create(register, name, Properties.ofFullCopy(Blocks.TNT));
     }
 
     public static final Supplier<TntBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.TNT), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.TNT), creativeTab);
     }
 
     public static final Supplier<TntBlock> create(ModRegister register, String name, Properties properties) {

@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class MuddyLand {
 
     public static final Supplier<MudBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.MUD));
+        return create(register, name, Properties.ofFullCopy(Blocks.MUD));
     }
 
     public static final Supplier<MudBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.MUD), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.MUD), creativeTab);
     }
 
     public static final Supplier<MudBlock> create(ModRegister register, String name, Properties properties) {

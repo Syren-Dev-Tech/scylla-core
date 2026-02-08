@@ -15,11 +15,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class Bushes {
 
     public static final Supplier<SweetBerryBushBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.SWEET_BERRY_BUSH));
+        return create(register, name, Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH));
     }
 
     public static final Supplier<SweetBerryBushBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.SWEET_BERRY_BUSH), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH), creativeTab);
     }
 
     public static final Supplier<SweetBerryBushBlock> create(ModRegister register, String name, Properties properties) {

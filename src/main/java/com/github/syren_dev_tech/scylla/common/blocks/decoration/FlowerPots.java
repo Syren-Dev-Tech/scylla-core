@@ -17,11 +17,11 @@ public class FlowerPots {
     public static class PotWithFlower {
 
         public static Supplier<FlowerPotBlock> create(ModRegister register, String name, Block flower) {
-            return create(register, name, Properties.copy(Blocks.FLOWER_POT), flower);
+            return create(register, name, Properties.ofFullCopy(Blocks.FLOWER_POT), flower);
         }
 
         public static Supplier<FlowerPotBlock> create(ModRegister register, String name, Block flower, ResourceKey<CreativeModeTab> creativeTab) {
-            return create(register, name, Properties.copy(Blocks.FLOWER_POT), flower, creativeTab);
+            return create(register, name, Properties.ofFullCopy(Blocks.FLOWER_POT), flower, creativeTab);
         }
 
         // Can't use "create" methods here because null is allowed for creative tabs.
@@ -45,7 +45,7 @@ public class FlowerPots {
         public static List<Supplier<FlowerPotBlock>> create(ModRegister register, String name, List<Block> flowers) {
             List<Supplier<FlowerPotBlock>> pots = new ArrayList<>();
 
-            flowers.forEach((Block flower) -> pots.add(create(register, name, Properties.copy(Blocks.FLOWER_POT), flower)));
+            flowers.forEach((Block flower) -> pots.add(create(register, name, Properties.ofFullCopy(Blocks.FLOWER_POT), flower)));
 
             return pots;
         }
@@ -64,11 +64,11 @@ public class FlowerPots {
     }
 
     public static Supplier<FlowerPotBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.FLOWER_POT));
+        return create(register, name, Properties.ofFullCopy(Blocks.FLOWER_POT));
     }
 
     public static Supplier<FlowerPotBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.FLOWER_POT), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.FLOWER_POT), creativeTab);
     }
 
     public static Supplier<FlowerPotBlock> create(ModRegister register, String name, Properties properties) {

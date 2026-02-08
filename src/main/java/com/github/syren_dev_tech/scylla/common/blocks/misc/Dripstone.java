@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class Dripstone {
 
     public static final Supplier<PointedDripstoneBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.POINTED_DRIPSTONE));
+        return create(register, name, Properties.ofFullCopy(Blocks.POINTED_DRIPSTONE));
     }
 
     public static final Supplier<PointedDripstoneBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.POINTED_DRIPSTONE), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.POINTED_DRIPSTONE), creativeTab);
     }
 
     public static final Supplier<PointedDripstoneBlock> create(ModRegister register, String name, Properties properties) {

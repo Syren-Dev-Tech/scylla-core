@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class Wires {
 
     public static final Supplier<RedStoneWireBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.REDSTONE_WIRE));
+        return create(register, name, Properties.ofFullCopy(Blocks.REDSTONE_WIRE));
     }
 
     public static final Supplier<RedStoneWireBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.REDSTONE_WIRE), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.REDSTONE_WIRE), creativeTab);
     }
 
     public static final Supplier<RedStoneWireBlock> create(ModRegister register, String name, Properties properties) {

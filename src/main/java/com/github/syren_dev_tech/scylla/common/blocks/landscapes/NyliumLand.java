@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class NyliumLand {
 
     public static final Supplier<NyliumBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.WARPED_NYLIUM));
+        return create(register, name, Properties.ofFullCopy(Blocks.WARPED_NYLIUM));
     }
 
     public static final Supplier<NyliumBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.WARPED_NYLIUM), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.WARPED_NYLIUM), creativeTab);
     }
 
     public static final Supplier<NyliumBlock> create(ModRegister register, String name, Properties properties) {

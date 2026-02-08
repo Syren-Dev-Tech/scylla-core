@@ -15,11 +15,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class CarvedGourdLanterns {
 
     public static final Supplier<CarvedGourd> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.JACK_O_LANTERN), 15);
+        return create(register, name, Properties.ofFullCopy(Blocks.JACK_O_LANTERN), 15);
     }
 
     public static final Supplier<CarvedGourd> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.JACK_O_LANTERN), 15, creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.JACK_O_LANTERN), 15, creativeTab);
     }
 
     public static final Supplier<CarvedGourd> create(ModRegister register, String name, Properties properties) {

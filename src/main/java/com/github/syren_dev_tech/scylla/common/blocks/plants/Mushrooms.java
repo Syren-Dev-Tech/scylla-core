@@ -15,22 +15,22 @@ import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 public class Mushrooms {
 
     public static final Supplier<MushroomBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.RED_MUSHROOM), TreeFeatures.HUGE_RED_MUSHROOM);
+        return create(register, name, Properties.ofFullCopy(Blocks.RED_MUSHROOM), TreeFeatures.HUGE_RED_MUSHROOM);
     }
 
     public static final Supplier<MushroomBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.RED_MUSHROOM), TreeFeatures.HUGE_RED_MUSHROOM, creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.RED_MUSHROOM), TreeFeatures.HUGE_RED_MUSHROOM, creativeTab);
     }
 
     // Cannot define methods that implement features and creative tab because
     // they're the same type.
 
     public static final Supplier<MushroomBlock> create(ModRegister register, String name, Properties properties, ResourceKey<ConfiguredFeature<?, ?>> feature) {
-        return register.blockRegistry.register(name, () -> new MushroomBlock(properties, feature));
+        return register.blockRegistry.register(name, () -> new MushroomBlock(feature, properties));
     }
 
     public static final Supplier<MushroomBlock> create(ModRegister register, String name, Properties properties, ResourceKey<ConfiguredFeature<?, ?>> feature, ResourceKey<CreativeModeTab> creativeTab) {
-        return register.blockRegistry.register(name, () -> new MushroomBlock(properties, feature), creativeTab);
+        return register.blockRegistry.register(name, () -> new MushroomBlock(feature, properties), creativeTab);
     }
 
     private Mushrooms() {

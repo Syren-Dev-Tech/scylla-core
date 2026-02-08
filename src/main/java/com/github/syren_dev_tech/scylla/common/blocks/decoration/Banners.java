@@ -18,11 +18,11 @@ public class Banners {
     public static class StandingBanners {
 
         public static final Supplier<BannerBlock> create(ModRegister register, String name) {
-            return create(register, name, Properties.copy(Blocks.WHITE_BANNER), DyeColor.WHITE);
+            return create(register, name, Properties.ofFullCopy(Blocks.WHITE_BANNER), DyeColor.WHITE);
         }
 
         public static final Supplier<BannerBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-            return create(register, name, Properties.copy(Blocks.WHITE_BANNER), DyeColor.WHITE, creativeTab);
+            return create(register, name, Properties.ofFullCopy(Blocks.WHITE_BANNER), DyeColor.WHITE, creativeTab);
         }
 
         public static final Supplier<BannerBlock> create(ModRegister register, String name, Properties properties) {
@@ -34,11 +34,11 @@ public class Banners {
         }
 
         public static final Supplier<BannerBlock> create(ModRegister register, String name, DyeColor color) {
-            return create(register, name, Properties.copy(Blocks.WHITE_BANNER), color);
+            return create(register, name, Properties.ofFullCopy(Blocks.WHITE_BANNER), color);
         }
 
         public static final Supplier<BannerBlock> create(ModRegister register, String name, DyeColor color, ResourceKey<CreativeModeTab> creativeTab) {
-            return create(register, name, Properties.copy(Blocks.WHITE_BANNER), color, creativeTab);
+            return create(register, name, Properties.ofFullCopy(Blocks.WHITE_BANNER), color, creativeTab);
         }
 
         public static final Supplier<BannerBlock> create(ModRegister register, String name, Properties properties, DyeColor color) {
@@ -57,11 +57,11 @@ public class Banners {
     public static class WallBanners {
 
         public static final Supplier<WallBannerBlock> create(ModRegister register, String name) {
-            return create(register, name, Properties.copy(Blocks.WHITE_WALL_BANNER), DyeColor.WHITE);
+            return create(register, name, Properties.ofFullCopy(Blocks.WHITE_WALL_BANNER), DyeColor.WHITE);
         }
 
         public static final Supplier<WallBannerBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-            return create(register, name, Properties.copy(Blocks.WHITE_WALL_BANNER), DyeColor.WHITE, creativeTab);
+            return create(register, name, Properties.ofFullCopy(Blocks.WHITE_WALL_BANNER), DyeColor.WHITE, creativeTab);
         }
 
         public static final Supplier<WallBannerBlock> create(ModRegister register, String name, Properties properties) {
@@ -73,11 +73,11 @@ public class Banners {
         }
 
         public static final Supplier<WallBannerBlock> create(ModRegister register, String name, DyeColor color) {
-            return create(register, name, Properties.copy(Blocks.WHITE_WALL_BANNER), color);
+            return create(register, name, Properties.ofFullCopy(Blocks.WHITE_WALL_BANNER), color);
         }
 
         public static final Supplier<WallBannerBlock> create(ModRegister register, String name, DyeColor color, ResourceKey<CreativeModeTab> creativeTab) {
-            return create(register, name, Properties.copy(Blocks.WHITE_WALL_BANNER), color, creativeTab);
+            return create(register, name, Properties.ofFullCopy(Blocks.WHITE_WALL_BANNER), color, creativeTab);
         }
 
         public static final Supplier<WallBannerBlock> create(ModRegister register, String name, Properties properties, DyeColor color) {
@@ -94,11 +94,11 @@ public class Banners {
     }
 
     public static final Tuple<Supplier<BannerBlock>, Supplier<WallBannerBlock>> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.WHITE_BANNER), DyeColor.WHITE);
+        return create(register, name, Properties.ofFullCopy(Blocks.WHITE_BANNER), DyeColor.WHITE);
     }
 
     public static final Tuple<Supplier<BannerBlock>, Supplier<WallBannerBlock>> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.WHITE_BANNER), DyeColor.WHITE, creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.WHITE_BANNER), DyeColor.WHITE, creativeTab);
     }
 
     public static final Tuple<Supplier<BannerBlock>, Supplier<WallBannerBlock>> create(ModRegister register, String name, Properties properties) {
@@ -110,11 +110,11 @@ public class Banners {
     }
 
     public static final Tuple<Supplier<BannerBlock>, Supplier<WallBannerBlock>> create(ModRegister register, String name, DyeColor color) {
-        return create(register, name, Properties.copy(Blocks.WHITE_BANNER), color);
+        return create(register, name, Properties.ofFullCopy(Blocks.WHITE_BANNER), color);
     }
 
     public static final Tuple<Supplier<BannerBlock>, Supplier<WallBannerBlock>> create(ModRegister register, String name, DyeColor color, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.WHITE_BANNER), color, creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.WHITE_BANNER), color, creativeTab);
     }
 
     public static final Tuple<Supplier<BannerBlock>, Supplier<WallBannerBlock>> create(ModRegister register, String name, Properties properties, DyeColor color) {

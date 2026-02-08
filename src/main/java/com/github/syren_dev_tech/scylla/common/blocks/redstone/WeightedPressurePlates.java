@@ -16,11 +16,11 @@ public class WeightedPressurePlates {
     public static final int HEAVY_WEIGHT = 150;
 
     public static final Supplier<WeightedPressurePlateBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.LIGHT_WEIGHTED_PRESSURE_PLATE), LIGHT_WEIGHT);
+        return create(register, name, Properties.ofFullCopy(Blocks.LIGHT_WEIGHTED_PRESSURE_PLATE), LIGHT_WEIGHT);
     }
 
     public static final Supplier<WeightedPressurePlateBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.LIGHT_WEIGHTED_PRESSURE_PLATE), LIGHT_WEIGHT, creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.LIGHT_WEIGHTED_PRESSURE_PLATE), LIGHT_WEIGHT, creativeTab);
     }
 
     public static final Supplier<WeightedPressurePlateBlock> create(ModRegister register, String name, Properties properties) {
@@ -32,11 +32,11 @@ public class WeightedPressurePlates {
     }
 
     public static final Supplier<WeightedPressurePlateBlock> create(ModRegister register, String name, Integer maxWeight) {
-        return create(register, name, Properties.copy(Blocks.LIGHT_WEIGHTED_PRESSURE_PLATE), maxWeight);
+        return create(register, name, Properties.ofFullCopy(Blocks.LIGHT_WEIGHTED_PRESSURE_PLATE), maxWeight);
     }
 
     public static final Supplier<WeightedPressurePlateBlock> create(ModRegister register, String name, Integer maxWeight, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.LIGHT_WEIGHTED_PRESSURE_PLATE), maxWeight, creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.LIGHT_WEIGHTED_PRESSURE_PLATE), maxWeight, creativeTab);
     }
 
     public static final Supplier<WeightedPressurePlateBlock> create(ModRegister register, String name, Properties properties, Integer maxWeight) {
@@ -48,11 +48,11 @@ public class WeightedPressurePlates {
     }
 
     public static final Supplier<WeightedPressurePlateBlock> create(ModRegister register, String name, Properties properties, Integer maxWeight, BlockSetType blockSetType) {
-        return register.blockRegistry.register(name, () -> new WeightedPressurePlateBlock(maxWeight, properties, blockSetType));
+        return register.blockRegistry.register(name, () -> new WeightedPressurePlateBlock(maxWeight, blockSetType, properties));
     }
 
     public static final Supplier<WeightedPressurePlateBlock> create(ModRegister register, String name, Properties properties, Integer maxWeight, BlockSetType blockSetType, ResourceKey<CreativeModeTab> creativeTab) {
-        return register.blockRegistry.register(name, () -> new WeightedPressurePlateBlock(maxWeight, properties, blockSetType), creativeTab);
+        return register.blockRegistry.register(name, () -> new WeightedPressurePlateBlock(maxWeight, blockSetType, properties), creativeTab);
     }
 
     private WeightedPressurePlates() {

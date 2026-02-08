@@ -16,11 +16,11 @@ import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 public class Fungus {
 
     public static final Supplier<FungusBlock> create(ModRegister register, String name, Block requiredBlock) {
-        return create(register, name, Properties.copy(Blocks.WARPED_FUNGUS), TreeFeatures.WARPED_FUNGUS_PLANTED, requiredBlock);
+        return create(register, name, Properties.ofFullCopy(Blocks.WARPED_FUNGUS), TreeFeatures.WARPED_FUNGUS_PLANTED, requiredBlock);
     }
 
     public static final Supplier<FungusBlock> create(ModRegister register, String name, Block requiredBlock, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.WARPED_FUNGUS), TreeFeatures.WARPED_FUNGUS_PLANTED, requiredBlock, creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.WARPED_FUNGUS), TreeFeatures.WARPED_FUNGUS_PLANTED, requiredBlock, creativeTab);
     }
 
     public static final Supplier<FungusBlock> create(ModRegister register, String name, Properties properties, Block requiredBlock) {
@@ -32,19 +32,19 @@ public class Fungus {
     }
 
     public static final Supplier<FungusBlock> create(ModRegister register, String name, ResourceKey<ConfiguredFeature<?, ?>> feature, Block requiredBlock) {
-        return create(register, name, Properties.copy(Blocks.WARPED_FUNGUS), feature, requiredBlock);
+        return create(register, name, Properties.ofFullCopy(Blocks.WARPED_FUNGUS), feature, requiredBlock);
     }
 
     public static final Supplier<FungusBlock> create(ModRegister register, String name, ResourceKey<ConfiguredFeature<?, ?>> feature, Block requiredBlock, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.WARPED_FUNGUS), feature, requiredBlock, creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.WARPED_FUNGUS), feature, requiredBlock, creativeTab);
     }
 
     public static final Supplier<FungusBlock> create(ModRegister register, String name, Properties properties, ResourceKey<ConfiguredFeature<?, ?>> feature, Block requiredBlock) {
-        return register.blockRegistry.register(name, () -> new FungusBlock(properties, feature, requiredBlock));
+        return register.blockRegistry.register(name, () -> new FungusBlock(feature, requiredBlock, properties));
     }
 
     public static final Supplier<FungusBlock> create(ModRegister register, String name, Properties properties, ResourceKey<ConfiguredFeature<?, ?>> feature, Block requiredBlock, ResourceKey<CreativeModeTab> creativeTab) {
-        return register.blockRegistry.register(name, () -> new FungusBlock(properties, feature, requiredBlock), creativeTab);
+        return register.blockRegistry.register(name, () -> new FungusBlock(feature, requiredBlock, properties), creativeTab);
     }
 
     private Fungus() {

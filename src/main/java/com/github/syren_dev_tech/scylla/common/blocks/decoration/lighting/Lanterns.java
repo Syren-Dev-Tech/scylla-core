@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class Lanterns {
 
     public static final Supplier<LanternBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.LANTERN));
+        return create(register, name, Properties.ofFullCopy(Blocks.LANTERN));
     }
 
     public static final Supplier<LanternBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.LANTERN), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.LANTERN), creativeTab);
     }
 
     public static final Supplier<LanternBlock> create(ModRegister register, String name, Properties properties) {

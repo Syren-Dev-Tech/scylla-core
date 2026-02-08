@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class Cobwebs {
 
     public static final Supplier<WebBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.COBWEB));
+        return create(register, name, Properties.ofFullCopy(Blocks.COBWEB));
     }
 
     public static final Supplier<WebBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.COBWEB), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.COBWEB), creativeTab);
     }
 
     public static final Supplier<WebBlock> create(ModRegister register, String name, Properties properties) {

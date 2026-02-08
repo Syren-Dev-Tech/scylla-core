@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class Bells {
 
     public static final Supplier<BellBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.BELL));
+        return create(register, name, Properties.ofFullCopy(Blocks.BELL));
     }
 
     public static final Supplier<BellBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.BELL), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.BELL), creativeTab);
     }
 
     public static final Supplier<BellBlock> create(ModRegister register, String name, Properties properties) {

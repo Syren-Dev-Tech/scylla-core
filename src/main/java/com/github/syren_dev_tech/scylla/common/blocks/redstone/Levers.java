@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class Levers {
 
     public static final Supplier<LeverBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.LEVER));
+        return create(register, name, Properties.ofFullCopy(Blocks.LEVER));
     }
 
     public static final Supplier<LeverBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.LEVER), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.LEVER), creativeTab);
     }
 
     public static final Supplier<LeverBlock> create(ModRegister register, String name, Properties properties) {

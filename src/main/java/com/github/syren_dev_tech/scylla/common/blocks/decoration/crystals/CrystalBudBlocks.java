@@ -15,11 +15,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class CrystalBudBlocks {
 
     public static final <T extends Block> Supplier<BuddingCrystal<T>> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.BUDDING_AMETHYST));
+        return create(register, name, Properties.ofFullCopy(Blocks.BUDDING_AMETHYST));
     }
 
     public static final <T extends Block> Supplier<BuddingCrystal<T>> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.BUDDING_AMETHYST), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.BUDDING_AMETHYST), creativeTab);
     }
 
     public static final <T extends Block> Supplier<BuddingCrystal<T>> create(ModRegister register, String name, Properties properties) {
@@ -31,11 +31,11 @@ public class CrystalBudBlocks {
     }
 
     public static final <T extends Block> Supplier<BuddingCrystal<T>> create(ModRegister register, String name, BuddingCrystalProperties<T> crystalBudBlockProperties) {
-        return register.blockRegistry.register(name, () -> new BuddingCrystal<>(Properties.copy(Blocks.BUDDING_AMETHYST), crystalBudBlockProperties));
+        return register.blockRegistry.register(name, () -> new BuddingCrystal<>(Properties.ofFullCopy(Blocks.BUDDING_AMETHYST), crystalBudBlockProperties));
     }
 
     public static final <T extends Block> Supplier<BuddingCrystal<T>> create(ModRegister register, String name, BuddingCrystalProperties<T> crystalBudBlockProperties, ResourceKey<CreativeModeTab> creativeTab) {
-        return register.blockRegistry.register(name, () -> new BuddingCrystal<>(Properties.copy(Blocks.BUDDING_AMETHYST), crystalBudBlockProperties), creativeTab);
+        return register.blockRegistry.register(name, () -> new BuddingCrystal<>(Properties.ofFullCopy(Blocks.BUDDING_AMETHYST), crystalBudBlockProperties), creativeTab);
     }
 
     public static final <T extends Block> Supplier<BuddingCrystal<T>> create(ModRegister register, String name, Properties properties, BuddingCrystalProperties<T> crystalBudBlockProperties) {

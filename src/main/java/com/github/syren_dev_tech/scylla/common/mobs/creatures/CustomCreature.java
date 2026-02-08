@@ -5,9 +5,9 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.level.Level;
 import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animation.AnimatableManager.ControllerRegistrar;
+import software.bernie.geckolib.animation.AnimationController;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 public class CustomCreature extends PathfinderMob implements GeoEntity { // NOSONAR - Ignore parent class limit
@@ -43,11 +43,6 @@ public class CustomCreature extends PathfinderMob implements GeoEntity { // NOSO
     }
 
     @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        builder.getAnimators().forEach((name, animator) -> controllers.add(new AnimationController<>(this, name, 10, animator::apply)));
-    }
-
-    @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return this.cache;
     }
@@ -58,5 +53,10 @@ public class CustomCreature extends PathfinderMob implements GeoEntity { // NOSO
 
     public CreatureBuilder<CustomCreature> getBuilder() {
         return builder;
+    }
+
+    @Override
+    public void registerControllers(ControllerRegistrar controllers) {
+        builder.getAnimators().forEach((name, animator) -> controllers.add(new AnimationController<>(this, name, 10, animator::apply)));
     }
 }

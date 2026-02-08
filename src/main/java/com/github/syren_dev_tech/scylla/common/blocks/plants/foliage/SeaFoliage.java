@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class SeaFoliage {
 
     public static final Supplier<SeagrassBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.SEAGRASS));
+        return create(register, name, Properties.ofFullCopy(Blocks.SEAGRASS));
     }
 
     public static final Supplier<SeagrassBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.SEAGRASS), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.SEAGRASS), creativeTab);
     }
 
     public static final Supplier<SeagrassBlock> create(ModRegister register, String name, Properties properties) {

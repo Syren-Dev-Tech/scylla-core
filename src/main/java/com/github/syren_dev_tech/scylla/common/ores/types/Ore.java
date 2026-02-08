@@ -5,11 +5,7 @@ import net.minecraft.world.level.block.DropExperienceBlock;
 
 public class Ore extends DropExperienceBlock {
 
-    public Ore(Properties properties) {
-        super(properties);
-    }
-
-    public Ore(Properties properties, IntProvider experience) {
-        super(properties, experience);
+    public Ore(IntProvider xpRange, Properties properties) {
+        super(xpRange, properties);
     }
 }

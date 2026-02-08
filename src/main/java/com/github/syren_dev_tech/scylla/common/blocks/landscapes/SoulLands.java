@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class SoulLands {
 
     public static final Supplier<SoulSandBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.SOUL_SAND));
+        return create(register, name, Properties.ofFullCopy(Blocks.SOUL_SAND));
     }
 
     public static final Supplier<SoulSandBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.SOUL_SAND), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.SOUL_SAND), creativeTab);
     }
 
     public static final Supplier<SoulSandBlock> create(ModRegister register, String name, Properties properties) {

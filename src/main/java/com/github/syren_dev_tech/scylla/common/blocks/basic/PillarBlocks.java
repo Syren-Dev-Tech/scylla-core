@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class PillarBlocks {
 
     public static final Supplier<RotatedPillarBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.DIRT));
+        return create(register, name, Properties.ofFullCopy(Blocks.DIRT));
     }
 
     public static final Supplier<RotatedPillarBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.DIRT), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.DIRT), creativeTab);
     }
 
     public static final Supplier<RotatedPillarBlock> create(ModRegister register, String name, Properties properties) {

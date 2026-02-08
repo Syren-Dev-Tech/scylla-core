@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class Smokers {
 
     public static final Supplier<SmokerBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.SMOKER));
+        return create(register, name, Properties.ofFullCopy(Blocks.SMOKER));
     }
 
     public static final Supplier<SmokerBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.SMOKER), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.SMOKER), creativeTab);
     }
 
     public static final Supplier<SmokerBlock> create(ModRegister register, String name, Properties properties) {

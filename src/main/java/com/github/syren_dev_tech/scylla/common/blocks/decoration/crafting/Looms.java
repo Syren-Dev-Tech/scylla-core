@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class Looms {
 
     public static final Supplier<LoomBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.LOOM));
+        return create(register, name, Properties.ofFullCopy(Blocks.LOOM));
     }
 
     public static final Supplier<LoomBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.LOOM), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.LOOM), creativeTab);
     }
 
     public static final Supplier<LoomBlock> create(ModRegister register, String name, Properties properties) {

@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class GrassLand {
 
     public static final Supplier<GrassBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.GRASS_BLOCK));
+        return create(register, name, Properties.ofFullCopy(Blocks.GRASS_BLOCK));
     }
 
     public static final Supplier<GrassBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.GRASS_BLOCK), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.GRASS_BLOCK), creativeTab);
     }
 
     public static final Supplier<GrassBlock> create(ModRegister register, String name, Properties properties) {

@@ -16,11 +16,11 @@ public class Bamboo {
     public static class BambooStalks {
 
         public static final Supplier<BambooStalkBlock> create(ModRegister register, String name) {
-            return create(register, name, Properties.copy(Blocks.BAMBOO));
+            return create(register, name, Properties.ofFullCopy(Blocks.BAMBOO));
         }
 
         public static final Supplier<BambooStalkBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-            return create(register, name, Properties.copy(Blocks.BAMBOO), creativeTab);
+            return create(register, name, Properties.ofFullCopy(Blocks.BAMBOO), creativeTab);
         }
 
         public static final Supplier<BambooStalkBlock> create(ModRegister register, String name, Properties properties) {
@@ -39,11 +39,11 @@ public class Bamboo {
     public static class BambooSaplings {
 
         public static final Supplier<BambooSaplingBlock> create(ModRegister register, String name) {
-            return create(register, name, Properties.copy(Blocks.BAMBOO_SAPLING));
+            return create(register, name, Properties.ofFullCopy(Blocks.BAMBOO_SAPLING));
         }
 
         public static final Supplier<BambooSaplingBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-            return create(register, name, Properties.copy(Blocks.BAMBOO_SAPLING), creativeTab);
+            return create(register, name, Properties.ofFullCopy(Blocks.BAMBOO_SAPLING), creativeTab);
         }
 
         public static final Supplier<BambooSaplingBlock> create(ModRegister register, String name, Properties properties) {
@@ -60,11 +60,11 @@ public class Bamboo {
     }
 
     public static final Tuple<Supplier<BambooStalkBlock>, Supplier<BambooSaplingBlock>> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.BAMBOO), Properties.copy(Blocks.BAMBOO_SAPLING));
+        return create(register, name, Properties.ofFullCopy(Blocks.BAMBOO), Properties.ofFullCopy(Blocks.BAMBOO_SAPLING));
     }
 
     public static final Tuple<Supplier<BambooStalkBlock>, Supplier<BambooSaplingBlock>> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.BAMBOO), Properties.copy(Blocks.BAMBOO_SAPLING), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.BAMBOO), Properties.ofFullCopy(Blocks.BAMBOO_SAPLING), creativeTab);
     }
 
     public static final Tuple<Supplier<BambooStalkBlock>, Supplier<BambooSaplingBlock>> create(ModRegister register, String name, Properties stalkProperties, Properties saplingProperties) {

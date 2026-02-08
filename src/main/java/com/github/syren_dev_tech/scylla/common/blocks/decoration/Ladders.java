@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class Ladders {
 
     public static final Supplier<LadderBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.LADDER));
+        return create(register, name, Properties.ofFullCopy(Blocks.LADDER));
     }
 
     public static final Supplier<LadderBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.LADDER), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.LADDER), creativeTab);
     }
 
     public static final Supplier<LadderBlock> create(ModRegister register, String name, Properties properties) {

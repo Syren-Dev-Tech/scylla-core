@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class FullCrystals {
 
     public static final Supplier<AmethystClusterBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.AMETHYST_CLUSTER));
+        return create(register, name, Properties.ofFullCopy(Blocks.AMETHYST_CLUSTER));
     }
 
     public static final Supplier<AmethystClusterBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.AMETHYST_CLUSTER), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.AMETHYST_CLUSTER), creativeTab);
     }
 
     public static final Supplier<AmethystClusterBlock> create(ModRegister register, String name, Properties properties) {

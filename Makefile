@@ -1,9 +1,10 @@
-FORGE_GRADLE_VERSION=8.8
+JAVA_VERSION=21.0.2-open
+FORGE_GRADLE_VERSION=9.0.0
 FABRIC_GRADLE_VERSION=8.8
 
-build: build-forge build-neoforge
-publish: publish-forge publish-neoforge
-publish-local: publish-forge-local publish-neoforge-local
+build: build-neoforge
+publish: publish-neoforge
+publish-local:publish-neoforge-local
 
 build-forge: SHELL := /bin/bash
 build-forge:
@@ -25,6 +26,7 @@ build-neoforge: SHELL := /bin/bash
 build-neoforge:
 	source "${HOME}/.sdkman/bin/sdkman-init.sh" && \
 	sdk use gradle ${FORGE_GRADLE_VERSION} && \
+	sdk use java ${JAVA_VERSION} && \
 	gradle clean build -Pneoforge=true && \
 	mkdir -p ./dist/neoforge && \
 	cp build/libs/*.jar ./dist/neoforge/

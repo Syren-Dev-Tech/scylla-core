@@ -1,21 +1,19 @@
 package com.github.syren_dev_tech.scylla.common.blocks.plants.melons;
 
-import java.util.function.Supplier;
-
 import com.github.syren_dev_tech.scylla.common.crops.Stems;
 import com.github.syren_dev_tech.scylla.common.registry.ModRegister;
-
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
 
 public class MelonSets {
 
-    public static final Supplier<?>[] create(ModRegister register, String name, Item seeds) {
-        var melon = Melons.create(register, name);
+    public static final MelonSetDefinition create(ModRegister register, String name, ResourceKey<Item> seeds) {
+        var melonDefinition = Melons.create(register, name);
 
-        var stems = Stems.create(register, name, melon.get(), seeds);
-        melon.get().setStem(stems.x.get()).setAttachedStem(stems.y.get());
+        var stems = Stems.create(register, name, melonDefinition.resourceKey, seeds);
+        melonDefinition.melon.get().setStem(stems.stem.get());
 
-        return new Supplier<?>[] { melon, stems.x, stems.y };
+        return new MelonSetDefinition(melonDefinition, stems);
     }
 
     private MelonSets() {

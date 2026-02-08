@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class SmithingTables {
 
     public static final Supplier<SmithingTableBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.SMITHING_TABLE));
+        return create(register, name, Properties.ofFullCopy(Blocks.SMITHING_TABLE));
     }
 
     public static final Supplier<SmithingTableBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.SMITHING_TABLE), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.SMITHING_TABLE), creativeTab);
     }
 
     public static final Supplier<SmithingTableBlock> create(ModRegister register, String name, Properties properties) {

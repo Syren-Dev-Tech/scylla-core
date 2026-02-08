@@ -13,11 +13,11 @@ import net.minecraft.world.item.CreativeModeTab;
 public class Rails {
 
     public static final Supplier<RailBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.RAIL));
+        return create(register, name, Properties.ofFullCopy(Blocks.RAIL));
     }
 
     public static final Supplier<RailBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.RAIL), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.RAIL), creativeTab);
     }
 
     public static final Supplier<RailBlock> create(ModRegister register, String name, Properties properties) {

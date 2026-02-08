@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class Crying {
 
     public static final Supplier<CryingObsidianBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.CRYING_OBSIDIAN));
+        return create(register, name, Properties.ofFullCopy(Blocks.CRYING_OBSIDIAN));
     }
 
     public static final Supplier<CryingObsidianBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.CRYING_OBSIDIAN), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.CRYING_OBSIDIAN), creativeTab);
     }
 
     public static final Supplier<CryingObsidianBlock> create(ModRegister register, String name, Properties properties) {

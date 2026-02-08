@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class StaticLand {
 
     public static final Supplier<SnowyDirtBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.PODZOL));
+        return create(register, name, Properties.ofFullCopy(Blocks.PODZOL));
     }
 
     public static final Supplier<SnowyDirtBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.PODZOL), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.PODZOL), creativeTab);
     }
 
     public static final Supplier<SnowyDirtBlock> create(ModRegister register, String name, Properties properties) {

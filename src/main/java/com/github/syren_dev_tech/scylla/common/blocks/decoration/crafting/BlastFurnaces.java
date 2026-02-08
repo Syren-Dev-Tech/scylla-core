@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class BlastFurnaces {
 
     public static final Supplier<BlastFurnaceBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.BLAST_FURNACE));
+        return create(register, name, Properties.ofFullCopy(Blocks.BLAST_FURNACE));
     }
 
     public static final Supplier<BlastFurnaceBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.BLAST_FURNACE), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.BLAST_FURNACE), creativeTab);
     }
 
     public static final Supplier<BlastFurnaceBlock> create(ModRegister register, String name, Properties properties) {

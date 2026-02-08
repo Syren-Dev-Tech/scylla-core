@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class Vines {
 
     public static final Supplier<VineBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.VINE));
+        return create(register, name, Properties.ofFullCopy(Blocks.VINE));
     }
 
     public static final Supplier<VineBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.VINE), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.VINE), creativeTab);
     }
 
     public static final Supplier<VineBlock> create(ModRegister register, String name, Properties properties) {

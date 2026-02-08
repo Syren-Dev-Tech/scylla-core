@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class Cakes {
 
     public static final Supplier<CakeBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.CAKE));
+        return create(register, name, Properties.ofFullCopy(Blocks.CAKE));
     }
 
     public static final Supplier<CakeBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.CAKE), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.CAKE), creativeTab);
     }
 
     public static final Supplier<CakeBlock> create(ModRegister register, String name, Properties properties) {

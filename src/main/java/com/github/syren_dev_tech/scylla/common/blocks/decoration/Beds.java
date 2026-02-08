@@ -14,19 +14,19 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class Beds {
 
     public static final Supplier<BedBlock> create(ModRegister register, String name) {
-        return create(register, name, DyeColor.WHITE, Properties.copy(Blocks.WHITE_BED));
+        return create(register, name, DyeColor.WHITE, Properties.ofFullCopy(Blocks.WHITE_BED));
     }
 
     public static final Supplier<BedBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, DyeColor.WHITE, Properties.copy(Blocks.WHITE_BED), creativeTab);
+        return create(register, name, DyeColor.WHITE, Properties.ofFullCopy(Blocks.WHITE_BED), creativeTab);
     }
 
     public static final Supplier<BedBlock> create(ModRegister register, String name, DyeColor color) {
-        return create(register, name, color, Properties.copy(Blocks.WHITE_BED));
+        return create(register, name, color, Properties.ofFullCopy(Blocks.WHITE_BED));
     }
 
     public static final Supplier<BedBlock> create(ModRegister register, String name, DyeColor color, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, color, Properties.copy(Blocks.WHITE_BED), creativeTab);
+        return create(register, name, color, Properties.ofFullCopy(Blocks.WHITE_BED), creativeTab);
     }
 
     public static final Supplier<BedBlock> create(ModRegister register, String name, DyeColor color, Properties properties) {

@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class Pots {
 
     public static final Supplier<DecoratedPotBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.DECORATED_POT));
+        return create(register, name, Properties.ofFullCopy(Blocks.DECORATED_POT));
     }
 
     public static final Supplier<DecoratedPotBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.DECORATED_POT), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.DECORATED_POT), creativeTab);
     }
 
     public static final Supplier<DecoratedPotBlock> create(ModRegister register, String name, Properties properties) {

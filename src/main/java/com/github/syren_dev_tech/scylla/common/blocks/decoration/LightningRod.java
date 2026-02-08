@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class LightningRod {
 
     public static final Supplier<LightningRodBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.LIGHTNING_ROD));
+        return create(register, name, Properties.ofFullCopy(Blocks.LIGHTNING_ROD));
     }
 
     public static final Supplier<LightningRodBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.LIGHTNING_ROD), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.LIGHTNING_ROD), creativeTab);
     }
 
     public static final Supplier<LightningRodBlock> create(ModRegister register, String name, Properties properties) {

@@ -15,8 +15,7 @@ import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguratio
 
 public class OreFeature {
 
-    private OreFeature() {
-    }
+    private OreFeature() {}
 
     public static final void register(String name, Block ore) {
         var oreList = List.of(OreConfiguration.target(FeatureRegistry.getStoneReplaceables(), ore.defaultBlockState()));
@@ -31,7 +30,7 @@ public class OreFeature {
     }
 
     public static final void register(String name, List<TargetBlockState> oreList, TagKey<Biome> biome) {
-        OreFeatureRegistry.register(name, oreList);
+        // OreFeatureRegistry.register(name, oreList);
         var placedFeatureKey = PlacedOreFeatureRegistry.register(name);
         BiomeOreFeatureRegistry.register(name, biome, placedFeatureKey);
     }

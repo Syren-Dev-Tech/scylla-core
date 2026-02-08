@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class Reeds {
 
     public static final Supplier<SugarCaneBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.SUGAR_CANE));
+        return create(register, name, Properties.ofFullCopy(Blocks.SUGAR_CANE));
     }
 
     public static final Supplier<SugarCaneBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.SUGAR_CANE), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.SUGAR_CANE), creativeTab);
     }
 
     public static final Supplier<SugarCaneBlock> create(ModRegister register, String name, Properties properties) {

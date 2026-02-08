@@ -18,11 +18,11 @@ public class HangingSigns {
     public static class CeilingHangingSigns {
 
         public static final Supplier<CeilingHangingSignBlock> create(ModRegister register, String name) {
-            return create(register, name, Properties.copy(Blocks.OAK_SIGN), WoodType.OAK);
+            return create(register, name, Properties.ofFullCopy(Blocks.OAK_SIGN), WoodType.OAK);
         }
 
         public static final Supplier<CeilingHangingSignBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-            return create(register, name, Properties.copy(Blocks.OAK_SIGN), WoodType.OAK, creativeTab);
+            return create(register, name, Properties.ofFullCopy(Blocks.OAK_SIGN), WoodType.OAK, creativeTab);
         }
 
         public static final Supplier<CeilingHangingSignBlock> create(ModRegister register, String name, Properties properties) {
@@ -34,11 +34,11 @@ public class HangingSigns {
         }
 
         public static final Supplier<CeilingHangingSignBlock> create(ModRegister register, String name, Properties properties, WoodType woodType) {
-            return register.blockRegistry.register(name, () -> new CeilingHangingSignBlock(properties, woodType));
+            return register.blockRegistry.register(name, () -> new CeilingHangingSignBlock(woodType, properties));
         }
 
         public static final Supplier<CeilingHangingSignBlock> create(ModRegister register, String name, Properties properties, WoodType woodType, ResourceKey<CreativeModeTab> creativeTab) {
-            return register.blockRegistry.register(name, () -> new CeilingHangingSignBlock(properties, woodType), creativeTab);
+            return register.blockRegistry.register(name, () -> new CeilingHangingSignBlock(woodType, properties), creativeTab);
         }
 
         private CeilingHangingSigns() {
@@ -49,7 +49,7 @@ public class HangingSigns {
     public static class WallHangingSigns {
 
         public static final Supplier<WallHangingSignBlock> create(ModRegister register, String name) {
-            return create(register, name, Properties.copy(Blocks.OAK_SIGN), WoodType.OAK);
+            return create(register, name, Properties.ofFullCopy(Blocks.OAK_SIGN), WoodType.OAK);
         }
 
         public static final Supplier<WallHangingSignBlock> create(ModRegister register, String name, Properties properties) {
@@ -57,7 +57,7 @@ public class HangingSigns {
         }
 
         public static final Supplier<WallHangingSignBlock> create(ModRegister register, String name, Properties properties, WoodType woodType) {
-            return register.blockRegistry.register(name, () -> new WallHangingSignBlock(properties, woodType));
+            return register.blockRegistry.register(name, () -> new WallHangingSignBlock(woodType, properties));
         }
 
         private WallHangingSigns() {

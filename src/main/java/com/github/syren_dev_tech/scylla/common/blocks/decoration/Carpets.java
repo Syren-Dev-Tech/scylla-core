@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class Carpets {
 
     public static Supplier<CarpetBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.WHITE_CARPET));
+        return create(register, name, Properties.ofFullCopy(Blocks.WHITE_CARPET));
     }
 
     public static Supplier<CarpetBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.WHITE_CARPET), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.WHITE_CARPET), creativeTab);
     }
 
     public static Supplier<CarpetBlock> create(ModRegister register, String name, Properties properties) {

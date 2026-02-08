@@ -18,11 +18,11 @@ public class CaveVines {
     public static class CaveVineBodies {
 
         public static final Supplier<CaveVinesPlantBlock> create(ModRegister register, String name) {
-            return create(register, name, Properties.copy(Blocks.CAVE_VINES_PLANT));
+            return create(register, name, Properties.ofFullCopy(Blocks.CAVE_VINES_PLANT));
         }
 
         public static final Supplier<CaveVinesPlantBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-            return create(register, name, Properties.copy(Blocks.CAVE_VINES_PLANT), creativeTab);
+            return create(register, name, Properties.ofFullCopy(Blocks.CAVE_VINES_PLANT), creativeTab);
         }
 
         public static final Supplier<CaveVinesPlantBlock> create(ModRegister register, String name, Properties properties) {
@@ -41,11 +41,11 @@ public class CaveVines {
     public static class CaveVineTips {
 
         public static final Supplier<CaveVinesBlock> create(ModRegister register, String name) {
-            return create(register, name, Properties.copy(Blocks.CAVE_VINES));
+            return create(register, name, Properties.ofFullCopy(Blocks.CAVE_VINES));
         }
 
         public static final Supplier<CaveVinesBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-            return create(register, name, Properties.copy(Blocks.CAVE_VINES), creativeTab);
+            return create(register, name, Properties.ofFullCopy(Blocks.CAVE_VINES), creativeTab);
         }
 
         public static final Supplier<CaveVinesBlock> create(ModRegister register, String name, Properties properties) {
@@ -62,11 +62,11 @@ public class CaveVines {
     }
 
     public static final Tuple<Supplier<CaveVinesBlock>, Supplier<CaveVinesPlantBlock>> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.CAVE_VINES), Properties.copy(Blocks.CAVE_VINES_PLANT));
+        return create(register, name, Properties.ofFullCopy(Blocks.CAVE_VINES), Properties.ofFullCopy(Blocks.CAVE_VINES_PLANT));
     }
 
     public static final Tuple<Supplier<CaveVinesBlock>, Supplier<CaveVinesPlantBlock>> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.CAVE_VINES), Properties.copy(Blocks.CAVE_VINES_PLANT), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.CAVE_VINES), Properties.ofFullCopy(Blocks.CAVE_VINES_PLANT), creativeTab);
     }
 
     public static final Tuple<Supplier<CaveVinesBlock>, Supplier<CaveVinesPlantBlock>> create(ModRegister register, String name, Properties topProperties, Properties bodyProperties) {

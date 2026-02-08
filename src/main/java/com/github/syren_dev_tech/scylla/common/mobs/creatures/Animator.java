@@ -2,9 +2,9 @@ package com.github.syren_dev_tech.scylla.common.mobs.creatures;
 
 import java.util.function.Function;
 import com.github.syren_dev_tech.scylla.common.collections.Tuple;
-import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.animation.RawAnimation;
-import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.animation.AnimationState;
+import software.bernie.geckolib.animation.PlayState;
+import software.bernie.geckolib.animation.RawAnimation;
 
 public class Animator<T extends CustomCreature> {
     private final Function<CreatureState<T>, Tuple<String, Boolean>> handler;

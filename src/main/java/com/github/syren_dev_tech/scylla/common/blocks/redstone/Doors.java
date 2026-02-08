@@ -39,27 +39,27 @@ public class Doors {
     }
 
     public static final Supplier<DoorBlock> create(ModRegister register, String name, Block sourceBlock) {
-        return create(register, name, Properties.copy(sourceBlock), BlockSetType.OAK);
+        return create(register, name, Properties.ofFullCopy(sourceBlock), BlockSetType.OAK);
     }
 
     public static final Supplier<DoorBlock> create(ModRegister register, String name, Block sourceBlock, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(sourceBlock), BlockSetType.OAK, creativeTab);
+        return create(register, name, Properties.ofFullCopy(sourceBlock), BlockSetType.OAK, creativeTab);
     }
 
     public static final Supplier<DoorBlock> create(ModRegister register, String name, Block sourceBlock, BlockSetType blockSetType) {
-        return create(register, name, Properties.copy(sourceBlock), blockSetType);
+        return create(register, name, Properties.ofFullCopy(sourceBlock), blockSetType);
     }
 
     public static final Supplier<DoorBlock> create(ModRegister register, String name, Block sourceBlock, BlockSetType blockSetType, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(sourceBlock), blockSetType, creativeTab);
+        return create(register, name, Properties.ofFullCopy(sourceBlock), blockSetType, creativeTab);
     }
 
     public static final Supplier<DoorBlock> create(ModRegister register, String name, Properties properties, BlockSetType blockSetType) {
-        return register.blockRegistry.register(name, () -> new DoorBlock(properties.noOcclusion(), blockSetType));
+        return register.blockRegistry.register(name, () -> new DoorBlock(blockSetType, properties.noOcclusion()));
     }
 
     public static final Supplier<DoorBlock> create(ModRegister register, String name, Properties properties, BlockSetType blockSetType, ResourceKey<CreativeModeTab> creativeTab) {
-        return register.blockRegistry.register(name, () -> new DoorBlock(properties.noOcclusion(), blockSetType), creativeTab);
+        return register.blockRegistry.register(name, () -> new DoorBlock(blockSetType, properties.noOcclusion()), creativeTab);
     }
 
     private Doors() {

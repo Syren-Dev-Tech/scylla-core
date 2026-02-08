@@ -15,11 +15,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class Beacons {
 
     public static final Supplier<BeaconBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.BEACON));
+        return create(register, name, Properties.ofFullCopy(Blocks.BEACON));
     }
 
     public static final Supplier<BeaconBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.BEACON), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.BEACON), creativeTab);
     }
 
     public static final Supplier<BeaconBlock> create(ModRegister register, String name, Properties properties) {

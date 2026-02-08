@@ -14,11 +14,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class CoralPlants {
 
     public static final Supplier<CoralPlantBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.FIRE_CORAL), Blocks.DEAD_FIRE_CORAL);
+        return create(register, name, Properties.ofFullCopy(Blocks.FIRE_CORAL), Blocks.DEAD_FIRE_CORAL);
     }
 
     public static final Supplier<CoralPlantBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.FIRE_CORAL), Blocks.DEAD_FIRE_CORAL, creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.FIRE_CORAL), Blocks.DEAD_FIRE_CORAL, creativeTab);
     }
 
     public static final Supplier<CoralPlantBlock> create(ModRegister register, String name, Properties properties) {
@@ -30,11 +30,11 @@ public class CoralPlants {
     }
 
     public static final Supplier<CoralPlantBlock> create(ModRegister register, String name, Block deadBlock) {
-        return create(register, name, Properties.copy(Blocks.FIRE_CORAL), deadBlock);
+        return create(register, name, Properties.ofFullCopy(Blocks.FIRE_CORAL), deadBlock);
     }
 
     public static final Supplier<CoralPlantBlock> create(ModRegister register, String name, Block deadBlock, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.FIRE_CORAL), deadBlock, creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.FIRE_CORAL), deadBlock, creativeTab);
     }
 
     public static final Supplier<CoralPlantBlock> create(ModRegister register, String name, Properties properties, Block deadBlock) {

@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class Observers {
 
     public static final Supplier<ObserverBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.OBSERVER));
+        return create(register, name, Properties.ofFullCopy(Blocks.OBSERVER));
     }
 
     public static final Supplier<ObserverBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.OBSERVER), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.OBSERVER), creativeTab);
     }
 
     public static final Supplier<ObserverBlock> create(ModRegister register, String name, Properties properties) {

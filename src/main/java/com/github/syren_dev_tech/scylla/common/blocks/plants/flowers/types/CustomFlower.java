@@ -1,8 +1,7 @@
 package com.github.syren_dev_tech.scylla.common.blocks.plants.flowers.types;
 
-import java.util.function.Supplier;
-
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.util.RandomSource;
@@ -24,15 +23,15 @@ public class CustomFlower extends FlowerBlock {
 
     private ParticleOptions particle;
     private Block[] canBePlacedOn = new Block[] {};
-    private MobEffect effect; // Effect when physically touched.
+    private Holder<MobEffect> effect; // Effect when physically touched.
     private boolean disabledInPeaceful = false;
 
-    public CustomFlower(Supplier<MobEffect> mobEffect, Properties properties) {
-        super(mobEffect, 8, properties);
+    public CustomFlower(Holder<MobEffect> effect, Properties properties) {
+        super(effect, 8, properties);
     }
 
-    public CustomFlower(Supplier<MobEffect> mobEffect, int duration, Properties properties) {
-        super(mobEffect, duration, properties);
+    public CustomFlower(Holder<MobEffect> effect, float seconds, Properties properties) {
+        super(effect, seconds, properties);
     }
 
     public CustomFlower setPlaceable(Block[] blocks) {
@@ -45,7 +44,7 @@ public class CustomFlower extends FlowerBlock {
         return this;
     }
 
-    public CustomFlower setPhysicalEffect(MobEffect effect) {
+    public CustomFlower setPhysicalEffect(Holder<MobEffect> effect) {
         this.effect = effect;
         return this;
     }

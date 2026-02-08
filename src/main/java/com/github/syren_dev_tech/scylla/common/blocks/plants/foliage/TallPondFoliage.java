@@ -18,11 +18,11 @@ public class TallPondFoliage {
     public static class TallPondFoliageLeaves {
 
         public static final Supplier<BigDripleafBlock> create(ModRegister register, String name) {
-            return create(register, name, Properties.copy(Blocks.BIG_DRIPLEAF));
+            return create(register, name, Properties.ofFullCopy(Blocks.BIG_DRIPLEAF));
         }
 
         public static final Supplier<BigDripleafBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-            return create(register, name, Properties.copy(Blocks.BIG_DRIPLEAF), creativeTab);
+            return create(register, name, Properties.ofFullCopy(Blocks.BIG_DRIPLEAF), creativeTab);
         }
 
         public static final Supplier<BigDripleafBlock> create(ModRegister register, String name, Properties properties) {
@@ -41,11 +41,11 @@ public class TallPondFoliage {
     public static class TallPondFoliageStems {
 
         public static final Supplier<BigDripleafStemBlock> create(ModRegister register, String name) {
-            return create(register, name, Properties.copy(Blocks.BIG_DRIPLEAF_STEM));
+            return create(register, name, Properties.ofFullCopy(Blocks.BIG_DRIPLEAF_STEM));
         }
 
         public static final Supplier<BigDripleafStemBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-            return create(register, name, Properties.copy(Blocks.BIG_DRIPLEAF_STEM), creativeTab);
+            return create(register, name, Properties.ofFullCopy(Blocks.BIG_DRIPLEAF_STEM), creativeTab);
         }
 
         public static final Supplier<BigDripleafStemBlock> create(ModRegister register, String name, Properties properties) {
@@ -62,11 +62,11 @@ public class TallPondFoliage {
     }
 
     public static final Tuple<Supplier<BigDripleafBlock>, Supplier<BigDripleafStemBlock>> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.BIG_DRIPLEAF_STEM));
+        return create(register, name, Properties.ofFullCopy(Blocks.BIG_DRIPLEAF_STEM));
     }
 
     public static final Tuple<Supplier<BigDripleafBlock>, Supplier<BigDripleafStemBlock>> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.BIG_DRIPLEAF_STEM), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.BIG_DRIPLEAF_STEM), creativeTab);
     }
 
     public static final Tuple<Supplier<BigDripleafBlock>, Supplier<BigDripleafStemBlock>> create(ModRegister register, String name, Properties properties) {

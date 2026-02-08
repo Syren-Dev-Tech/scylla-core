@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class Bookshelves {
 
     public static final Supplier<ChiseledBookShelfBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.CHISELED_BOOKSHELF));
+        return create(register, name, Properties.ofFullCopy(Blocks.CHISELED_BOOKSHELF));
     }
 
     public static final Supplier<ChiseledBookShelfBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.CHISELED_BOOKSHELF), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.CHISELED_BOOKSHELF), creativeTab);
     }
 
     public static final Supplier<ChiseledBookShelfBlock> create(ModRegister register, String name, Properties properties) {

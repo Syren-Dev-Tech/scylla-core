@@ -13,19 +13,19 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class Ice {
 
     public static final Supplier<CustomIce> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.ICE));
+        return create(register, name, Properties.ofFullCopy(Blocks.ICE));
     }
 
     public static final Supplier<CustomIce> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.ICE), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.ICE), creativeTab);
     }
 
     public static final Supplier<CustomIce> create(ModRegister register, String name, Block meltedBlock) {
-        return create(register, name, Properties.copy(Blocks.ICE), meltedBlock);
+        return create(register, name, Properties.ofFullCopy(Blocks.ICE), meltedBlock);
     }
 
     public static final Supplier<CustomIce> create(ModRegister register, String name, Block meltedBlock, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.ICE), meltedBlock, creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.ICE), meltedBlock, creativeTab);
     }
 
     public static final Supplier<CustomIce> create(ModRegister register, String name, Properties properties) {

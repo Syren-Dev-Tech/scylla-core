@@ -17,11 +17,11 @@ public class Roots {
     public static class HangingRoots {
 
         public static final Supplier<RootsBlock> create(ModRegister register, String name) {
-            return create(register, name, Properties.copy(Blocks.HANGING_ROOTS));
+            return create(register, name, Properties.ofFullCopy(Blocks.HANGING_ROOTS));
         }
 
         public static final Supplier<RootsBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-            return create(register, name, Properties.copy(Blocks.HANGING_ROOTS), creativeTab);
+            return create(register, name, Properties.ofFullCopy(Blocks.HANGING_ROOTS), creativeTab);
         }
 
         public static final Supplier<RootsBlock> create(ModRegister register, String name, Properties properties) {
@@ -40,11 +40,11 @@ public class Roots {
     public static class SolidRoots {
 
         public static final Supplier<MangroveRootsBlock> create(ModRegister register, String name) {
-            return create(register, name, Properties.copy(Blocks.MANGROVE_ROOTS));
+            return create(register, name, Properties.ofFullCopy(Blocks.MANGROVE_ROOTS));
         }
 
         public static final Supplier<MangroveRootsBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-            return create(register, name, Properties.copy(Blocks.MANGROVE_ROOTS), creativeTab);
+            return create(register, name, Properties.ofFullCopy(Blocks.MANGROVE_ROOTS), creativeTab);
         }
 
         public static final Supplier<MangroveRootsBlock> create(ModRegister register, String name, Properties properties) {
@@ -62,11 +62,11 @@ public class Roots {
 
     public static class SoilRoots {
         public static final Supplier<RootedDirtBlock> create(ModRegister register, String name) {
-            return create(register, name, Properties.copy(Blocks.ROOTED_DIRT));
+            return create(register, name, Properties.ofFullCopy(Blocks.ROOTED_DIRT));
         }
 
         public static final Supplier<RootedDirtBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-            return create(register, name, Properties.copy(Blocks.ROOTED_DIRT), creativeTab);
+            return create(register, name, Properties.ofFullCopy(Blocks.ROOTED_DIRT), creativeTab);
         }
 
         public static final Supplier<RootedDirtBlock> create(ModRegister register, String name, Properties properties) {

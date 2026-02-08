@@ -14,11 +14,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class WallFanCorals {
 
     public static final Supplier<CoralWallFanBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.FIRE_CORAL_WALL_FAN), Blocks.DEAD_FIRE_CORAL_WALL_FAN);
+        return create(register, name, Properties.ofFullCopy(Blocks.FIRE_CORAL_WALL_FAN), Blocks.DEAD_FIRE_CORAL_WALL_FAN);
     }
 
     public static final Supplier<CoralWallFanBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.FIRE_CORAL_WALL_FAN), Blocks.DEAD_FIRE_CORAL_WALL_FAN, creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.FIRE_CORAL_WALL_FAN), Blocks.DEAD_FIRE_CORAL_WALL_FAN, creativeTab);
     }
 
     public static final Supplier<CoralWallFanBlock> create(ModRegister register, String name, Properties properties) {
@@ -30,11 +30,11 @@ public class WallFanCorals {
     }
 
     public static final Supplier<CoralWallFanBlock> create(ModRegister register, String name, Block deadBlock) {
-        return create(register, name, Properties.copy(Blocks.FIRE_CORAL_WALL_FAN), deadBlock);
+        return create(register, name, Properties.ofFullCopy(Blocks.FIRE_CORAL_WALL_FAN), deadBlock);
     }
 
     public static final Supplier<CoralWallFanBlock> create(ModRegister register, String name, Block deadBlock, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.FIRE_CORAL_WALL_FAN), deadBlock, creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.FIRE_CORAL_WALL_FAN), deadBlock, creativeTab);
     }
 
     public static final Supplier<CoralWallFanBlock> create(ModRegister register, String name, Properties properties, Block deadBlock) {

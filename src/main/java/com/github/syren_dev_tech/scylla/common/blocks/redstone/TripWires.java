@@ -15,11 +15,11 @@ public class TripWires {
 
     public static class TripWireHooks {
         public static final Supplier<TripWireHookBlock> create(ModRegister register, String name) {
-            return create(register, name, Properties.copy(Blocks.TRIPWIRE_HOOK));
+            return create(register, name, Properties.ofFullCopy(Blocks.TRIPWIRE_HOOK));
         }
 
         public static final Supplier<TripWireHookBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-            return create(register, name, Properties.copy(Blocks.TRIPWIRE_HOOK), creativeTab);
+            return create(register, name, Properties.ofFullCopy(Blocks.TRIPWIRE_HOOK), creativeTab);
         }
 
         public static final Supplier<TripWireHookBlock> create(ModRegister register, String name, Properties properties) {
@@ -36,11 +36,11 @@ public class TripWires {
     }
 
     public static final Supplier<TripWireBlock> create(ModRegister register, String name, TripWireHookBlock hookBlock) {
-        return create(register, name, hookBlock, Properties.copy(Blocks.TRIPWIRE));
+        return create(register, name, hookBlock, Properties.ofFullCopy(Blocks.TRIPWIRE));
     }
 
     public static final Supplier<TripWireBlock> create(ModRegister register, String name, TripWireHookBlock hookBlock, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, hookBlock, Properties.copy(Blocks.TRIPWIRE), creativeTab);
+        return create(register, name, hookBlock, Properties.ofFullCopy(Blocks.TRIPWIRE), creativeTab);
     }
 
     public static final Supplier<TripWireBlock> create(ModRegister register, String name, TripWireHookBlock hookBlock, Properties properties) {

@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class Cactus {
 
     public static final Supplier<CactusBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.CACTUS));
+        return create(register, name, Properties.ofFullCopy(Blocks.CACTUS));
     }
 
     public static final Supplier<CactusBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.CACTUS), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.CACTUS), creativeTab);
     }
 
     public static final Supplier<CactusBlock> create(ModRegister register, String name, Properties properties) {

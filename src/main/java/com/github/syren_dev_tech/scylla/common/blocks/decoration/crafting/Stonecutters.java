@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class Stonecutters {
 
     public static final Supplier<StonecutterBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.STONECUTTER));
+        return create(register, name, Properties.ofFullCopy(Blocks.STONECUTTER));
     }
 
     public static final Supplier<StonecutterBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.STONECUTTER), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.STONECUTTER), creativeTab);
     }
 
     public static final Supplier<StonecutterBlock> create(ModRegister register, String name, Properties properties) {

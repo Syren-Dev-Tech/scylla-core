@@ -5,11 +5,10 @@ import java.util.List;
 import java.util.Map;
 
 import com.github.syren_dev_tech.scylla.common.collections.Tuple;
-import com.github.syren_dev_tech.scylla.common.util.ResourcePath;
+import com.github.syren_dev_tech.scylla.utilities.files.ResourcePath;
 import com.github.syren_dev_tech.scylla.common.ScyllaCommon;
 
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;
@@ -51,27 +50,24 @@ public class FeatureRegistry {
 
         protected static final Map<String, Tuple<ResourceKey<ConfiguredFeature<?, ?>>, List<OreConfiguration.TargetBlockState>>> ORES = new HashMap<>();
 
-        private OreFeatureRegistry() {
-        }
+        private OreFeatureRegistry() {}
 
-        public static final void register(String name, List<OreConfiguration.TargetBlockState> ore) {
-            ORES.put(name, new Tuple<>(FeatureRegistry.registerKey(name), ore));
-        }
+        // public static final void register(String name, List<OreConfiguration.TargetBlockState> ore) {
+        // ORES.put(name, new Tuple<>(FeatureRegistry.registerKey(name), ore));
+        // }
     }
 
-    public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context) {
-        OreFeatureRegistry.ORES.forEach((key, value) -> {
-            register(context, value.x, Feature.ORE, new OreConfiguration(value.y, 9));
-        });
-    }
+    // public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context) {
+    // OreFeatureRegistry.ORES.forEach((key, value) -> {
+    // register(context, value.x, Feature.ORE, new OreConfiguration(value.y, 9));
+    // });
+    // }
 
-    public static ResourceKey<ConfiguredFeature<?, ?>> registerKey(String name) {
-        return ResourceKey.create(Registries.CONFIGURED_FEATURE, new ResourcePath(ScyllaCommon.MOD_ID, name));
-    }
+    // public static ResourceKey<ConfiguredFeature<?, ?>> registerKey(String name) {
+    // return ResourceKey.create(Registries.CONFIGURED_FEATURE, new ResourcePath(ScyllaCommon.MOD_ID, name).get());
+    // }
 
-    private static <FC extends FeatureConfiguration, F extends Feature<FC>> void register(
-            BootstapContext<ConfiguredFeature<?, ?>> context, ResourceKey<ConfiguredFeature<?, ?>> key, F feature,
-            FC configuration) {
-        context.register(key, new ConfiguredFeature<>(feature, configuration));
-    }
+    // private static <FC extends FeatureConfiguration, F extends Feature<FC>> void register(BootstapContext<ConfiguredFeature<?, ?>> context, ResourceKey<ConfiguredFeature<?, ?>> key, F feature, FC configuration) {
+    // context.register(key, new ConfiguredFeature<>(feature, configuration));
+    // }
 }

@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class CrystalBlocks {
 
     public static final Supplier<AmethystBlock> create(ModRegister register, String name) {
-        return create(register, name, Properties.copy(Blocks.AMETHYST_BLOCK));
+        return create(register, name, Properties.ofFullCopy(Blocks.AMETHYST_BLOCK));
     }
 
     public static final Supplier<AmethystBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.AMETHYST_BLOCK), creativeTab);
+        return create(register, name, Properties.ofFullCopy(Blocks.AMETHYST_BLOCK), creativeTab);
     }
 
     public static final Supplier<AmethystBlock> create(ModRegister register, String name, Properties properties) {

@@ -1,7 +1,8 @@
 package com.github.syren_dev_tech.scylla.common.blocks.plants.melons;
 
 import com.github.syren_dev_tech.scylla.common.crops.Stems;
-import com.github.syren_dev_tech.scylla.common.registry.ModRegister;
+import com.github.syren_dev_tech.scylla.registry.ModRegister;
+import com.github.syren_dev_tech.scylla.registry.definitions.MelonSetDefinition;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
 
@@ -11,7 +12,7 @@ public class MelonSets {
         var melonDefinition = Melons.create(register, name);
 
         var stems = Stems.create(register, name, melonDefinition.resourceKey, seeds);
-        melonDefinition.melon.get().setStem(stems.stem.get());
+        melonDefinition.melon.registry.get().setStem(stems.stem.registry.get());
 
         return new MelonSetDefinition(melonDefinition, stems);
     }

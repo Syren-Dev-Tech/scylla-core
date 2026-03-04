@@ -1,5 +1,6 @@
 package com.github.syren_dev_tech.scylla.common.crops.types;
 
+import com.github.syren_dev_tech.scylla.registry.definitions.BlockDefinition;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
@@ -10,22 +11,22 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 public class CropProperties {
 
     private final Properties blockProperties;
-    private final Block soilBlock;
+    private final BlockDefinition<? extends Block> soilBlock;
     private IntegerProperty age = BlockStateProperties.AGE_3;
     private int maxAge = 3;
     private VoxelShape[] shapeByAge = new VoxelShape[] {Block.box(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 4.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 6.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D)};
 
     public CropProperties() {
         this.blockProperties = Properties.ofFullCopy(Blocks.WHEAT);
-        this.soilBlock = Blocks.FARMLAND;
+        this.soilBlock = BlockDefinition.of(() -> Blocks.FARMLAND);
     }
 
     public CropProperties(Properties properties) {
         this.blockProperties = properties;
-        this.soilBlock = Blocks.FARMLAND;
+        this.soilBlock = BlockDefinition.of(() -> Blocks.FARMLAND);
     }
 
-    public CropProperties(Properties properties, Block soilBlock) {
+    public CropProperties(Properties properties, BlockDefinition<? extends Block> soilBlock) {
         this.blockProperties = properties;
         this.soilBlock = soilBlock;
     }
@@ -59,6 +60,6 @@ public class CropProperties {
     }
 
     public Block getSoilBlock() {
-        return this.soilBlock;
+        return this.soilBlock.registry.get();
     }
 }

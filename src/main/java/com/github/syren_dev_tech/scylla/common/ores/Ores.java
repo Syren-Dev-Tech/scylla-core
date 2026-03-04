@@ -1,12 +1,10 @@
 package com.github.syren_dev_tech.scylla.common.ores;
 
-import java.util.function.Supplier;
-
 import com.github.syren_dev_tech.scylla.common.items.ModItem;
 import com.github.syren_dev_tech.scylla.common.ores.types.Ore;
-import com.github.syren_dev_tech.scylla.common.registry.ModRegister;
-import com.github.syren_dev_tech.scylla.common.registry.features.OreFeature;
-
+import com.github.syren_dev_tech.scylla.registry.ModRegister;
+import com.github.syren_dev_tech.scylla.registry.definitions.BlockDefinition;
+import com.github.syren_dev_tech.scylla.registry.features.OreFeature;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.world.item.CreativeModeTab;
@@ -41,24 +39,24 @@ public class Ores {
         }
     }
 
-    public static final Supplier<Ore> create(ModRegister register, String name, IntProvider xpRange) {
+    public static final BlockDefinition<Ore> create(ModRegister register, String name, IntProvider xpRange) {
         return create(register, name, xpRange, Properties.ofFullCopy(Blocks.IRON_ORE));
     }
 
-    public static final Supplier<Ore> create(ModRegister register, String name, IntProvider xpRange, ResourceKey<CreativeModeTab> creativeTab) {
+    public static final BlockDefinition<Ore> create(ModRegister register, String name, IntProvider xpRange, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, xpRange, Properties.ofFullCopy(Blocks.IRON_ORE), creativeTab);
     }
 
-    public static final Supplier<Ore> create(ModRegister register, String name, IntProvider xpRange, Properties properties) {
-        var ore = register.blockRegistry.register(name, () -> new Ore(xpRange, properties.requiresCorrectToolForDrops()));
-        OreFeature.register(name, ore.get());
+    public static final BlockDefinition<Ore> create(ModRegister register, String name, IntProvider xpRange, Properties properties) {
+        var ore = register.blockRegistry.register(name, BlockDefinition.of(() -> new Ore(xpRange, properties.requiresCorrectToolForDrops())));
+        OreFeature.register(name, ore.registry.get());
 
         return ore;
     }
 
-    public static final Supplier<Ore> create(ModRegister register, String name, IntProvider xpRange, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
-        var ore = register.blockRegistry.register(name, () -> new Ore(xpRange, properties.requiresCorrectToolForDrops()), creativeTab);
-        OreFeature.register(name, ore.get());
+    public static final BlockDefinition<Ore> create(ModRegister register, String name, IntProvider xpRange, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
+        var ore = register.blockRegistry.register(name, BlockDefinition.of(() -> new Ore(xpRange, properties.requiresCorrectToolForDrops())), creativeTab);
+        OreFeature.register(name, ore.registry.get());
 
         return ore;
     }

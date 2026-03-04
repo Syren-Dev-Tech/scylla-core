@@ -1,12 +1,10 @@
 package com.github.syren_dev_tech.scylla.common.mobs;
 
 import java.util.function.Supplier;
-
-import com.github.syren_dev_tech.scylla.common.ScyllaCommon;
+import com.github.syren_dev_tech.scylla.ScyllaCommon;
 import com.github.syren_dev_tech.scylla.common.mobs.client.CustomCreatureRenderer;
 import com.github.syren_dev_tech.scylla.common.mobs.creatures.CustomCreature;
-import com.github.syren_dev_tech.scylla.common.registry.IMobRegistrar;
-
+import com.github.syren_dev_tech.scylla.registry.IMobRegistrar;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;

@@ -1,10 +1,8 @@
 package com.github.syren_dev_tech.scylla.common.blocks.plants;
 
-import java.util.function.Supplier;
-
-import com.github.syren_dev_tech.scylla.common.collections.Tuple;
-import com.github.syren_dev_tech.scylla.common.registry.ModRegister;
-
+import com.github.syren_dev_tech.scylla.registry.ModRegister;
+import com.github.syren_dev_tech.scylla.registry.definitions.BlockDefinition;
+import com.github.syren_dev_tech.scylla.utilities.collections.Tuple;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.BambooSaplingBlock;
@@ -15,20 +13,20 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class Bamboo {
     public static class BambooStalks {
 
-        public static final Supplier<BambooStalkBlock> create(ModRegister register, String name) {
+        public static final BlockDefinition<BambooStalkBlock> create(ModRegister register, String name) {
             return create(register, name, Properties.ofFullCopy(Blocks.BAMBOO));
         }
 
-        public static final Supplier<BambooStalkBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
+        public static final BlockDefinition<BambooStalkBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
             return create(register, name, Properties.ofFullCopy(Blocks.BAMBOO), creativeTab);
         }
 
-        public static final Supplier<BambooStalkBlock> create(ModRegister register, String name, Properties properties) {
-            return register.blockRegistry.register(name, () -> new BambooStalkBlock(properties));
+        public static final BlockDefinition<BambooStalkBlock> create(ModRegister register, String name, Properties properties) {
+            return register.blockRegistry.register(name, BlockDefinition.of(() -> new BambooStalkBlock(properties)));
         }
 
-        public static final Supplier<BambooStalkBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
-            return register.blockRegistry.register(name, () -> new BambooStalkBlock(properties), creativeTab);
+        public static final BlockDefinition<BambooStalkBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
+            return register.blockRegistry.register(name, BlockDefinition.of(() -> new BambooStalkBlock(properties)), creativeTab);
         }
 
         private BambooStalks() {
@@ -38,20 +36,20 @@ public class Bamboo {
 
     public static class BambooSaplings {
 
-        public static final Supplier<BambooSaplingBlock> create(ModRegister register, String name) {
+        public static final BlockDefinition<BambooSaplingBlock> create(ModRegister register, String name) {
             return create(register, name, Properties.ofFullCopy(Blocks.BAMBOO_SAPLING));
         }
 
-        public static final Supplier<BambooSaplingBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
+        public static final BlockDefinition<BambooSaplingBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
             return create(register, name, Properties.ofFullCopy(Blocks.BAMBOO_SAPLING), creativeTab);
         }
 
-        public static final Supplier<BambooSaplingBlock> create(ModRegister register, String name, Properties properties) {
-            return register.blockRegistry.register(name, () -> new BambooSaplingBlock(properties));
+        public static final BlockDefinition<BambooSaplingBlock> create(ModRegister register, String name, Properties properties) {
+            return register.blockRegistry.register(name, BlockDefinition.of(() -> new BambooSaplingBlock(properties)));
         }
 
-        public static final Supplier<BambooSaplingBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
-            return register.blockRegistry.register(name, () -> new BambooSaplingBlock(properties), creativeTab);
+        public static final BlockDefinition<BambooSaplingBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
+            return register.blockRegistry.register(name, BlockDefinition.of(() -> new BambooSaplingBlock(properties)), creativeTab);
         }
 
         private BambooSaplings() {
@@ -59,19 +57,19 @@ public class Bamboo {
         }
     }
 
-    public static final Tuple<Supplier<BambooStalkBlock>, Supplier<BambooSaplingBlock>> create(ModRegister register, String name) {
+    public static final Tuple<BlockDefinition<BambooStalkBlock>, BlockDefinition<BambooSaplingBlock>> create(ModRegister register, String name) {
         return create(register, name, Properties.ofFullCopy(Blocks.BAMBOO), Properties.ofFullCopy(Blocks.BAMBOO_SAPLING));
     }
 
-    public static final Tuple<Supplier<BambooStalkBlock>, Supplier<BambooSaplingBlock>> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Tuple<BlockDefinition<BambooStalkBlock>, BlockDefinition<BambooSaplingBlock>> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.ofFullCopy(Blocks.BAMBOO), Properties.ofFullCopy(Blocks.BAMBOO_SAPLING), creativeTab);
     }
 
-    public static final Tuple<Supplier<BambooStalkBlock>, Supplier<BambooSaplingBlock>> create(ModRegister register, String name, Properties stalkProperties, Properties saplingProperties) {
+    public static final Tuple<BlockDefinition<BambooStalkBlock>, BlockDefinition<BambooSaplingBlock>> create(ModRegister register, String name, Properties stalkProperties, Properties saplingProperties) {
         return new Tuple<>(BambooStalks.create(register, name, stalkProperties), BambooSaplings.create(register, name, saplingProperties));
     }
 
-    public static final Tuple<Supplier<BambooStalkBlock>, Supplier<BambooSaplingBlock>> create(ModRegister register, String name, Properties stalkProperties, Properties saplingProperties, ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Tuple<BlockDefinition<BambooStalkBlock>, BlockDefinition<BambooSaplingBlock>> create(ModRegister register, String name, Properties stalkProperties, Properties saplingProperties, ResourceKey<CreativeModeTab> creativeTab) {
         return new Tuple<>(BambooStalks.create(register, name, stalkProperties, creativeTab), BambooSaplings.create(register, name, saplingProperties, creativeTab));
     }
 

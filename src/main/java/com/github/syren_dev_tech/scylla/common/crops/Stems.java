@@ -1,8 +1,8 @@
 package com.github.syren_dev_tech.scylla.common.crops;
 
-import java.util.function.Supplier;
-
-import com.github.syren_dev_tech.scylla.common.registry.ModRegister;
+import com.github.syren_dev_tech.scylla.registry.ModRegister;
+import com.github.syren_dev_tech.scylla.registry.definitions.BlockDefinition;
+import com.github.syren_dev_tech.scylla.registry.definitions.StemDefinition;
 import com.github.syren_dev_tech.scylla.utilities.files.ResourcePath;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
@@ -22,12 +22,12 @@ public class Stems {
 
         private AttachedStems() {}
 
-        public static final Supplier<AttachedStemBlock> create(ModRegister register, String name, ResourceKey<Block> stem, ResourceKey<Block> fruit, ResourceKey<Item> seed) {
-            return register.blockRegistry.register(name, () -> new AttachedStemBlock(stem, fruit, seed, Properties.ofFullCopy(Blocks.PUMPKIN_STEM)));
+        public static final BlockDefinition<AttachedStemBlock> create(ModRegister register, String name, ResourceKey<Block> stem, ResourceKey<Block> fruit, ResourceKey<Item> seed) {
+            return register.blockRegistry.register(name, BlockDefinition.of(() -> new AttachedStemBlock(stem, fruit, seed, Properties.ofFullCopy(Blocks.PUMPKIN_STEM))));
         }
 
-        public static final Supplier<AttachedStemBlock> create(ModRegister register, String name, ResourceKey<Block> stem, ResourceKey<Block> fruit, ResourceKey<Item> seed, Properties properties) {
-            return register.blockRegistry.register(name, () -> new AttachedStemBlock(stem, fruit, seed, properties));
+        public static final BlockDefinition<AttachedStemBlock> create(ModRegister register, String name, ResourceKey<Block> stem, ResourceKey<Block> fruit, ResourceKey<Item> seed, Properties properties) {
+            return register.blockRegistry.register(name, BlockDefinition.of(() -> new AttachedStemBlock(stem, fruit, seed, properties)));
         }
     }
 
@@ -35,12 +35,12 @@ public class Stems {
 
         private GrowingStems() {}
 
-        public static final Supplier<StemBlock> create(ModRegister register, String name, ResourceKey<Block> fruit, ResourceKey<Block> attachedStem, ResourceKey<Item> seed) {
-            return register.blockRegistry.register(name, () -> new StemBlock(fruit, attachedStem, seed, Properties.ofFullCopy(Blocks.PUMPKIN_STEM)));
+        public static final BlockDefinition<StemBlock> create(ModRegister register, String name, ResourceKey<Block> fruit, ResourceKey<Block> attachedStem, ResourceKey<Item> seed) {
+            return register.blockRegistry.register(name, BlockDefinition.of(() -> new StemBlock(fruit, attachedStem, seed, Properties.ofFullCopy(Blocks.PUMPKIN_STEM))));
         }
 
-        public static final Supplier<StemBlock> create(ModRegister register, String name, ResourceKey<Block> fruit, ResourceKey<Block> attachedStem, ResourceKey<Item> seed, Properties properties) {
-            return register.blockRegistry.register(name, () -> new StemBlock(fruit, attachedStem, seed, properties));
+        public static final BlockDefinition<StemBlock> create(ModRegister register, String name, ResourceKey<Block> fruit, ResourceKey<Block> attachedStem, ResourceKey<Item> seed, Properties properties) {
+            return register.blockRegistry.register(name, BlockDefinition.of(() -> new StemBlock(fruit, attachedStem, seed, properties)));
         }
     }
 

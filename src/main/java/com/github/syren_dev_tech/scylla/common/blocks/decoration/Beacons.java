@@ -1,9 +1,7 @@
 package com.github.syren_dev_tech.scylla.common.blocks.decoration;
 
-import java.util.function.Supplier;
-
-import com.github.syren_dev_tech.scylla.common.registry.ModRegister;
-
+import com.github.syren_dev_tech.scylla.registry.ModRegister;
+import com.github.syren_dev_tech.scylla.registry.definitions.BlockDefinition;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.BeaconBlock;
@@ -14,20 +12,20 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
 public class Beacons {
 
-    public static final Supplier<BeaconBlock> create(ModRegister register, String name) {
+    public static final BlockDefinition<BeaconBlock> create(ModRegister register, String name) {
         return create(register, name, Properties.ofFullCopy(Blocks.BEACON));
     }
 
-    public static final Supplier<BeaconBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
+    public static final BlockDefinition<BeaconBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.ofFullCopy(Blocks.BEACON), creativeTab);
     }
 
-    public static final Supplier<BeaconBlock> create(ModRegister register, String name, Properties properties) {
-        return register.blockRegistry.register(name, () -> new BeaconBlock(properties));
+    public static final BlockDefinition<BeaconBlock> create(ModRegister register, String name, Properties properties) {
+        return register.blockRegistry.register(name, BlockDefinition.of(() -> new BeaconBlock(properties)));
     }
 
-    public static final Supplier<BeaconBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
-        return register.blockRegistry.register(name, () -> new BeaconBlock(properties), creativeTab);
+    public static final BlockDefinition<BeaconBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
+        return register.blockRegistry.register(name, BlockDefinition.of(() -> new BeaconBlock(properties)), creativeTab);
     }
 
     private Beacons() {

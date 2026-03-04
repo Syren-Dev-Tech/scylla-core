@@ -1,5 +1,6 @@
 package com.github.syren_dev_tech.scylla.common.blocks.plants.vines.types;
 
+import com.github.syren_dev_tech.scylla.registry.definitions.BlockDefinition;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.NetherVines;
@@ -11,9 +12,9 @@ public class RoofVineHeadBlock extends WeepingVinesBlock {
     protected static final VoxelShape SHAPE = Block.box(4.0D, 9.0D, 4.0D, 12.0D, 16.0D, 12.0D);
     private Block bodyBlock;
 
-    public RoofVineHeadBlock(Properties properties, Block bodyBlock) {
+    public RoofVineHeadBlock(Properties properties, BlockDefinition<Block> bodyBlock) {
         super(properties);
-        this.bodyBlock = bodyBlock;
+        this.bodyBlock = bodyBlock.registry.get();
     }
 
     public RoofVineHeadBlock(Properties properties) {

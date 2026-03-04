@@ -1,9 +1,8 @@
 package com.github.syren_dev_tech.scylla.common.blocks.plants.gourds;
 
-import java.util.function.Supplier;
-
 import com.github.syren_dev_tech.scylla.common.crops.Stems;
-import com.github.syren_dev_tech.scylla.common.registry.ModRegister;
+import com.github.syren_dev_tech.scylla.registry.ModRegister;
+import com.github.syren_dev_tech.scylla.registry.definitions.GourdSetDefinition;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Blocks;
@@ -16,14 +15,14 @@ public class GourdSets {
         var weableCarved = EquipableGourds.create(register, name);
         var lantern = CarvedGourdLanterns.create(register, name);
 
-        var gourdRegistry = Gourds.create(register, name, Properties.ofFullCopy(Blocks.PUMPKIN));
+        var gourdDefinition = Gourds.create(register, name, Properties.ofFullCopy(Blocks.PUMPKIN));
         // gourd.setCarvedBlock(weableCarved.get()).setSeeds(seeds);
 
-        var stems = Stems.create(register, name, gourdRegistry.resourceKey, seeds);
+        var stems = Stems.create(register, name, gourdDefinition.resourceKey, seeds);
 
-        // gourdRegistry.gourd.get().setStemBlock(stems.x.get()).setAttachedStemBlock(stems.y.get());
+        // gourdDefinition.gourd.get().setStemBlock(stems.x.get()).setAttachedStemBlock(stems.y.get());
 
-        return new GourdSetDefinition(name, gourdRegistry, stems, weableCarved, lantern);
+        return new GourdSetDefinition(name, gourdDefinition, stems, weableCarved, lantern);
     }
 
     private GourdSets() {

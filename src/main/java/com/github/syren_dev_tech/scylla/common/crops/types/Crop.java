@@ -1,6 +1,7 @@
 package com.github.syren_dev_tech.scylla.common.crops.types;
 
 import java.util.function.Supplier;
+import com.github.syren_dev_tech.scylla.registry.definitions.ItemDefinition;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -33,9 +34,9 @@ public class Crop<T extends Item> extends BushBlock implements BonemealableBlock
     private static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[] {Block.box(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 4.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 6.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 10.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 12.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 14.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D)};
 
     private final CropProperties cropProperties;
-    private Supplier<T> plantableItem;
+    private ItemDefinition<T> plantableItem;
 
-    public Crop(CropProperties properties, Supplier<T> plantableItem) {
+    public Crop(CropProperties properties, ItemDefinition<T> plantableItem) {
         super(properties.get());
 
         this.cropProperties = properties;
@@ -112,7 +113,7 @@ public class Crop<T extends Item> extends BushBlock implements BonemealableBlock
     }
 
     protected ItemLike getBaseSeedId() {
-        return this.plantableItem.get();
+        return this.plantableItem.registry.get();
     }
 
     public boolean isBonemealSuccess(Level pLevel, RandomSource pRandom, BlockPos pPos, BlockState pState) {

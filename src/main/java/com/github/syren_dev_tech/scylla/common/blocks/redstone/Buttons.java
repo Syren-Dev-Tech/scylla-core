@@ -1,10 +1,8 @@
 package com.github.syren_dev_tech.scylla.common.blocks.redstone;
 
-import java.util.function.Supplier;
-
 import com.github.syren_dev_tech.scylla.common.blocks.redstone.types.ButtonBase;
-import com.github.syren_dev_tech.scylla.common.registry.ModRegister;
-
+import com.github.syren_dev_tech.scylla.registry.ModRegister;
+import com.github.syren_dev_tech.scylla.registry.definitions.BlockDefinition;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.Block;
@@ -13,28 +11,28 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
 public class Buttons {
 
-    public static final Supplier<ButtonBase> create(ModRegister register, String name) {
+    public static final BlockDefinition<ButtonBase> create(ModRegister register, String name) {
         return create(register, name, Properties.ofFullCopy(Blocks.STONE_BUTTON));
     }
 
-    public static final Supplier<ButtonBase> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
+    public static final BlockDefinition<ButtonBase> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.ofFullCopy(Blocks.STONE_BUTTON), creativeTab);
     }
 
-    public static final Supplier<ButtonBase> create(ModRegister register, String name, Block sourceBlock) {
+    public static final BlockDefinition<ButtonBase> create(ModRegister register, String name, Block sourceBlock) {
         return create(register, name, Properties.ofFullCopy(sourceBlock));
     }
 
-    public static final Supplier<ButtonBase> create(ModRegister register, String name, Block sourceBlock, ResourceKey<CreativeModeTab> creativeTab) {
+    public static final BlockDefinition<ButtonBase> create(ModRegister register, String name, Block sourceBlock, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.ofFullCopy(sourceBlock), creativeTab);
     }
 
-    public static final Supplier<ButtonBase> create(ModRegister register, String name, Properties properties) {
-        return register.blockRegistry.register(name, () -> new ButtonBase(properties));
+    public static final BlockDefinition<ButtonBase> create(ModRegister register, String name, Properties properties) {
+        return register.blockRegistry.register(name, BlockDefinition.of(() -> new ButtonBase(properties)));
     }
 
-    public static final Supplier<ButtonBase> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
-        return register.blockRegistry.register(name, () -> new ButtonBase(properties), creativeTab);
+    public static final BlockDefinition<ButtonBase> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
+        return register.blockRegistry.register(name, BlockDefinition.of(() -> new ButtonBase(properties)), creativeTab);
     }
 
     private Buttons() {

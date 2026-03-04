@@ -1,7 +1,7 @@
 package com.github.syren_dev_tech.scylla.common.mobs.creatures;
 
 import java.util.function.Function;
-import com.github.syren_dev_tech.scylla.common.collections.Tuple;
+import com.github.syren_dev_tech.scylla.utilities.collections.Tuple;
 import software.bernie.geckolib.animation.AnimationState;
 import software.bernie.geckolib.animation.PlayState;
 import software.bernie.geckolib.animation.RawAnimation;

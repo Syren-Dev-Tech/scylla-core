@@ -1,15 +1,16 @@
 package com.github.syren_dev_tech.scylla.common.blocks.plants.vines.types;
 
+import com.github.syren_dev_tech.scylla.registry.definitions.BlockDefinition;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.GrowingPlantHeadBlock;
 import net.minecraft.world.level.block.WeepingVinesPlantBlock;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class RoofVineBodyBlock extends WeepingVinesPlantBlock {
-    public static final VoxelShape SHAPE = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 16.0D, 15.0D);
-    private GrowingPlantHeadBlock headBlock;
 
-    public RoofVineBodyBlock(Properties properties, GrowingPlantHeadBlock headBlock) {
+    public static final VoxelShape SHAPE = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 16.0D, 15.0D);
+    private BlockDefinition<RoofVineHeadBlock> headBlock;
+
+    public RoofVineBodyBlock(Properties properties, BlockDefinition<RoofVineHeadBlock> headBlock) {
         super(properties);
         this.headBlock = headBlock;
     }
@@ -18,11 +19,12 @@ public class RoofVineBodyBlock extends WeepingVinesPlantBlock {
         super(properties);
     }
 
-    public void setHeadBlock(GrowingPlantHeadBlock headBlock) {
+    public void setHeadBlock(BlockDefinition<RoofVineHeadBlock> headBlock) {
         this.headBlock = headBlock;
     }
 
-    protected GrowingPlantHeadBlock getHeadBlock() {
-        return this.headBlock;
+    @Override
+    protected RoofVineHeadBlock getHeadBlock() {
+        return this.headBlock.registry.get();
     }
 }

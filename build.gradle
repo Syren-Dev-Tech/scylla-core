@@ -19,9 +19,9 @@ plugins {
     id 'java-library'
     id 'maven-publish'
     // id 'fabric-loom' version "${loom_version}" apply false
-    id 'net.minecraftforge.gradle' version '[6.0,6.2)' apply false
+    // id 'net.minecraftforge.gradle' version '[6.0,6.2)' apply false
     id 'org.parchmentmc.librarian.forgegradle' version '1.+' apply false
-    id 'org.spongepowered.mixin' version '0.7.+' apply false
+    // id 'org.spongepowered.mixin' version '0.7.+' apply false
     id 'net.neoforged.moddev' version '2.0.140' apply false
 }
 
@@ -209,10 +209,6 @@ else {
                 mod_description        : mod_description
         ]
         inputs.properties replaceProperties
-
-        filesMatching(['META-INF/neoforge.mods.toml']) {
-            expand replaceProperties
-        }
     }
 }
 

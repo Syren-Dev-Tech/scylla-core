@@ -1,7 +1,7 @@
 package com.github.syren_dev_tech.scylla.common.mobs.client;
 
 import java.util.function.Function;
-import com.github.syren_dev_tech.scylla.common.registry.ModRegister;
+import com.github.syren_dev_tech.scylla.registry.ModRegister;
 import com.github.syren_dev_tech.scylla.utilities.files.ResourcePath;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;

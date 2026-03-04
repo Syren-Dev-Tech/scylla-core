@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.PrintWriter;
 import java.nio.file.Path;
 import java.util.Arrays;
-import com.github.syren_dev_tech.scylla.common.ScyllaCommon;
+import com.github.syren_dev_tech.scylla.ScyllaCommon;
 import net.neoforged.fml.loading.FMLPaths;
 
 public class Files_Forge {

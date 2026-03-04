@@ -1,7 +1,7 @@
 package com.github.syren_dev_tech.scylla.common.dimensions.portals;
 
 import java.util.Optional;
-import com.github.syren_dev_tech.scylla.common.ScyllaCommon;
+import com.github.syren_dev_tech.scylla.ScyllaCommon;
 import net.minecraft.BlockUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

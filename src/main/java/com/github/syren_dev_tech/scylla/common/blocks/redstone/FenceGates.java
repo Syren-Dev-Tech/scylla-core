@@ -1,9 +1,7 @@
 package com.github.syren_dev_tech.scylla.common.blocks.redstone;
 
-import java.util.function.Supplier;
-
-import com.github.syren_dev_tech.scylla.common.registry.ModRegister;
-
+import com.github.syren_dev_tech.scylla.registry.ModRegister;
+import com.github.syren_dev_tech.scylla.registry.definitions.BlockDefinition;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.Block;
@@ -14,52 +12,52 @@ import net.minecraft.world.level.block.state.properties.WoodType;
 
 public class FenceGates {
 
-    public static final Supplier<FenceGateBlock> create(ModRegister register, String name) {
+    public static final BlockDefinition<FenceGateBlock> create(ModRegister register, String name) {
         return create(register, name, Properties.ofFullCopy(Blocks.OAK_FENCE_GATE), WoodType.OAK);
     }
 
-    public static final Supplier<FenceGateBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
+    public static final BlockDefinition<FenceGateBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.ofFullCopy(Blocks.OAK_FENCE_GATE), WoodType.OAK, creativeTab);
     }
 
-    public static final Supplier<FenceGateBlock> create(ModRegister register, String name, Properties properties) {
+    public static final BlockDefinition<FenceGateBlock> create(ModRegister register, String name, Properties properties) {
         return create(register, name, properties, WoodType.OAK);
     }
 
-    public static final Supplier<FenceGateBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
+    public static final BlockDefinition<FenceGateBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, properties, WoodType.OAK, creativeTab);
     }
 
-    public static final Supplier<FenceGateBlock> create(ModRegister register, String name, WoodType woodType) {
+    public static final BlockDefinition<FenceGateBlock> create(ModRegister register, String name, WoodType woodType) {
         return create(register, name, Properties.ofFullCopy(Blocks.OAK_FENCE_GATE), woodType);
     }
 
-    public static final Supplier<FenceGateBlock> create(ModRegister register, String name, WoodType woodType, ResourceKey<CreativeModeTab> creativeTab) {
+    public static final BlockDefinition<FenceGateBlock> create(ModRegister register, String name, WoodType woodType, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.ofFullCopy(Blocks.OAK_FENCE_GATE), woodType, creativeTab);
     }
 
-    public static final Supplier<FenceGateBlock> create(ModRegister register, String name, Block sourceBlock) {
+    public static final BlockDefinition<FenceGateBlock> create(ModRegister register, String name, Block sourceBlock) {
         return create(register, name, Properties.ofFullCopy(sourceBlock), WoodType.OAK);
     }
 
-    public static final Supplier<FenceGateBlock> create(ModRegister register, String name, Block sourceBlock, ResourceKey<CreativeModeTab> creativeTab) {
+    public static final BlockDefinition<FenceGateBlock> create(ModRegister register, String name, Block sourceBlock, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.ofFullCopy(sourceBlock), WoodType.OAK, creativeTab);
     }
 
-    public static final Supplier<FenceGateBlock> create(ModRegister register, String name, Block sourceBlock, WoodType woodType) {
+    public static final BlockDefinition<FenceGateBlock> create(ModRegister register, String name, Block sourceBlock, WoodType woodType) {
         return create(register, name, Properties.ofFullCopy(sourceBlock), woodType);
     }
 
-    public static final Supplier<FenceGateBlock> create(ModRegister register, String name, Block sourceBlock, WoodType woodType, ResourceKey<CreativeModeTab> creativeTab) {
+    public static final BlockDefinition<FenceGateBlock> create(ModRegister register, String name, Block sourceBlock, WoodType woodType, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.ofFullCopy(sourceBlock), woodType, creativeTab);
     }
 
-    public static final Supplier<FenceGateBlock> create(ModRegister register, String name, Properties properties, WoodType woodType) {
-        return register.blockRegistry.register(name, () -> new FenceGateBlock(woodType, properties));
+    public static final BlockDefinition<FenceGateBlock> create(ModRegister register, String name, Properties properties, WoodType woodType) {
+        return register.blockRegistry.register(name, BlockDefinition.of(() -> new FenceGateBlock(woodType, properties)));
     }
 
-    public static final Supplier<FenceGateBlock> create(ModRegister register, String name, Properties properties, WoodType woodType, ResourceKey<CreativeModeTab> creativeTab) {
-        return register.blockRegistry.register(name, () -> new FenceGateBlock(woodType, properties), creativeTab);
+    public static final BlockDefinition<FenceGateBlock> create(ModRegister register, String name, Properties properties, WoodType woodType, ResourceKey<CreativeModeTab> creativeTab) {
+        return register.blockRegistry.register(name, BlockDefinition.of(() -> new FenceGateBlock(woodType, properties)), creativeTab);
     }
 
     private FenceGates() {

@@ -1,5 +1,6 @@
 package com.github.syren_dev_tech.scylla.common.husbandry.types;
 
+import java.util.function.Supplier;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.animal.Animal;
 
@@ -35,7 +36,7 @@ public class WaterEggData<T extends Animal> extends EggData<T> {
         this.hitboxWidth = hitboxWidth;
     }
 
-    public WaterEggData(EntityType<T> entityType) {
+    public WaterEggData(Supplier<EntityType<T>> entityType) {
         super(entityType);
     }
 }

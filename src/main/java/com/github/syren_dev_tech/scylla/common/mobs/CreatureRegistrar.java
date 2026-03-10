@@ -26,6 +26,14 @@ public class CreatureRegistrar<T extends CustomCreature> {
         return entityType;
     }
 
+    public Supplier<AttributeSupplier.Builder> getAttributes() {
+        return attributes;
+    }
+
+    public CreatureBuilder<T> getBuilder() {
+        return builder;
+    }
+
     public void registerAttributes(IMobRegistrar<EntityType<? extends LivingEntity>> registrar) {
         ScyllaCommon.LOGGER.info("Registering attributes for entity: {}", this.builder.getName());
 

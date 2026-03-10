@@ -1,5 +1,6 @@
 package com.github.syren_dev_tech.scylla.common.husbandry.types;
 
+import java.util.function.Supplier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EntityType;
@@ -35,7 +36,7 @@ public class SmallEggData<T extends Animal> extends EggData<T> {
         this.randHatchChance = randHatchChance;
     }
 
-    public SmallEggData(EntityType<T> entityType) {
+    public SmallEggData(Supplier<EntityType<T>> entityType) {
         super(entityType);
     }
 }

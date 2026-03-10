@@ -121,13 +121,13 @@ public class CreatureBuilder<T extends CustomCreature> {
         return rideable;
     }
 
-    public Supplier<EntityType<T>> register() {
+    public CreatureRegistrar<T> register() {
         var registry = this.register.mobRegistry.register(this);
 
         var registrar = new CreatureRegistrar<T>(this, registry, this::createAttributes);
         this.register.mobRegistry.entities.put(this.name, registrar);
 
-        return registry;
+        return registrar;
     }
 
     public Animator<T> addAnimator(String name, Function<CreatureState<T>, Tuple<String, Boolean>> handler) {

@@ -1,7 +1,9 @@
 package com.github.syren_dev_tech.scylla.common.husbandry.types;
 
+import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
+import com.github.syren_dev_tech.scylla.registry.definitions.BlockDefinition;
 import com.github.syren_dev_tech.scylla.utilities.files.ResourcePath;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
@@ -16,18 +18,37 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 public class EggData<T extends Mob> {
 
     private final Supplier<EntityType<T>> entityType;
+    private Set<BlockDefinition<?>> nestingBlocks = Set.of();
+
     private SoundEvent hatchSound;
     private SoundEvent crackSound;
+
     private int maxHatchLevel = 2;
     private IntegerProperty hatch = IntegerProperty.create("hatch", 0, maxHatchLevel);
+
     private int regularHatchTimeTicks = 24000;
     private int boostedHatchTimeTicks = 12000;
     private int randomHatchOffsetTicks = 300;
+
+    private double minTimeOfDay = 0.65D;
+    private double maxTimeOfDay = 0.69D;
+    private int randHatchChance = 500;
+
     private VoxelShape shape = Block.box(1.0F, 0.0F, 2.0F, 15.0F, 16.0F, 14.0F);
+
     private TagKey<Block> boost;
 
     public EggData(Supplier<EntityType<T>> entityType) {
         this.entityType = entityType;
+    }
+
+    public EggData<T> addNestingBlock(BlockDefinition<?> block) {
+        this.nestingBlocks.add(block);
+        return this;
+    }
+
+    public boolean isNestingBlock(Block block) {
+        return this.nestingBlocks.stream().anyMatch(blockDef -> blockDef.registry.get().equals(block));
     }
 
     public TagKey<Block> getBoost() {
@@ -114,6 +135,29 @@ public class EggData<T extends Mob> {
 
     public EntityType<T> getEntityType() {
         return entityType.get();
+    }
+
+    public double getMinTimeOfDay() {
+        return minTimeOfDay;
+    }
+
+    public double getMaxTimeOfDay() {
+        return maxTimeOfDay;
+    }
+
+    public int getRandHatchChance() {
+        return randHatchChance;
+    }
+
+    public EggData<T> setRandHatchChance(int randHatchChance) {
+        this.randHatchChance = randHatchChance;
+        return this;
+    }
+
+    public EggData<T> setTimeOfDayRange(double min, double max) {
+        this.minTimeOfDay = min;
+        this.maxTimeOfDay = max;
+        return this;
     }
 
     public T spawn(ServerLevel serverLevel) {

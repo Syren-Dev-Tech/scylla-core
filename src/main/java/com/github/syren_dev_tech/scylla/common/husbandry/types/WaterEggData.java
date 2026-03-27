@@ -2,9 +2,9 @@ package com.github.syren_dev_tech.scylla.common.husbandry.types;
 
 import java.util.function.Supplier;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.Mob;
 
-public class WaterEggData<T extends Animal> extends EggData<T> {
+public class WaterEggData<T extends Mob> extends EggData<T> {
 
     private int minSpawn = 2;
 

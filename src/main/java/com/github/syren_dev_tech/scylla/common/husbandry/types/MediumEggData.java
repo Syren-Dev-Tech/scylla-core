@@ -6,6 +6,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 
 public class MediumEggData<T extends Mob> extends EggData<T> {
+
     public MediumEggData(Supplier<EntityType<T>> entityType) {
         super(entityType);
 

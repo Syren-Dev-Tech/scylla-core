@@ -22,6 +22,8 @@ public class CustomCreature extends PathfinderMob implements GeoEntity { // NOSO
         this.cache = GeckoLibUtil.createInstanceCache(this);
         this.builder = builder;
         this.state = new CreatureState<>(builder);
+
+        this.registerGoalsFromBuilder();
     }
 
     @Override
@@ -53,6 +55,13 @@ public class CustomCreature extends PathfinderMob implements GeoEntity { // NOSO
 
     public CreatureBuilder<CustomCreature> getBuilder() {
         return builder;
+    }
+
+    private void registerGoalsFromBuilder() {
+        builder.getGoals().forEach(goalFunc -> {
+            var goal = goalFunc.apply(this);
+            this.goalSelector.addGoal(goal.getWeight(), goal);
+        });
     }
 
     @Override

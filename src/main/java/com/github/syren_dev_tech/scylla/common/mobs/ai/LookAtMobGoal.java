@@ -6,7 +6,6 @@ import net.minecraft.world.entity.Mob;
 // AI goal that makes the host mob look at another entity, including players
 public class LookAtMobGoal extends AIGoal {
 
-    private Mob self;
     private Entity lookTarget;
     private int ticksSpentLooking;
     private int maxLookingTicks = 40;
@@ -14,8 +13,7 @@ public class LookAtMobGoal extends AIGoal {
     private float chanceToStartLooking = 0.02F;
 
     public LookAtMobGoal(Mob self) {
-        super();
-        this.self = self;
+        super(self);
     }
 
     public LookAtMobGoal(Mob self, float maxSightDistance) {

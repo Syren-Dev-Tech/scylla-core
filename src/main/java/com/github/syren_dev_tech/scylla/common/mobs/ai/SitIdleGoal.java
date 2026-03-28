@@ -4,14 +4,12 @@ import net.minecraft.world.entity.Mob;
 
 public class SitIdleGoal extends AIGoal {
 
-    private final Mob self;
     private boolean bored = false;
     private int boredomTicksMod = 100; // 20 * 5 seconds
     private float chanceToGetBored = 0.1F;
 
     public SitIdleGoal(Mob self) {
-        super();
-        this.self = self;
+        super(self);
     }
 
     @Override

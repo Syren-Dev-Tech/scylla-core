@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
-import java.util.function.Supplier;
+import com.github.syren_dev_tech.scylla.common.mobs.ai.AIGoal;
 import com.github.syren_dev_tech.scylla.common.mobs.client.TextureRenderer;
 import com.github.syren_dev_tech.scylla.common.mobs.creatures.Animator;
 import com.github.syren_dev_tech.scylla.common.mobs.creatures.CreatureState;
@@ -17,7 +17,6 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.level.Level;
 
 public class CreatureBuilder<T extends CustomCreature> {
@@ -25,7 +24,7 @@ public class CreatureBuilder<T extends CustomCreature> {
     private final ModRegister register;
     private final String name;
 
-    private List<Goal> goals = new ArrayList<>();
+    private List<Function<T, AIGoal>> goals = new ArrayList<>();
     private Function<CreatureState<T>, ResourcePath> textures;
     private Function<CreatureState<T>, ResourcePath> masks;
     private TextureRenderer<T> textureRenderer;
@@ -56,12 +55,12 @@ public class CreatureBuilder<T extends CustomCreature> {
         return this;
     }
 
-    public CreatureBuilder<T> withAiGoal(Goal goal) {
+    public CreatureBuilder<T> withAiGoal(Function<T, AIGoal> goal) {
         this.goals.add(goal);
         return this;
     }
 
-    public CreatureBuilder<T> withAiGoals(List<Goal> goals) {
+    public CreatureBuilder<T> withAiGoals(List<Function<T, AIGoal>> goals) {
         this.goals.addAll(goals);
         return this;
     }
@@ -109,7 +108,7 @@ public class CreatureBuilder<T extends CustomCreature> {
         return textureRenderer;
     }
 
-    public List<Goal> getGoals() {
+    public List<Function<T, AIGoal>> getGoals() {
         return goals;
     }
 

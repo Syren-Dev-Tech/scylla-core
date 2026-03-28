@@ -28,11 +28,15 @@ public class CreatureState<T extends CustomCreature> {
     }
 
     public String getCurrentAnimation(String animatorName) {
-        Animator animator = this.builder.getAnimators().get(animatorName);
+        Animator<T> animator = this.builder.getAnimators().get(animatorName);
         if (animator == null) {
             return "";
         }
 
         return animator.getCurrentAnimation();
+    }
+
+    public CreatureBuilder<T> getBuilder() {
+        return builder;
     }
 }

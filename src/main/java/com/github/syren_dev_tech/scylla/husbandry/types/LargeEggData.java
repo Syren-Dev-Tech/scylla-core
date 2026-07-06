@@ -1,0 +1,12 @@
+package com.github.syren_dev_tech.scylla.husbandry.types;
+
+import java.util.function.Supplier;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.animal.Animal;
+
+public class LargeEggData<T extends Animal> extends EggData<T> {
+
+    public LargeEggData(Supplier<EntityType<T>> entityType) {
+        super(entityType);
+    }
+}

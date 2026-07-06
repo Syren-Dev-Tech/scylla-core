@@ -1,0 +1,59 @@
+package com.github.syren_dev_tech.scylla.blocks.redstone;
+
+import com.github.syren_dev_tech.scylla.registry.ModRegister;
+import com.github.syren_dev_tech.scylla.registry.definitions.BlockDefinition;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.WeightedPressurePlateBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
+import net.minecraft.world.level.block.state.properties.BlockSetType;
+
+public class WeightedPressurePlates {
+    public static final int LIGHT_WEIGHT = 15;
+    public static final int HEAVY_WEIGHT = 150;
+
+    public static BlockDefinition<WeightedPressurePlateBlock> create(ModRegister register, String name) {
+        return create(register, name, Properties.ofFullCopy(Blocks.LIGHT_WEIGHTED_PRESSURE_PLATE), LIGHT_WEIGHT);
+    }
+
+    public static BlockDefinition<WeightedPressurePlateBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
+        return create(register, name, Properties.ofFullCopy(Blocks.LIGHT_WEIGHTED_PRESSURE_PLATE), LIGHT_WEIGHT, creativeTab);
+    }
+
+    public static BlockDefinition<WeightedPressurePlateBlock> create(ModRegister register, String name, Properties properties) {
+        return create(register, name, properties, LIGHT_WEIGHT);
+    }
+
+    public static BlockDefinition<WeightedPressurePlateBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
+        return create(register, name, properties, LIGHT_WEIGHT, creativeTab);
+    }
+
+    public static BlockDefinition<WeightedPressurePlateBlock> create(ModRegister register, String name, Integer maxWeight) {
+        return create(register, name, Properties.ofFullCopy(Blocks.LIGHT_WEIGHTED_PRESSURE_PLATE), maxWeight);
+    }
+
+    public static BlockDefinition<WeightedPressurePlateBlock> create(ModRegister register, String name, Integer maxWeight, ResourceKey<CreativeModeTab> creativeTab) {
+        return create(register, name, Properties.ofFullCopy(Blocks.LIGHT_WEIGHTED_PRESSURE_PLATE), maxWeight, creativeTab);
+    }
+
+    public static BlockDefinition<WeightedPressurePlateBlock> create(ModRegister register, String name, Properties properties, Integer maxWeight) {
+        return create(register, name, properties, maxWeight, BlockSetType.IRON);
+    }
+
+    public static BlockDefinition<WeightedPressurePlateBlock> create(ModRegister register, String name, Properties properties, Integer maxWeight, ResourceKey<CreativeModeTab> creativeTab) {
+        return create(register, name, properties, maxWeight, BlockSetType.IRON, creativeTab);
+    }
+
+    public static BlockDefinition<WeightedPressurePlateBlock> create(ModRegister register, String name, Properties properties, Integer maxWeight, BlockSetType blockSetType) {
+        return register.blockRegistry.register(name, BlockDefinition.of(() -> new WeightedPressurePlateBlock(maxWeight, blockSetType, properties)));
+    }
+
+    public static BlockDefinition<WeightedPressurePlateBlock> create(ModRegister register, String name, Properties properties, Integer maxWeight, BlockSetType blockSetType, ResourceKey<CreativeModeTab> creativeTab) {
+        return register.blockRegistry.register(name, BlockDefinition.of(() -> new WeightedPressurePlateBlock(maxWeight, blockSetType, properties)), creativeTab);
+    }
+
+    private WeightedPressurePlates() {
+        // Prevent instantiation
+    }
+}

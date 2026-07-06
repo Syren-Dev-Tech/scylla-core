@@ -1,0 +1,146 @@
+package com.github.syren_dev_tech.scylla.mobs;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import com.github.syren_dev_tech.scylla.mobs.ai.AIGoal;
+import com.github.syren_dev_tech.scylla.mobs.client.TextureRenderer;
+import com.github.syren_dev_tech.scylla.mobs.creatures.CreatureState;
+import com.github.syren_dev_tech.scylla.mobs.creatures.CustomCreature;
+import com.github.syren_dev_tech.scylla.registry.ModRegister;
+import com.github.syren_dev_tech.scylla.utilities.collections.Tuple;
+import com.github.syren_dev_tech.scylla.utilities.files.ResourcePath;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.level.Level;
+
+public class CreatureBuilder<T extends CustomCreature> {
+
+    private final ModRegister register;
+    private final String name;
+
+    private List<Function<T, AIGoal>> goals = new ArrayList<>();
+    private Function<CreatureState<T>, ResourcePath> textures;
+    private Function<CreatureState<T>, ResourcePath> masks;
+    private TextureRenderer<T> textureRenderer;
+    private Map<String, AnimationHandler<T>> animators = new HashMap<>();
+    private CreatureFactory<T> factory;
+    private float shadowSize = 0.5f;
+    private boolean rideable = false;
+
+    public CreatureBuilder(String name, ModRegister register, CreatureFactory<T> factory) {
+        this.name = name;
+        this.register = register;
+        this.factory = factory;
+
+        this.textures = t -> new ResourcePath(register.modId, "textures/entity/" + name + ".png");
+    }
+
+    public ModRegister getRegister() {
+        return register;
+    }
+
+    public CreatureBuilder<T> withTextures(Function<CreatureState<T>, ResourcePath> textures) {
+        this.textures = textures;
+        return this;
+    }
+
+    public CreatureBuilder<T> withMasks(Function<CreatureState<T>, ResourcePath> masks) {
+        this.masks = masks;
+        return this;
+    }
+
+    public CreatureBuilder<T> withAiGoal(Function<T, AIGoal> goal) {
+        this.goals.add(goal);
+        return this;
+    }
+
+    public CreatureBuilder<T> withAiGoals(List<Function<T, AIGoal>> goals) {
+        this.goals.addAll(goals);
+        return this;
+    }
+
+    public CreatureBuilder<T> withShadowSize(float shadowSize) {
+        this.shadowSize = shadowSize;
+        return this;
+    }
+
+    public CreatureBuilder<T> withTextureRenderer(TextureRenderer<T> textureRenderer) {
+        this.textureRenderer = textureRenderer;
+        return this;
+    }
+
+    public CreatureBuilder<T> allowRiding() {
+        this.rideable = true;
+        return this;
+    }
+
+    public AttributeSupplier.Builder createAttributes() {
+        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 20.0).add(Attributes.MOVEMENT_SPEED, 0.25);
+    }
+
+    public CreatureFactory<T> getFactory() {
+        return this.factory;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Function<CreatureState<T>, ResourcePath> getTextures() {
+        return textures;
+    }
+
+    public Function<CreatureState<T>, ResourcePath> getMasks() {
+        return masks;
+    }
+
+    public float getShadowSize() {
+        return shadowSize;
+    }
+
+    public TextureRenderer<T> getTextureRenderer() {
+        return textureRenderer;
+    }
+
+    public List<Function<T, AIGoal>> getGoals() {
+        return goals;
+    }
+
+    public Map<String, AnimationHandler<T>> getAnimators() {
+        return animators;
+    }
+
+    public boolean isRideable() {
+        return rideable;
+    }
+
+    public CreatureRegistrar<T> register() {
+        var registry = this.register.mobRegistry.register(this);
+
+        var registrar = new CreatureRegistrar<T>(this, registry, this::createAttributes);
+        this.register.mobRegistry.entities.put(this.name, registrar);
+
+        return registrar;
+    }
+
+    public CreatureBuilder<T> addAnimator(String name, Function<CreatureState<T>, Tuple<String, Boolean>> handler) {
+        this.animators.put(name, AnimationHandler.fromStateHandler(handler));
+
+        return this;
+    }
+
+    public CreatureBuilder<T> addAnimator(String name, AnimationHandler<T> handler) {
+        this.animators.put(name, handler);
+
+        return this;
+    }
+
+    public interface CreatureFactory<T extends CustomCreature> {
+        T create(EntityType<? extends CustomCreature> type, Level world, CreatureBuilder<T> builder);
+    }
+}

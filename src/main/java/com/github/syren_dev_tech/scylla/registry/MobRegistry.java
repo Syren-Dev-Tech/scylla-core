@@ -4,9 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 import com.github.syren_dev_tech.scylla.ScyllaCommon;
-import com.github.syren_dev_tech.scylla.common.mobs.CreatureBuilder;
-import com.github.syren_dev_tech.scylla.common.mobs.CreatureRegistrar;
-import com.github.syren_dev_tech.scylla.common.mobs.creatures.CustomCreature;
+import com.github.syren_dev_tech.scylla.mobs.CreatureBuilder;
+import com.github.syren_dev_tech.scylla.mobs.CreatureRegistrar;
+import com.github.syren_dev_tech.scylla.mobs.creatures.CustomCreature;
 
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;

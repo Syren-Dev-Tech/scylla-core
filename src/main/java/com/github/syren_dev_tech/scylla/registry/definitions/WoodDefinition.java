@@ -1,18 +1,18 @@
 package com.github.syren_dev_tech.scylla.registry.definitions;
 
-import com.github.syren_dev_tech.scylla.common.blocks.FenceBlocks;
-import com.github.syren_dev_tech.scylla.common.blocks.ModBlocks;
-import com.github.syren_dev_tech.scylla.common.blocks.PillarBlocks;
-import com.github.syren_dev_tech.scylla.common.blocks.Slabs;
-import com.github.syren_dev_tech.scylla.common.blocks.Stairs;
-import com.github.syren_dev_tech.scylla.common.blocks.decoration.signs.HangingSigns;
-import com.github.syren_dev_tech.scylla.common.blocks.decoration.signs.Signs;
-import com.github.syren_dev_tech.scylla.common.blocks.redstone.Buttons;
-import com.github.syren_dev_tech.scylla.common.blocks.redstone.Doors;
-import com.github.syren_dev_tech.scylla.common.blocks.redstone.FenceGates;
-import com.github.syren_dev_tech.scylla.common.blocks.redstone.PressurePlates;
-import com.github.syren_dev_tech.scylla.common.blocks.redstone.TrapDoors;
-import com.github.syren_dev_tech.scylla.common.blocks.redstone.types.ButtonBase;
+import com.github.syren_dev_tech.scylla.blocks.FenceBlocks;
+import com.github.syren_dev_tech.scylla.blocks.ModBlocks;
+import com.github.syren_dev_tech.scylla.blocks.PillarBlocks;
+import com.github.syren_dev_tech.scylla.blocks.Slabs;
+import com.github.syren_dev_tech.scylla.blocks.Stairs;
+import com.github.syren_dev_tech.scylla.blocks.decoration.signs.HangingSigns;
+import com.github.syren_dev_tech.scylla.blocks.decoration.signs.Signs;
+import com.github.syren_dev_tech.scylla.blocks.redstone.Buttons;
+import com.github.syren_dev_tech.scylla.blocks.redstone.Doors;
+import com.github.syren_dev_tech.scylla.blocks.redstone.FenceGates;
+import com.github.syren_dev_tech.scylla.blocks.redstone.PressurePlates;
+import com.github.syren_dev_tech.scylla.blocks.redstone.TrapDoors;
+import com.github.syren_dev_tech.scylla.blocks.redstone.types.ButtonBase;
 import com.github.syren_dev_tech.scylla.registry.ModRegister;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.vehicle.Boat;
@@ -72,6 +72,37 @@ public class WoodDefinition {
         this.strippedWood = ModBlocks.create(register, "stripped_" + name + "_wood", creativeTab);
 
         var plankProperties = Properties.ofFullCopy(Blocks.OAK_PLANKS);
+        this.planks = ModBlocks.create(register, name + "_planks", plankProperties, creativeTab);
+        this.stairs = Stairs.create(register, name + "_stairs", plankProperties, planks, creativeTab);
+        this.slab = Slabs.create(register, name + "_slab", plankProperties, creativeTab);
+        this.fence = FenceBlocks.create(register, name + "_fence", plankProperties, creativeTab);
+        this.fenceGate = FenceGates.create(register, name + "_fence_gate", plankProperties, woodType, creativeTab);
+        this.door = Doors.create(register, name + "_door", plankProperties, blockSetType, creativeTab);
+        this.trapdoor = TrapDoors.create(register, name + "_trapdoor", plankProperties, blockSetType, creativeTab);
+
+        this.pressurePlate = PressurePlates.create(register, name + "_pressure_plate", plankProperties, blockSetType, creativeTab);
+        this.button = Buttons.create(register, name + "_button", plankProperties, creativeTab);
+
+        this.sign = Signs.create(register, name, plankProperties, creativeTab);
+        this.hangingSign = HangingSigns.create(register, name, plankProperties, creativeTab);
+
+        this.boat = register.itemRegistry.register(name + "_boat", () -> new BoatItem(false, Boat.Type.OAK, new Item.Properties().stacksTo(1)), creativeTab);
+        this.chestBoat = register.itemRegistry.register(name + "_chest_boat", () -> new BoatItem(true, Boat.Type.OAK, new Item.Properties().stacksTo(1)), creativeTab);
+    }
+
+    public WoodDefinition(ModRegister register, String name, Properties plankProperties, ResourceKey<CreativeModeTab> creativeTab) {
+        this.name = name;
+
+        BlockSetType blockSetType = new BlockSetType(name);
+        BlockSetType.register(blockSetType);
+        WoodType woodType = new WoodType(name, blockSetType);
+        WoodType.register(woodType);
+
+        this.log = PillarBlocks.create(register, name + "_log", creativeTab);
+        this.strippedLog = PillarBlocks.create(register, "stripped_" + name + "_log", creativeTab);
+        this.wood = ModBlocks.create(register, name + "_wood", creativeTab);
+        this.strippedWood = ModBlocks.create(register, "stripped_" + name + "_wood", creativeTab);
+
         this.planks = ModBlocks.create(register, name + "_planks", plankProperties, creativeTab);
         this.stairs = Stairs.create(register, name + "_stairs", plankProperties, planks, creativeTab);
         this.slab = Slabs.create(register, name + "_slab", plankProperties, creativeTab);

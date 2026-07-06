@@ -1,12 +1,12 @@
 package com.github.syren_dev_tech.scylla.registry.definitions;
 
-import com.github.syren_dev_tech.scylla.common.blocks.ModBlocks;
-import com.github.syren_dev_tech.scylla.common.blocks.Slabs;
-import com.github.syren_dev_tech.scylla.common.blocks.Stairs;
-import com.github.syren_dev_tech.scylla.common.blocks.WallBlocks;
-import com.github.syren_dev_tech.scylla.common.blocks.redstone.Buttons;
-import com.github.syren_dev_tech.scylla.common.blocks.redstone.PressurePlates;
-import com.github.syren_dev_tech.scylla.common.blocks.redstone.types.ButtonBase;
+import com.github.syren_dev_tech.scylla.blocks.ModBlocks;
+import com.github.syren_dev_tech.scylla.blocks.Slabs;
+import com.github.syren_dev_tech.scylla.blocks.Stairs;
+import com.github.syren_dev_tech.scylla.blocks.WallBlocks;
+import com.github.syren_dev_tech.scylla.blocks.redstone.Buttons;
+import com.github.syren_dev_tech.scylla.blocks.redstone.PressurePlates;
+import com.github.syren_dev_tech.scylla.blocks.redstone.types.ButtonBase;
 import com.github.syren_dev_tech.scylla.registry.ModRegister;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;

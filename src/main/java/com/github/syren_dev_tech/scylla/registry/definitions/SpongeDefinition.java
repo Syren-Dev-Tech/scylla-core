@@ -1,6 +1,6 @@
 package com.github.syren_dev_tech.scylla.registry.definitions;
 
-import com.github.syren_dev_tech.scylla.common.blocks.plants.sponges.types.Sponge;
+import com.github.syren_dev_tech.scylla.blocks.plants.sponges.types.Sponge;
 import net.minecraft.world.level.block.WetSpongeBlock;
 
 public class SpongeDefinition {

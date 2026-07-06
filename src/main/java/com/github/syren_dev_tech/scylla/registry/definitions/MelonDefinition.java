@@ -1,6 +1,6 @@
 package com.github.syren_dev_tech.scylla.registry.definitions;
 
-import com.github.syren_dev_tech.scylla.common.blocks.plants.melons.types.Melon;
+import com.github.syren_dev_tech.scylla.blocks.plants.melons.types.Melon;
 import com.github.syren_dev_tech.scylla.registry.ModRegister;
 import com.github.syren_dev_tech.scylla.utilities.files.ResourcePath;
 import net.minecraft.core.registries.Registries;

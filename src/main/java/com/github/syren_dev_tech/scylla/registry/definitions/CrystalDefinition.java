@@ -1,13 +1,13 @@
 package com.github.syren_dev_tech.scylla.registry.definitions;
 
-import com.github.syren_dev_tech.scylla.common.blocks.decoration.crystals.CrystalBlocks;
-import com.github.syren_dev_tech.scylla.common.blocks.decoration.crystals.CrystalBudBlocks;
-import com.github.syren_dev_tech.scylla.common.blocks.decoration.crystals.FullCrystals;
-import com.github.syren_dev_tech.scylla.common.blocks.decoration.crystals.LargeCrystals;
-import com.github.syren_dev_tech.scylla.common.blocks.decoration.crystals.MediumCrystals;
-import com.github.syren_dev_tech.scylla.common.blocks.decoration.crystals.SmallCrystals;
-import com.github.syren_dev_tech.scylla.common.blocks.decoration.crystals.types.BuddingCrystal;
-import com.github.syren_dev_tech.scylla.common.blocks.decoration.crystals.types.BuddingCrystalProperties;
+import com.github.syren_dev_tech.scylla.blocks.decoration.crystals.CrystalBlocks;
+import com.github.syren_dev_tech.scylla.blocks.decoration.crystals.CrystalBudBlocks;
+import com.github.syren_dev_tech.scylla.blocks.decoration.crystals.FullCrystals;
+import com.github.syren_dev_tech.scylla.blocks.decoration.crystals.LargeCrystals;
+import com.github.syren_dev_tech.scylla.blocks.decoration.crystals.MediumCrystals;
+import com.github.syren_dev_tech.scylla.blocks.decoration.crystals.SmallCrystals;
+import com.github.syren_dev_tech.scylla.blocks.decoration.crystals.types.BuddingCrystal;
+import com.github.syren_dev_tech.scylla.blocks.decoration.crystals.types.BuddingCrystalProperties;
 import com.github.syren_dev_tech.scylla.registry.ModRegister;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;

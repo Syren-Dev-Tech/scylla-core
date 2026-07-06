@@ -1,7 +1,7 @@
 package com.github.syren_dev_tech.scylla.registry.definitions;
 
-import com.github.syren_dev_tech.scylla.common.blocks.plants.gourds.types.CarvedGourd;
-import com.github.syren_dev_tech.scylla.common.blocks.plants.gourds.types.EquipableCarvedGourd;
+import com.github.syren_dev_tech.scylla.blocks.plants.gourds.types.CarvedGourd;
+import com.github.syren_dev_tech.scylla.blocks.plants.gourds.types.EquipableCarvedGourd;
 
 public class GourdSetDefinition {
     public final String name;

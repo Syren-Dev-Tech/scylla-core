@@ -1,0 +1,28 @@
+package com.github.syren_dev_tech.scylla.blocks.plants.gourds;
+
+import com.github.syren_dev_tech.scylla.blocks.plants.gourds.types.Gourd;
+import com.github.syren_dev_tech.scylla.registry.ModRegister;
+import com.github.syren_dev_tech.scylla.registry.definitions.BlockDefinition;
+import com.github.syren_dev_tech.scylla.registry.definitions.GourdDefinition;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
+
+public class Gourds {
+
+    public static final GourdDefinition create(ModRegister register, String name, Properties properties) {
+        var gourd = register.blockRegistry.register(name, BlockDefinition.of(() -> new Gourd(properties)));
+
+        return new GourdDefinition(register, name, gourd);
+    }
+
+    public static final GourdDefinition create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
+        var gourd = register.blockRegistry.register(name, BlockDefinition.of(() -> new Gourd(properties)), creativeTab);
+
+        return new GourdDefinition(register, name, gourd);
+    }
+
+    private Gourds() {
+        // Prevent instantiation
+    }
+}

@@ -13,7 +13,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.BrushableBlock;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BrushableBlockEntity;
@@ -24,7 +23,7 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 
 public class CustomBrushableBlock extends BaseEntityBlock {
 
-    public static final MapCodec<BrushableBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(BuiltInRegistries.BLOCK.byNameCodec().fieldOf("turns_into").forGetter(BrushableBlock::getTurnsInto), BuiltInRegistries.SOUND_EVENT.byNameCodec().fieldOf("brush_sound").forGetter(BrushableBlock::getBrushSound), BuiltInRegistries.SOUND_EVENT.byNameCodec().fieldOf("brush_comleted_sound").forGetter(BrushableBlock::getBrushCompletedSound), propertiesCodec()).apply(instance, BrushableBlock::new));
+    public static final MapCodec<CustomBrushableBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(BuiltInRegistries.BLOCK.byNameCodec().fieldOf("turns_into").forGetter(CustomBrushableBlock::getTurnsInto), BuiltInRegistries.SOUND_EVENT.byNameCodec().fieldOf("brush_sound").forGetter(CustomBrushableBlock::getBrushSound), BuiltInRegistries.SOUND_EVENT.byNameCodec().fieldOf("brush_comleted_sound").forGetter(CustomBrushableBlock::getBrushCompletedSound), propertiesCodec()).apply(instance, CustomBrushableBlock::new));
 
     private static final IntegerProperty DUSTED = BlockStateProperties.DUSTED;
     public static final int TICK_DELAY = 2;
@@ -32,12 +31,12 @@ public class CustomBrushableBlock extends BaseEntityBlock {
     private final SoundEvent brushSound;
     private final SoundEvent brushCompletedSound;
 
-    public CustomBrushableBlock(Block turnsInto, Properties properties, SoundEvent brushSound, SoundEvent brushCompletedSound) {
+    public CustomBrushableBlock(Block turnsInto, SoundEvent brushSound, SoundEvent brushCompletedSound, Properties properties) {
         super(properties);
         this.turnsInto = turnsInto;
         this.brushSound = brushSound;
         this.brushCompletedSound = brushCompletedSound;
-        this.registerDefaultState(this.stateDefinition.any().setValue(DUSTED, Integer.valueOf(0)));
+        this.registerDefaultState((this.stateDefinition.any()).setValue(DUSTED, 0));
     }
 
     @Override
@@ -46,24 +45,24 @@ public class CustomBrushableBlock extends BaseEntityBlock {
     }
 
     @Override
-    public RenderShape getRenderShape(BlockState blockState) { // NOSONAR - Ignore deprecation warning
+    public RenderShape getRenderShape(BlockState blockState) {
         return RenderShape.MODEL;
     }
 
     @Override
-    public void onPlace(BlockState unused1, Level level, BlockPos blockPos, BlockState unused2, boolean unused3) { // NOSONAR - Ignore deprecation warning
+    public void onPlace(BlockState unused1, Level level, BlockPos blockPos, BlockState unused2, boolean unused3) {
         level.scheduleTick(blockPos, this, 2);
     }
 
     @Override
-    public BlockState updateShape(BlockState blockState, Direction direction, BlockState nextBlockState, LevelAccessor levelAccessor, BlockPos blockPos, BlockPos nextBlockPos) { // NOSONAR - Ignore deprecation warning
+    public BlockState updateShape(BlockState blockState, Direction direction, BlockState nextBlockState, LevelAccessor levelAccessor, BlockPos blockPos, BlockPos nextBlockPos) {
         levelAccessor.scheduleTick(blockPos, this, 2);
 
         return blockState;
     }
 
     @Override
-    public void tick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource) { // NOSONAR - Ignore deprecation warning
+    public void tick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource) {
         BlockEntity blockentity = serverLevel.getBlockEntity(blockPos);
         if (blockentity instanceof BrushableBlockEntity brushableblockentity) {
             brushableblockentity.checkReset();

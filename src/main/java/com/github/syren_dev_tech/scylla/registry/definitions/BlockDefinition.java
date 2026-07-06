@@ -6,6 +6,7 @@ import com.github.syren_dev_tech.scylla.utilities.files.ResourcePath;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
 public class BlockDefinition<T extends Block> {
     public final String name;
@@ -24,6 +25,10 @@ public class BlockDefinition<T extends Block> {
 
         this.name = name;
         this.resourceKey = ResourceKey.create(Registries.BLOCK, new ResourcePath(modRegister.modId, name).get());
+    }
+
+    public Properties properties() {
+        return Properties.ofFullCopy(registry.get());
     }
 
     public static <T extends Block> BlockDefinition<T> of(Supplier<T> block) {

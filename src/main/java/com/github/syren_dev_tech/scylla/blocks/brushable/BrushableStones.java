@@ -8,17 +8,16 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
 public class BrushableStones {
 
     public static BlockDefinition<CustomBrushableBlock> create(ModRegister register, String name, BlockDefinition<Block> dustedBlock) {
-        return create(register, name, Properties.ofFullCopy(Blocks.STONE), dustedBlock);
+        return create(register, name, dustedBlock.properties(), dustedBlock);
     }
 
     public static BlockDefinition<CustomBrushableBlock> create(ModRegister register, String name, BlockDefinition<Block> dustedBlock, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.ofFullCopy(Blocks.STONE), dustedBlock, SoundEvents.BRUSH_SAND, SoundEvents.BRUSH_SAND_COMPLETED, creativeTab);
+        return create(register, name, dustedBlock.properties(), dustedBlock, SoundEvents.BRUSH_SAND, SoundEvents.BRUSH_SAND_COMPLETED, creativeTab);
     }
 
     public static BlockDefinition<CustomBrushableBlock> create(ModRegister register, String name, Properties properties, BlockDefinition<Block> dustedBlock) {
@@ -30,11 +29,11 @@ public class BrushableStones {
     }
 
     public static BlockDefinition<CustomBrushableBlock> create(ModRegister register, String name, Properties properties, BlockDefinition<Block> dustedBlock, SoundEvent dustingSound, SoundEvent dustingCompletedSound) {
-        return register.blockRegistry.register(name, BlockDefinition.of(() -> new CustomBrushableBlock(dustedBlock.registry.get(), properties, dustingSound, dustingCompletedSound)));
+        return register.blockRegistry.register(name, BlockDefinition.of(() -> new CustomBrushableBlock(dustedBlock.registry.get(), dustingSound, dustingCompletedSound, properties)));
     }
 
     public static BlockDefinition<CustomBrushableBlock> create(ModRegister register, String name, Properties properties, BlockDefinition<Block> dustedBlock, SoundEvent dustingSound, SoundEvent dustingCompletedSound, ResourceKey<CreativeModeTab> creativeTab) {
-        return register.blockRegistry.register(name, BlockDefinition.of(() -> new CustomBrushableBlock(dustedBlock.registry.get(), properties, dustingSound, dustingCompletedSound)), creativeTab);
+        return register.blockRegistry.register(name, BlockDefinition.of(() -> new CustomBrushableBlock(dustedBlock.registry.get(), dustingSound, dustingCompletedSound, properties)), creativeTab);
     }
 
     private BrushableStones() {

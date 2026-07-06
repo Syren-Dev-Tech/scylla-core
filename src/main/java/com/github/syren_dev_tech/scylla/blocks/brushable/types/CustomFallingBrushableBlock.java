@@ -17,11 +17,11 @@ import net.minecraft.world.phys.Vec3;
 
 public class CustomFallingBrushableBlock extends CustomBrushableBlock implements Fallable {
     public CustomFallingBrushableBlock(Block turnsInto, Properties properties, SoundEvent brushSound, SoundEvent brushCompletedStone) {
-        super(turnsInto, properties, brushSound, brushCompletedStone);
+        super(turnsInto, brushSound, brushCompletedStone, properties);
     }
 
     @Override
-    public void tick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource) { // NOSONAR - Ignore deprecation warning
+    public void tick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource) {
         super.tick(blockState, serverLevel, blockPos, randomSource);
 
         if (FallingBlock.isFree(serverLevel.getBlockState(blockPos.below())) && blockPos.getY() >= serverLevel.getMinBuildHeight()) {

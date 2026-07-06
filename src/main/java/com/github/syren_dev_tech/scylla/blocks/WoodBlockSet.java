@@ -13,12 +13,12 @@ public class WoodBlockSet {
         return new WoodDefinition(register, name, creativeTab);
     }
 
-    public static final WoodDefinition create(ModRegister register, String name, Block sourceBlock, ResourceKey<CreativeModeTab> creativeTab) {
-        return new WoodDefinition(register, name, Properties.ofFullCopy(sourceBlock), creativeTab);
+    public static final WoodDefinition create(ModRegister register, String name, Block sourceLog, Block sourcePlank, ResourceKey<CreativeModeTab> creativeTab) {
+        return new WoodDefinition(register, name, Properties.ofFullCopy(sourceLog), Properties.ofFullCopy(sourcePlank), creativeTab);
     }
 
-    public static final WoodDefinition create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
-        return new WoodDefinition(register, name, properties, creativeTab);
+    public static final WoodDefinition create(ModRegister register, String name, Properties logProperties, Properties plankProperties, ResourceKey<CreativeModeTab> creativeTab) {
+        return new WoodDefinition(register, name, logProperties, plankProperties, creativeTab);
     }
 
     private WoodBlockSet() {

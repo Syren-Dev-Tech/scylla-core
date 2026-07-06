@@ -16,11 +16,7 @@ public class SitIdleGoal extends AIGoal {
 
     @Override
     public boolean canUse() {
-        if (this.self.isSwimming()) {
-            return false;
-        }
-
-        return true;
+        return !this.self.isSwimming();
     }
 
     @Override
@@ -29,11 +25,7 @@ public class SitIdleGoal extends AIGoal {
             return false;
         }
 
-        if (this.self.isSwimming()) {
-            return false;
-        }
-
-        return true;
+        return !this.self.isSwimming();
     }
 
     @Override
@@ -44,16 +36,15 @@ public class SitIdleGoal extends AIGoal {
         this.bored = false;
 
         // If this is a custom creature with animators, force idle animations from the builder
-        if (this.self instanceof CustomCreature) {
-            CustomCreature creature = (CustomCreature) this.self;
+        if (this.self instanceof CustomCreature creature) {
             creature.clearAllRequestedAnimations();
 
             var animators = creature.getState().getBuilder().getAnimators();
             animators.forEach((name, handler) -> {
                 var res = handler.apply(null, creature.getState());
-                if (res != null && res.x != null && !res.x.isEmpty()) {
+                if (res != null && res.animation() != null && !res.animation().isEmpty()) {
                     // Force the animator to play the chosen animation in loop (idle)
-                    creature.requestAnimation(name, res.x, true);
+                    creature.requestAnimation(name, res.animation(), true);
                 }
             });
         }
@@ -63,8 +54,8 @@ public class SitIdleGoal extends AIGoal {
     public void stop() {
         ScyllaCommon.LOGGER.debug("Stopping SitIdleGoal for {}", this.self.getName().getString());
 
-        if (this.self instanceof CustomCreature) {
-            ((CustomCreature) this.self).clearAllRequestedAnimations();
+        if (this.self instanceof CustomCreature creature) {
+            creature.clearAllRequestedAnimations();
         }
 
     }

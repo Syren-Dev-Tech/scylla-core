@@ -1,7 +1,6 @@
 package com.github.syren_dev_tech.scylla.mobs.creatures;
 
 import com.github.syren_dev_tech.scylla.mobs.AnimationHandler;
-import com.github.syren_dev_tech.scylla.utilities.collections.Tuple;
 import software.bernie.geckolib.animation.AnimationState;
 import software.bernie.geckolib.animation.PlayState;
 import software.bernie.geckolib.animation.RawAnimation;
@@ -21,22 +20,22 @@ public class Animator<T extends CustomCreature> {
 
         // First check for any forced animation requests from AI/state
         var forced = entity.getState().getForcedAnimation(this.name);
-        Tuple<String, Boolean> result = null;
+        AnimationDefinition result = null;
         if (forced != null) {
             result = forced;
         } else {
             result = this.handler.apply(event, entity.getState());
         }
 
-        if (result == null || result.x == null || result.x.isEmpty() || Boolean.FALSE.equals(result.y))
+        if (result == null || result.animation() == null || result.animation().isEmpty() || !result.loop())
             return PlayState.STOP;
 
-        this.currentAnimation = result.x;
+        this.currentAnimation = result.animation();
 
-        return event.setAndContinue(RawAnimation.begin().thenLoop(result.x));
+        return event.setAndContinue(RawAnimation.begin().thenLoop(result.animation()));
     }
 
-    public Tuple<String, Boolean> getAnimationForState(CreatureState<T> state) {
+    public AnimationDefinition getAnimationForState(CreatureState<T> state) {
         return this.handler.apply(null, state);
     }
 

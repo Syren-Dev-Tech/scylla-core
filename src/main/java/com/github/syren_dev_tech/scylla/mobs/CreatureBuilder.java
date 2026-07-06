@@ -6,11 +6,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import com.github.syren_dev_tech.scylla.mobs.ai.AIGoal;
+import com.github.syren_dev_tech.scylla.mobs.ai.AnimatedGoal;
 import com.github.syren_dev_tech.scylla.mobs.client.TextureRenderer;
+import com.github.syren_dev_tech.scylla.mobs.creatures.AnimationDefinition;
 import com.github.syren_dev_tech.scylla.mobs.creatures.CreatureState;
 import com.github.syren_dev_tech.scylla.mobs.creatures.CustomCreature;
 import com.github.syren_dev_tech.scylla.registry.ModRegister;
-import com.github.syren_dev_tech.scylla.utilities.collections.Tuple;
 import com.github.syren_dev_tech.scylla.utilities.files.ResourcePath;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
@@ -59,8 +60,29 @@ public class CreatureBuilder<T extends CustomCreature> {
         return this;
     }
 
+    public CreatureBuilder<T> withAiGoal(Function<T, AIGoal> goal, String animatorName, String movingAnimation, String idleAnimation) {
+        return this.withAnimatedAiGoal(goal, animatorName, movingAnimation, idleAnimation);
+    }
+
     public CreatureBuilder<T> withAiGoals(List<Function<T, AIGoal>> goals) {
         this.goals.addAll(goals);
+        return this;
+    }
+
+    public CreatureBuilder<T> withAiGoals(List<Function<T, AIGoal>> goals, String animatorName, String movingAnimation, String idleAnimation) {
+        return this.withAnimatedAiGoals(goals, animatorName, movingAnimation, idleAnimation);
+    }
+
+    public CreatureBuilder<T> withAnimatedAiGoal(Function<T, AIGoal> goal, String animatorName, String movingAnimation, String idleAnimation) {
+        this.goals.add(entity -> new AnimatedGoal<>(entity, goal.apply(entity)).withAnimation(animatorName, movingAnimation, idleAnimation));
+        return this;
+    }
+
+    public CreatureBuilder<T> withAnimatedAiGoals(List<Function<T, AIGoal>> goals, String animatorName, String movingAnimation, String idleAnimation) {
+        for (Function<T, AIGoal> goal : goals) {
+            this.goals.add(entity -> new AnimatedGoal<>(entity, goal.apply(entity)).withAnimation(animatorName, movingAnimation, idleAnimation));
+        }
+
         return this;
     }
 
@@ -128,7 +150,7 @@ public class CreatureBuilder<T extends CustomCreature> {
         return registrar;
     }
 
-    public CreatureBuilder<T> addAnimator(String name, Function<CreatureState<T>, Tuple<String, Boolean>> handler) {
+    public CreatureBuilder<T> addAnimator(String name, Function<CreatureState<T>, AnimationDefinition> handler) {
         this.animators.put(name, AnimationHandler.fromStateHandler(handler));
 
         return this;

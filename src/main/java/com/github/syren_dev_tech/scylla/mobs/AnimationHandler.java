@@ -1,8 +1,8 @@
 package com.github.syren_dev_tech.scylla.mobs;
 
-import com.github.syren_dev_tech.scylla.mobs.creatures.CreatureState;
 import com.github.syren_dev_tech.scylla.mobs.creatures.AnimationContext;
-import com.github.syren_dev_tech.scylla.utilities.collections.Tuple;
+import com.github.syren_dev_tech.scylla.mobs.creatures.AnimationDefinition;
+import com.github.syren_dev_tech.scylla.mobs.creatures.CreatureState;
 import software.bernie.geckolib.animation.AnimationState;
 
 /**
@@ -10,13 +10,13 @@ import software.bernie.geckolib.animation.AnimationState;
  */
 @FunctionalInterface
 public interface AnimationHandler<T extends com.github.syren_dev_tech.scylla.mobs.creatures.CustomCreature> {
-    Tuple<String, Boolean> apply(AnimationState<T> animationState, CreatureState<T> state);
+    AnimationDefinition apply(AnimationState<T> animationState, CreatureState<T> state);
 
-    static <T extends com.github.syren_dev_tech.scylla.mobs.creatures.CustomCreature> AnimationHandler<T> fromStateHandler(java.util.function.Function<CreatureState<T>, Tuple<String, Boolean>> fn) {
+    static <T extends com.github.syren_dev_tech.scylla.mobs.creatures.CustomCreature> AnimationHandler<T> fromStateHandler(java.util.function.Function<CreatureState<T>, AnimationDefinition> fn) {
         return (animationState, state) -> fn.apply(state);
     }
 
-    default Tuple<String, Boolean> apply(AnimationContext<T> ctx) {
+    default AnimationDefinition apply(AnimationContext<T> ctx) {
         return apply(ctx.getAnimationState(), ctx.getCreatureState());
     }
 }

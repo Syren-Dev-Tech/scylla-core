@@ -1,7 +1,6 @@
 package com.github.syren_dev_tech.scylla.mobs.creatures;
 
 import com.github.syren_dev_tech.scylla.mobs.CreatureBuilder;
-import com.github.syren_dev_tech.scylla.utilities.collections.Tuple;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,7 +8,7 @@ public class CreatureState<T extends CustomCreature> {
 
     private final CreatureBuilder<T> builder;
     private int ticksEllapsed = 0;
-    private final Map<String, Tuple<String, Boolean>> forcedAnimations = new HashMap<>();
+    private final Map<String, AnimationDefinition> forcedAnimations = new HashMap<>();
     private final Map<String, Animator<T>> instanceAnimators = new HashMap<>();
 
     public CreatureState(CreatureBuilder<T> builder) {
@@ -53,10 +52,10 @@ public class CreatureState<T extends CustomCreature> {
             return;
         }
 
-        this.forcedAnimations.put(animatorName, new Tuple<>(animation, loop));
+        this.forcedAnimations.put(animatorName, new AnimationDefinition(animation, loop));
     }
 
-    public Tuple<String, Boolean> getForcedAnimation(String animatorName) {
+    public AnimationDefinition getForcedAnimation(String animatorName) {
         return this.forcedAnimations.get(animatorName);
     }
 

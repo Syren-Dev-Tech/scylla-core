@@ -63,6 +63,7 @@ public class LookAtMobGoal extends AIGoal {
 
     @Override
     public void start() {
+        super.start();
         ScyllaCommon.LOGGER.debug("Starting LookAtMobGoal for {} looking at {}", this.self.getName().getString(), this.lookTarget.getName().getString());
 
         this.ticksSpentLooking = 0;
@@ -71,6 +72,7 @@ public class LookAtMobGoal extends AIGoal {
 
     @Override
     public void stop() {
+        super.stop();
         ScyllaCommon.LOGGER.debug("Stopping LookAtMobGoal for {} looking at {}", this.self.getName().getString(), this.lookTarget != null ? this.lookTarget.getName().getString() : "null");
 
         this.lookTarget = null;

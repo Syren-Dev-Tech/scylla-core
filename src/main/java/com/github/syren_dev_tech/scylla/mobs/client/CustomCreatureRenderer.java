@@ -1,6 +1,7 @@
 package com.github.syren_dev_tech.scylla.mobs.client;
 
 import com.github.syren_dev_tech.scylla.mobs.CreatureBuilder;
+import com.github.syren_dev_tech.scylla.mobs.creatures.CreatureState;
 import com.github.syren_dev_tech.scylla.mobs.creatures.CustomCreature;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -24,13 +25,18 @@ public class CustomCreatureRenderer<T extends CustomCreature> extends GeoEntityR
 
         if (builder.getTextureRenderer() != null)
             this.addRenderLayer(builder.getTextureRenderer());
-        if (builder.getMasks() != null)
+        if (!builder.getMaskLayers().isEmpty() || builder.getMasks() != null)
             this.addRenderLayer(new MyColorLayer(this));
     }
 
     @Override
     public ResourceLocation getTextureLocation(T pEntity) {
-        return builder.getTextures().apply(pEntity.getState()).get();
+        return builder.getTextures().apply(getTypedState(pEntity)).get();
+    }
+
+    @SuppressWarnings("unchecked")
+    private CreatureState<T> getTypedState(T animatable) {
+        return (CreatureState<T>) animatable.getState();
     }
 
     public class MyColorLayer extends GeoRenderLayer<T> {
@@ -41,18 +47,16 @@ public class CustomCreatureRenderer<T extends CustomCreature> extends GeoEntityR
 
         @Override
         public void render(PoseStack poseStack, T animatable, BakedGeoModel model, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
-            int red = 0;
-            int green = 255;
-            int blue = 0;
-            int alpha = 255;
+            CreatureState<T> state = getTypedState(animatable);
 
-            var mask = builder.getMasks().apply(animatable.getState());
+            for (var maskLayer : builder.getMaskLayers()) {
+                var mask = maskLayer.getMask().apply(state);
+                var layerRenderType = RenderType.entityCutoutNoCull(mask.get());
+                var layerBuffer = bufferSource.getBuffer(layerRenderType);
+                int rgba = maskLayer.getColor().apply(state);
 
-            var renderType2 = RenderType.entityCutoutNoCull(mask.get());
-            var buffer2 = bufferSource.getBuffer(RenderType.entityCutoutNoCull(mask.get()));
-            var rgb = (red << 24) + (green << 16) + (blue << 8) + (alpha);
-
-            getRenderer().reRender(model, poseStack, bufferSource, animatable, renderType2, buffer2, partialTick, packedLight, packedOverlay, rgb);
+                getRenderer().reRender(model, poseStack, bufferSource, animatable, layerRenderType, layerBuffer, partialTick, packedLight, packedOverlay, rgba);
+            }
         }
     }
 }

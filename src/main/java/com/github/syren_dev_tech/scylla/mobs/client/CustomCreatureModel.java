@@ -1,6 +1,7 @@
 package com.github.syren_dev_tech.scylla.mobs.client;
 
 import com.github.syren_dev_tech.scylla.mobs.CreatureBuilder;
+import com.github.syren_dev_tech.scylla.mobs.creatures.CreatureState;
 import com.github.syren_dev_tech.scylla.mobs.creatures.CustomCreature;
 import com.github.syren_dev_tech.scylla.utilities.files.ResourcePath;
 import net.minecraft.resources.ResourceLocation;
@@ -34,7 +35,7 @@ public class CustomCreatureModel<T extends CustomCreature> extends GeoModel<T> {
 
     @Override
     public ResourceLocation getTextureResource(T animatable) {
-        return this.builder.getTextures().apply(animatable.getState()).get();
+        return this.builder.getTextures().apply((CreatureState<T>) animatable.getState()).get();
     }
 
     @Override

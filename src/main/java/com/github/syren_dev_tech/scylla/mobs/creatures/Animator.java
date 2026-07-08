@@ -17,20 +17,27 @@ public class Animator<T extends CustomCreature> {
 
     public PlayState apply(AnimationState<T> event) {
         T entity = event.getAnimatable();
+        @SuppressWarnings("unchecked")
+        CreatureState<T> state = (CreatureState<T>) entity.getState();
 
         // First check for any forced animation requests from AI/state
-        var forced = entity.getState().getForcedAnimation(this.name);
+        var forced = state.getForcedAnimation(this.name);
         AnimationDefinition result = null;
         if (forced != null) {
             result = forced;
         } else {
-            result = this.handler.apply(event, entity.getState());
+            result = this.handler.apply(event, state);
         }
 
-        if (result == null || result.animation() == null || result.animation().isEmpty() || !result.loop())
+        if (result == null || result.animation() == null || result.animation().isEmpty() || !result.loop()) {
+            this.currentAnimation = "";
             return PlayState.STOP;
+        }
 
-        this.currentAnimation = result.animation();
+        if (!result.animation().equals(this.currentAnimation)) {
+            event.getController().forceAnimationReset();
+            this.currentAnimation = result.animation();
+        }
 
         return event.setAndContinue(RawAnimation.begin().thenLoop(result.animation()));
     }

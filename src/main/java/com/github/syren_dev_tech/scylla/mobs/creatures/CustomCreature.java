@@ -156,7 +156,7 @@ public class CustomCreature extends PathfinderMob implements GeoEntity { // NOSO
                 continue;
             }
 
-            if (encoded.length() > 0) {
+            if (!encoded.isEmpty()) {
                 encoded.append('\n');
             }
 
@@ -174,18 +174,15 @@ public class CustomCreature extends PathfinderMob implements GeoEntity { // NOSO
         }
 
         for (String entry : encoded.split("\\n")) {
-            if (entry.isEmpty()) {
-                continue;
+            if (!entry.isEmpty()) {
+                String[] parts = entry.split("\\t", 3);
+                if (parts.length >= 3 && !parts[0].isEmpty() && !parts[1].isEmpty()) {
+                    animations.put(parts[0], new AnimationDefinition(parts[1], "1".equals(parts[2])));
+                }
             }
-
-            String[] parts = entry.split("\\t", 3);
-            if (parts.length < 3 || parts[0].isEmpty() || parts[1].isEmpty()) {
-                continue;
-            }
-
-            animations.put(parts[0], new AnimationDefinition(parts[1], "1".equals(parts[2])));
         }
 
         return animations;
     }
+
 }

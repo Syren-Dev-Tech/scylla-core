@@ -2,15 +2,16 @@ package com.github.syren_dev_tech.scylla.mobs.creatures;
 
 import com.github.syren_dev_tech.scylla.mobs.CreatureBuilder;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class CreatureState<T extends CustomCreature> {
 
     private final CreatureBuilder<T> builder;
-    private int ticksEllapsed = 0;
     private final Map<String, AnimationDefinition> forcedAnimations = new HashMap<>();
+    private final Map<String, Animator<T>> instanceAnimators = new LinkedHashMap<>();
     private final Map<String, Object> forcedAnimationOwners = new HashMap<>();
-    private final Map<String, Animator<T>> instanceAnimators = new HashMap<>();
+    private int ticksEllapsed = 0;
 
     public CreatureState(CreatureBuilder<T> builder) {
         this.builder = builder;
@@ -28,8 +29,22 @@ public class CreatureState<T extends CustomCreature> {
         this.ticksEllapsed = 0;
     }
 
+    public String getCurrentAnimator() {
+        return this.instanceAnimators.keySet().stream().findFirst().orElse("");
+    }
+
     public String[] getCurrentAnimations() {
         return this.instanceAnimators.values().stream().map(Animator::getCurrentAnimation).toArray(String[]::new);
+    }
+
+    public String getCurrentAnimation() {
+        for (String animation : this.getCurrentAnimations()) {
+            if (animation != null && !animation.isEmpty()) {
+                return animation;
+            }
+        }
+
+        return "";
     }
 
     public String getCurrentAnimation(String animatorName) {

@@ -1,6 +1,7 @@
-package com.github.syren_dev_tech.scylla.mobs.ai;
+package com.github.syren_dev_tech.scylla.mobs.ai.goals;
 
 import com.github.syren_dev_tech.scylla.ScyllaCommon;
+import com.github.syren_dev_tech.scylla.mobs.ai.AIGoal;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.Mob;
 
@@ -35,12 +36,12 @@ public class LookAtMobGoal extends AIGoal {
 
     @Override
     public boolean canUse() {
-        if (this.self.getRandom().nextFloat() >= this.chanceToStartLooking) {
+        if (this.getSelf().getRandom().nextFloat() >= this.chanceToStartLooking) {
             return false;
         }
 
-        if (this.self.getTarget() != null) {
-            this.lookTarget = this.self.getTarget();
+        if (this.getSelf().getTarget() != null) {
+            this.lookTarget = this.getSelf().getTarget();
         }
 
         return this.lookTarget != null && this.lookTarget.isAlive();
@@ -53,7 +54,7 @@ public class LookAtMobGoal extends AIGoal {
         }
 
         // If the looking target is further than the max sight distance, stop looking
-        double distanceSq = this.self.distanceToSqr(this.lookTarget);
+        double distanceSq = this.getSelf().distanceToSqr(this.lookTarget);
         if (distanceSq > this.maxSightDistance * this.maxSightDistance) {
             return false;
         }
@@ -64,16 +65,16 @@ public class LookAtMobGoal extends AIGoal {
     @Override
     public void start() {
         super.start();
-        ScyllaCommon.LOGGER.debug("Starting LookAtMobGoal for {} looking at {}", this.self.getName().getString(), this.lookTarget.getName().getString());
+        ScyllaCommon.LOGGER.debug("Starting LookAtMobGoal for {} looking at {}", this.getSelf().getName().getString(), this.lookTarget.getName().getString());
 
         this.ticksSpentLooking = 0;
-        this.maxLookingTicks = this.adjustedTickDelay(40 + this.self.getRandom().nextInt(40));
+        this.maxLookingTicks = this.adjustedTickDelay(40 + this.getSelf().getRandom().nextInt(40));
     }
 
     @Override
     public void stop() {
         super.stop();
-        ScyllaCommon.LOGGER.debug("Stopping LookAtMobGoal for {} looking at {}", this.self.getName().getString(), this.lookTarget != null ? this.lookTarget.getName().getString() : "null");
+        ScyllaCommon.LOGGER.debug("Stopping LookAtMobGoal for {} looking at {}", this.getSelf().getName().getString(), this.lookTarget != null ? this.lookTarget.getName().getString() : "null");
 
         this.lookTarget = null;
         this.ticksSpentLooking = 0;

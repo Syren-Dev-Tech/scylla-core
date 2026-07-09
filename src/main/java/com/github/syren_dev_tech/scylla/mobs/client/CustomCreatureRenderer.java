@@ -23,15 +23,14 @@ public class CustomCreatureRenderer<T extends CustomCreature> extends GeoEntityR
         this.shadowRadius = builder.getShadowSize(); // Set shadow size
         this.builder = builder;
 
-        if (builder.getTextureRenderer() != null)
-            this.addRenderLayer(builder.getTextureRenderer());
-        if (!builder.getMaskLayers().isEmpty() || builder.getMasks() != null)
-            this.addRenderLayer(new MyColorLayer(this));
+        this.addRenderLayer(new MyColorLayer(this));
     }
 
     @Override
     public ResourceLocation getTextureLocation(T pEntity) {
-        return builder.getTextures().apply(getTypedState(pEntity)).get();
+        CreatureState<T> state = getTypedState(pEntity);
+        TextureDefinition definition = this.builder.getTextureForState(state);
+        return definition.getTexture().get();
     }
 
     @SuppressWarnings("unchecked")
@@ -48,14 +47,27 @@ public class CustomCreatureRenderer<T extends CustomCreature> extends GeoEntityR
         @Override
         public void render(PoseStack poseStack, T animatable, BakedGeoModel model, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
             CreatureState<T> state = getTypedState(animatable);
+            TextureDefinition definition = builder.getTextureForState(state);
+            if (definition.getMask() != null) {
+                ResourceLocation maskResource = definition.getMask().get();
+                var layerRenderType = RenderType.entityCutoutNoCull(maskResource);
+                var layerBuffer = bufferSource.getBuffer(layerRenderType);
+                int white = CreatureBuilder.rgba(255, 255, 255, 255);
+
+                getRenderer().reRender(model, poseStack, bufferSource, animatable, layerRenderType, layerBuffer, partialTick, packedLight, packedOverlay, white);
+            }
 
             for (var maskLayer : builder.getMaskLayers()) {
                 var mask = maskLayer.getMask().apply(state);
-                var layerRenderType = RenderType.entityCutoutNoCull(mask.get());
-                var layerBuffer = bufferSource.getBuffer(layerRenderType);
-                int rgba = maskLayer.getColor().apply(state);
+                ResourceLocation maskResource = mask == null ? null : mask.get();
 
-                getRenderer().reRender(model, poseStack, bufferSource, animatable, layerRenderType, layerBuffer, partialTick, packedLight, packedOverlay, rgba);
+                if (maskResource != null) {
+                    var layerRenderType = RenderType.entityCutoutNoCull(maskResource);
+                    var layerBuffer = bufferSource.getBuffer(layerRenderType);
+                    int rgba = maskLayer.getColor().apply(state);
+
+                    getRenderer().reRender(model, poseStack, bufferSource, animatable, layerRenderType, layerBuffer, partialTick, packedLight, packedOverlay, rgba);
+                }
             }
         }
     }

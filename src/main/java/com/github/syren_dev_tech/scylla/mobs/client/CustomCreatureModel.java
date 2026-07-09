@@ -35,7 +35,14 @@ public class CustomCreatureModel<T extends CustomCreature> extends GeoModel<T> {
 
     @Override
     public ResourceLocation getTextureResource(T animatable) {
-        return this.builder.getTextures().apply((CreatureState<T>) animatable.getState()).get();
+        CreatureState<T> state = this.getTypedState(animatable);
+        TextureDefinition definition = this.builder.getTextureForState(state);
+        return definition.getTexture().get();
+    }
+
+    @SuppressWarnings("unchecked")
+    private CreatureState<T> getTypedState(T animatable) {
+        return (CreatureState<T>) animatable.getState();
     }
 
     @Override

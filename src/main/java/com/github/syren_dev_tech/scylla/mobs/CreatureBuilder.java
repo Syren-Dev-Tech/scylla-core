@@ -2,14 +2,13 @@ package com.github.syren_dev_tech.scylla.mobs;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import com.github.syren_dev_tech.scylla.mobs.ai.AIGoal;
 import com.github.syren_dev_tech.scylla.mobs.ai.AIGoalDefinition;
-import com.github.syren_dev_tech.scylla.mobs.ai.AnimatedGoal;
-import com.github.syren_dev_tech.scylla.mobs.client.TextureRenderer;
+import com.github.syren_dev_tech.scylla.mobs.ai.goals.AnimatedGoal;
+import com.github.syren_dev_tech.scylla.mobs.client.TextureDefinition;
 import com.github.syren_dev_tech.scylla.mobs.creatures.AnimationDefinition;
 import com.github.syren_dev_tech.scylla.mobs.creatures.CreatureState;
 import com.github.syren_dev_tech.scylla.mobs.creatures.CustomCreature;
@@ -23,80 +22,61 @@ import net.minecraft.world.level.Level;
 
 public class CreatureBuilder<T extends CustomCreature> {
 
+    private final CreatureFactory<T> factory;
+    private final List<Function<T, AIGoal>> goals = new ArrayList<>();
+    private final List<MaskLayer<T>> maskLayers = new ArrayList<>();
+    private final Map<String, AnimationHandler<T>> animators = new HashMap<>();
+    private final Map<String, TextureDefinition> textures = new HashMap<>();
     private final ModRegister register;
+    private final TextureDefinition defaultTexture;
     private final String name;
 
-    private List<Function<T, AIGoal>> goals = new ArrayList<>();
-    private Function<CreatureState<T>, ResourcePath> textures;
-    private Function<CreatureState<T>, ResourcePath> masks;
-    private List<MaskLayer<T>> maskLayers = new ArrayList<>();
-    private TextureRenderer<T> textureRenderer;
-    private Map<String, AnimationHandler<T>> animators = new HashMap<>();
-    private CreatureFactory<T> factory;
-    private float shadowSize = 0.5f;
     private boolean rideable = false;
+    private float shadowSize = 0.5f;
 
     public CreatureBuilder(String name, ModRegister register, CreatureFactory<T> factory) {
         this.name = name;
         this.register = register;
         this.factory = factory;
-
-        this.textures = t -> new ResourcePath(register.modId, "textures/entity/" + name + ".png");
+        this.defaultTexture = new TextureDefinition(register, name);
     }
 
     public ModRegister getRegister() {
         return register;
     }
 
-    public CreatureBuilder<T> withTextures(Function<CreatureState<T>, ResourcePath> textures) {
-        this.textures = textures;
-        return this;
-    }
+    public final CreatureBuilder<T> withTexture(String textureName, String... animations) {
+        if (textureName == null || textureName.isEmpty() || animations == null || animations.length == 0) {
+            return this;
+        }
 
-    public CreatureBuilder<T> withTextures(ResourcePath texture) {
-        this.textures = state -> texture;
-        return this;
-    }
-
-    public CreatureBuilder<T> withTexture(Function<CreatureState<T>, ResourcePath> textures) {
-        return this.withTextures(textures);
-    }
-
-    public CreatureBuilder<T> withTexture(ResourcePath texture) {
-        return this.withTextures(texture);
-    }
-
-    public CreatureBuilder<T> withMasks(Function<CreatureState<T>, ResourcePath> masks) {
-        this.masks = masks;
-
-        this.maskLayers.removeIf(layer -> layer.legacyDefault);
-        this.maskLayers.add(MaskLayer.legacyDefault(masks));
+        TextureDefinition textureDefinition = new TextureDefinition(register, textureName);
+        for (String animation : animations) {
+            if (animation != null && !animation.isEmpty()) {
+                // If the definition already exists, set the texture
+                this.textures.computeIfAbsent(animation, anim -> textureDefinition).setTexture(textureDefinition.getTexture());
+            }
+        }
 
         return this;
     }
 
-    public CreatureBuilder<T> withMaskLayer(Function<CreatureState<T>, ResourcePath> mask, int rgbaColor) {
-        this.maskLayers.add(MaskLayer.of(mask, state -> rgbaColor));
-        return this;
-    }
+    public CreatureBuilder<T> withMask(ResourcePath maskName, String... animations) {
+        if (maskName == null || animations == null || animations.length == 0) {
+            return this;
+        }
 
-    public CreatureBuilder<T> withMaskLayer(Function<CreatureState<T>, ResourcePath> mask, Function<CreatureState<T>, Integer> colorSupplier) {
-        this.maskLayers.add(MaskLayer.of(mask, colorSupplier));
-        return this;
-    }
+        if (animations.length == 0) {
+            this.defaultTexture.setMask(maskName);
+            return this;
+        }
 
-    public CreatureBuilder<T> withMaskLayer(Function<CreatureState<T>, ResourcePath> mask, int red, int green, int blue, int alpha) {
-        return this.withMaskLayer(mask, rgba(red, green, blue, alpha));
-    }
+        for (String animation : animations) {
+            if (animation != null && !animation.isEmpty()) {
+                this.textures.computeIfAbsent(animation, anim -> new TextureDefinition(register, "")).setMask(maskName);
+            }
+        }
 
-    public CreatureBuilder<T> withMaskLayers(List<MaskLayer<T>> maskLayers) {
-        this.maskLayers.addAll(maskLayers);
-        return this;
-    }
-
-    public CreatureBuilder<T> clearMaskLayers() {
-        this.maskLayers.clear();
-        this.masks = null;
         return this;
     }
 
@@ -112,11 +92,11 @@ public class CreatureBuilder<T extends CustomCreature> {
     }
 
     public CreatureBuilder<T> withAiGoal(Function<T, AIGoal> goal, String animatorName, String movingAnimation, String idleAnimation) {
-        return this.withAiGoal(AIGoalDefinition.<T>define(goal).withAnimator(animatorName, movingAnimation, idleAnimation).build());
+        return this.withAiGoal(this.createGoalDefinition(goal, animatorName, movingAnimation, idleAnimation));
     }
 
     public CreatureBuilder<T> withAiGoal(Function<T, AIGoal> goal, String animatorName, String... animations) {
-        return this.withAiGoal(AIGoalDefinition.<T>define(goal).withAnimator(animatorName, animations).build());
+        return this.withAiGoal(this.createGoalDefinition(goal, animatorName, animations));
     }
 
     public CreatureBuilder<T> withAiGoals(List<Function<T, AIGoal>> goals) {
@@ -125,26 +105,17 @@ public class CreatureBuilder<T extends CustomCreature> {
     }
 
     public CreatureBuilder<T> withAiGoalsFromDefinitions(List<AIGoalDefinition<T>> goalDefinitions) {
-        for (AIGoalDefinition<T> goalDefinition : goalDefinitions) {
-            this.withAiGoal(goalDefinition);
-        }
-
+        goalDefinitions.forEach(this::withAiGoal);
         return this;
     }
 
     public CreatureBuilder<T> withAiGoals(List<Function<T, AIGoal>> goals, String animatorName, String movingAnimation, String idleAnimation) {
-        for (Function<T, AIGoal> goal : goals) {
-            this.withAiGoal(goal, animatorName, movingAnimation, idleAnimation);
-        }
-
+        goals.forEach(goal -> this.withAiGoal(goal, animatorName, movingAnimation, idleAnimation));
         return this;
     }
 
     public CreatureBuilder<T> withAiGoals(List<Function<T, AIGoal>> goals, String animatorName, String... animations) {
-        for (Function<T, AIGoal> goal : goals) {
-            this.withAiGoal(goal, animatorName, animations);
-        }
-
+        goals.forEach(goal -> this.withAiGoal(goal, animatorName, animations));
         return this;
     }
 
@@ -171,7 +142,17 @@ public class CreatureBuilder<T extends CustomCreature> {
             return baseGoal;
         }
 
-        return new AnimatedGoal<>(entity, baseGoal).withAnimation(goalDefinition.getAnimatorName(), goalDefinition.getAnimations());
+        AnimatedGoal<T> animatedGoal = new AnimatedGoal<>(entity, baseGoal);
+        animatedGoal.withAnimation(goalDefinition.getAnimatorName(), goalDefinition.getAnimations());
+        return animatedGoal;
+    }
+
+    private AIGoalDefinition<T> createGoalDefinition(Function<T, AIGoal> goal, String animatorName, String movingAnimation, String idleAnimation) {
+        return AIGoalDefinition.<T>define(goal).withAnimator(animatorName, movingAnimation, idleAnimation).build();
+    }
+
+    private AIGoalDefinition<T> createGoalDefinition(Function<T, AIGoal> goal, String animatorName, String... animations) {
+        return AIGoalDefinition.<T>define(goal).withAnimator(animatorName, animations).build();
     }
 
     private void ensureGoalAnimator(AIGoalDefinition<T> goalDefinition) {
@@ -179,16 +160,11 @@ public class CreatureBuilder<T extends CustomCreature> {
             return;
         }
 
-        this.animators.computeIfAbsent(goalDefinition.getAnimatorName(), name -> AnimationHandler.fromStateHandler(state -> null));
+        this.animators.computeIfAbsent(goalDefinition.getAnimatorName(), animator -> AnimationHandler.fromStateHandler(state -> null));
     }
 
     public CreatureBuilder<T> withShadowSize(float shadowSize) {
         this.shadowSize = shadowSize;
-        return this;
-    }
-
-    public CreatureBuilder<T> withTextureRenderer(TextureRenderer<T> textureRenderer) {
-        this.textureRenderer = textureRenderer;
         return this;
     }
 
@@ -209,14 +185,6 @@ public class CreatureBuilder<T extends CustomCreature> {
         return name;
     }
 
-    public Function<CreatureState<T>, ResourcePath> getTextures() {
-        return textures;
-    }
-
-    public Function<CreatureState<T>, ResourcePath> getMasks() {
-        return masks;
-    }
-
     public List<MaskLayer<T>> getMaskLayers() {
         return maskLayers;
     }
@@ -225,16 +193,48 @@ public class CreatureBuilder<T extends CustomCreature> {
         return shadowSize;
     }
 
-    public TextureRenderer<T> getTextureRenderer() {
-        return textureRenderer;
-    }
-
     public List<Function<T, AIGoal>> getGoals() {
         return goals;
     }
 
     public Map<String, AnimationHandler<T>> getAnimators() {
         return animators;
+    }
+
+    public Map<String, TextureDefinition> getTextures() {
+        return textures;
+    }
+
+    public TextureDefinition getDefaultTexture() {
+        return defaultTexture;
+    }
+
+    public TextureDefinition getTextureForAnimation(String animation) {
+        if (animation == null || animation.isEmpty()) {
+            return this.defaultTexture;
+        }
+
+        TextureDefinition definition = this.textures.get(animation);
+        if (definition != null) {
+            return definition;
+        }
+
+        return this.defaultTexture;
+    }
+
+    public TextureDefinition getTextureForState(CreatureState<T> state) {
+        if (state == null) {
+            return this.defaultTexture;
+        }
+
+        for (String animation : state.getCurrentAnimations()) {
+            TextureDefinition definition = this.getTextureForAnimation(animation);
+            if (definition != this.defaultTexture) {
+                return definition;
+            }
+        }
+
+        return this.defaultTexture;
     }
 
     public boolean isRideable() {
@@ -251,14 +251,11 @@ public class CreatureBuilder<T extends CustomCreature> {
     }
 
     public CreatureBuilder<T> addAnimator(String name, Function<CreatureState<T>, AnimationDefinition> handler) {
-        this.animators.put(name, AnimationHandler.fromStateHandler(handler));
-
-        return this;
+        return this.addAnimator(name, AnimationHandler.fromStateHandler(handler));
     }
 
     public CreatureBuilder<T> addAnimator(String name, AnimationHandler<T> handler) {
         this.animators.put(name, handler);
-
         return this;
     }
 
@@ -270,53 +267,32 @@ public class CreatureBuilder<T extends CustomCreature> {
         return ((red & 0xFF) << 24) | ((green & 0xFF) << 16) | ((blue & 0xFF) << 8) | (alpha & 0xFF);
     }
 
-    public static <T extends CustomCreature> AnimationResourceSelector<T> animationResources(String animatorName, ResourcePath fallback) {
-        return new AnimationResourceSelector<>(animatorName, fallback);
+    public static AnimationResource animationResource(String animationName, ResourcePath resource) {
+        return new AnimationResource(animationName, resource);
     }
 
-    public static class AnimationResourceSelector<T extends CustomCreature> {
-        private final String animatorName;
-        private final ResourcePath fallback;
-        private final Map<String, ResourcePath> animationResources = new LinkedHashMap<>();
+    public static record AnimationResource(String animationName, ResourcePath resource) {
+    }
 
-        private AnimationResourceSelector(String animatorName, ResourcePath fallback) {
-            this.animatorName = animatorName;
-            this.fallback = fallback;
-        }
-
-        public AnimationResourceSelector<T> forAnimation(String animationName, ResourcePath resource) {
-            if (animationName == null || animationName.isEmpty() || resource == null) {
-                return this;
-            }
-
-            this.animationResources.put(animationName, resource);
+    @SafeVarargs
+    public final CreatureBuilder<T> withTexture(ResourcePath resource, String... animations) {
+        if (resource == null || animations == null || animations.length == 0) {
             return this;
         }
 
-        public AnimationResourceSelector<T> forAnimations(ResourcePath resource, String... animationNames) {
-            if (resource == null || animationNames == null) {
-                return this;
-            }
-
-            for (String animationName : animationNames) {
-                this.forAnimation(animationName, resource);
-            }
-
+        if (animations.length == 0) {
+            this.defaultTexture.setTexture(resource);
             return this;
         }
 
-        public Function<CreatureState<T>, ResourcePath> build() {
-            return state -> {
-                String currentAnimation = state.getCurrentAnimation(this.animatorName);
-                ResourcePath resource = this.animationResources.get(currentAnimation);
-
-                if (resource != null) {
-                    return resource;
-                }
-
-                return this.fallback;
-            };
+        TextureDefinition definition = new TextureDefinition(register, "").setTexture(resource);
+        for (String animation : animations) {
+            if (animation != null && !animation.isEmpty()) {
+                this.textures.computeIfAbsent(animation, anim -> definition).setTexture(resource);
+            }
         }
+
+        return this;
     }
 
     public static class MaskLayer<T extends CustomCreature> {
@@ -344,6 +320,10 @@ public class CreatureBuilder<T extends CustomCreature> {
 
         public Function<CreatureState<T>, Integer> getColor() {
             return color;
+        }
+
+        public boolean isLegacyDefault() {
+            return this.legacyDefault;
         }
     }
 }

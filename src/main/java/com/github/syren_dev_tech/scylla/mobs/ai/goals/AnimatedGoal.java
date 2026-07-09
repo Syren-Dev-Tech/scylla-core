@@ -1,4 +1,4 @@
-package com.github.syren_dev_tech.scylla.mobs.ai;
+package com.github.syren_dev_tech.scylla.mobs.ai.goals;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import com.github.syren_dev_tech.scylla.ScyllaCommon;
 import com.github.syren_dev_tech.scylla.mobs.creatures.CustomCreature;
+import com.github.syren_dev_tech.scylla.mobs.ai.AIGoal;
 import com.github.syren_dev_tech.scylla.mobs.ai.AIGoalDefinition.WeightedAnimation;
 import net.minecraft.world.entity.Mob;
 
@@ -19,7 +20,7 @@ public class AnimatedGoal<T extends CustomCreature> extends AIGoal {
     public AnimatedGoal(Mob self, AIGoal delegate) {
         super(self);
         this.delegate = delegate;
-        this.delegate.isDelegate = true;
+        this.delegate.useAsDeligate();
         this.setFlags(delegate.getFlags());
     }
 
@@ -64,7 +65,7 @@ public class AnimatedGoal<T extends CustomCreature> extends AIGoal {
 
     @Override
     public void start() {
-        ScyllaCommon.LOGGER.debug("Entity {} changing to goal {}", this.self.getId(), this.delegate.getClass().getSimpleName());
+        ScyllaCommon.LOGGER.debug("Entity {} changing to goal {}", this.getSelf().getId(), this.delegate.getClass().getSimpleName());
         this.delegate.start();
         this.claimAnimations();
         this.chooseAnimations();
@@ -73,7 +74,7 @@ public class AnimatedGoal<T extends CustomCreature> extends AIGoal {
 
     @Override
     public void stop() {
-        ScyllaCommon.LOGGER.debug("Entity {} goal {} stopped", this.self.getId(), this.delegate.getClass().getSimpleName());
+        ScyllaCommon.LOGGER.debug("Entity {} goal {} stopped", this.getSelf().getId(), this.delegate.getClass().getSimpleName());
         this.delegate.stop();
         this.clearAnimations();
         this.selectedAnimations.clear();
@@ -91,7 +92,7 @@ public class AnimatedGoal<T extends CustomCreature> extends AIGoal {
     }
 
     private void applyAnimations() {
-        if (!(this.self instanceof CustomCreature creature)) {
+        if (!(this.getSelf() instanceof CustomCreature creature)) {
             return;
         }
 
@@ -128,7 +129,7 @@ public class AnimatedGoal<T extends CustomCreature> extends AIGoal {
     }
 
     private void clearAnimations() {
-        if (!(this.self instanceof CustomCreature creature)) {
+        if (!(this.getSelf() instanceof CustomCreature creature)) {
             return;
         }
 
@@ -137,7 +138,7 @@ public class AnimatedGoal<T extends CustomCreature> extends AIGoal {
     }
 
     private void claimAnimations() {
-        if (!(this.self instanceof CustomCreature creature)) {
+        if (!(this.getSelf() instanceof CustomCreature creature)) {
             return;
         }
 
@@ -170,7 +171,7 @@ public class AnimatedGoal<T extends CustomCreature> extends AIGoal {
             return null;
         }
 
-        int roll = this.self.getRandom().nextInt(totalWeight);
+        int roll = this.getSelf().getRandom().nextInt(totalWeight);
         int cursor = 0;
 
         for (WeightedAnimation option : possibleAnimations) {
@@ -208,7 +209,7 @@ public class AnimatedGoal<T extends CustomCreature> extends AIGoal {
     }
 
     private boolean isMoving() {
-        return this.self.getDeltaMovement().horizontalDistanceSqr() > 1.0E-6D;
+        return this.getSelf().getDeltaMovement().horizontalDistanceSqr() > 1.0E-6D;
     }
 
     private String normalizeAnimationName(String animation) {

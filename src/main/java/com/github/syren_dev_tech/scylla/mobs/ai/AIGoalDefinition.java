@@ -9,8 +9,8 @@ import com.github.syren_dev_tech.scylla.mobs.creatures.CustomCreature;
 public class AIGoalDefinition<T extends CustomCreature> {
 
     private final Function<T, AIGoal> goalFactory;
-    private final String animatorName;
     private final List<WeightedAnimation> animations;
+    private final String animatorName;
 
     private AIGoalDefinition(Function<T, AIGoal> goalFactory, String animatorName, List<WeightedAnimation> animations) {
         this.goalFactory = goalFactory;
@@ -39,7 +39,7 @@ public class AIGoalDefinition<T extends CustomCreature> {
     }
 
     @SafeVarargs
-    public static <T extends CustomCreature> List<WeightedAnimation> weightedPool(WeightedAnimation... animations) {
+    public static List<WeightedAnimation> weightedPool(WeightedAnimation... animations) {
         List<WeightedAnimation> result = new ArrayList<>();
 
         if (animations != null) {

@@ -6,10 +6,11 @@ import net.minecraft.world.entity.ai.goal.Goal;
 
 public class AIGoal extends Goal {
 
+    private final Mob self;
+
     private boolean enabled = true;
-    final Mob self;
     private int weight;
-    boolean isDelegate = false;
+    private boolean isDelegate = false;
 
     public AIGoal(Mob self) {
         super();
@@ -24,6 +25,21 @@ public class AIGoal extends Goal {
 
     public int getWeight() {
         return weight;
+    }
+
+    public Mob getSelf() {
+        return self;
+    }
+
+    /**
+     * @return the isDelegate
+     */
+    public boolean isDelegate() {
+        return isDelegate;
+    }
+
+    public void useAsDeligate() {
+        isDelegate = true;
     }
 
     @Override

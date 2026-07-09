@@ -1,7 +1,6 @@
 package com.github.syren_dev_tech.scylla.mobs.client;
 
 import java.util.function.Function;
-import com.github.syren_dev_tech.scylla.registry.ModRegister;
 import com.github.syren_dev_tech.scylla.utilities.files.ResourcePath;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
@@ -12,10 +11,10 @@ public class TextureRenderer<T extends LivingEntity & GeoAnimatable> extends Geo
 
     private Function<T, ResourcePath> textureSupplier;
 
-    public TextureRenderer(ModRegister register, String name, CustomGeoRenderer<T> geoRenderer) {
+    public TextureRenderer(ResourcePath resource, CustomGeoRenderer<T> geoRenderer) {
         super(geoRenderer);
 
-        this.textureSupplier = t -> new ResourcePath(register.modId, "textures/entity/" + name + "/" + name + ".png");
+        this.textureSupplier = t -> resource;
     }
 
     public void setTextureSupplier(Function<T, ResourcePath> textureSupplier) {

@@ -1,3 +1,5 @@
+publish: publish-neoforge
+
 publish-%: SHELL := /bin/bash
 publish-%:
 	gradle --no-daemon clean build -P$*=true && \
@@ -10,6 +12,8 @@ deps: SHELL := /bin/bash
 deps:
 	source "${HOME}/.sdkman/bin/sdkman-init.sh" && \
 	gradle --refresh-dependencies
+
+TAG_REMOTE ?= origin
 
 release: SHELL := /bin/bash
 release:

@@ -31,23 +31,20 @@ jobs:
           source "$HOME/.sdkman/bin/sdkman-init.sh"
           sdk install gradle ${{ env.GRADLE_VERSION }}
 
-      - name: Run publish task
-        run: make publish
+      - name: Run remote publish task
+        run: make publish-remote
 
       - name: Upload Maven artifacts
         uses: actions/upload-artifact@v4
         with:
           name: maven-artifacts
-          path: dist/*
-
-      - name: Run build task
-        run: make build
+          path: dist/maven-repo/**
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
           name: build-artifacts
-          path: dist/*.jar
+          path: dist/**/*.jar
 
   deploy:
     runs-on: ubuntu-latest

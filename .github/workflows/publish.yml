@@ -1,9 +1,9 @@
 name: Build and Publish to GitHub Packages
 
 on:
-  push:
-    branches:
-      - master
+  create:
+    tags:
+      - '*'
 
 # Variables
 # Set Java version

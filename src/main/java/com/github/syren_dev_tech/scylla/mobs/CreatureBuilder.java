@@ -46,7 +46,12 @@ public class CreatureBuilder<T extends CustomCreature> {
     }
 
     public final CreatureBuilder<T> withTexture(String textureName, String... animations) {
-        if (textureName == null || textureName.isEmpty() || animations == null || animations.length == 0) {
+        if (textureName == null || textureName.isEmpty()) {
+            return this;
+        }
+
+        if (animations == null || animations.length == 0) {
+            this.defaultTexture.setTexture(new TextureDefinition(register, textureName).getTexture());
             return this;
         }
 
@@ -62,18 +67,18 @@ public class CreatureBuilder<T extends CustomCreature> {
     }
 
     public CreatureBuilder<T> withMask(ResourcePath maskName, String... animations) {
-        if (maskName == null || animations == null || animations.length == 0) {
+        if (maskName == null) {
             return this;
         }
 
-        if (animations.length == 0) {
+        if (animations == null || animations.length == 0) {
             this.defaultTexture.setMask(maskName);
             return this;
         }
 
         for (String animation : animations) {
             if (animation != null && !animation.isEmpty()) {
-                this.textures.computeIfAbsent(animation, anim -> new TextureDefinition(register, "")).setMask(maskName);
+                this.textures.computeIfAbsent(animation, anim -> new TextureDefinition(this.defaultTexture.getTexture(), null)).setMask(maskName);
             }
         }
 
@@ -276,11 +281,11 @@ public class CreatureBuilder<T extends CustomCreature> {
 
     @SafeVarargs
     public final CreatureBuilder<T> withTexture(ResourcePath resource, String... animations) {
-        if (resource == null || animations == null || animations.length == 0) {
+        if (resource == null) {
             return this;
         }
 
-        if (animations.length == 0) {
+        if (animations == null || animations.length == 0) {
             this.defaultTexture.setTexture(resource);
             return this;
         }

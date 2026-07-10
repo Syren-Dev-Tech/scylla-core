@@ -14,6 +14,7 @@ import com.github.syren_dev_tech.scylla.blocks.redstone.PressurePlates;
 import com.github.syren_dev_tech.scylla.blocks.redstone.TrapDoors;
 import com.github.syren_dev_tech.scylla.blocks.redstone.types.ButtonBase;
 import com.github.syren_dev_tech.scylla.registry.ModRegister;
+import com.github.syren_dev_tech.scylla.registry.definitions.WoodDefinition.LogDefinition.LogDefinitionProperties;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.item.BoatItem;
@@ -52,10 +53,10 @@ public class WoodDefinition {
         this.boats = new BoatDefinition(register, name, creativeTab);
     }
 
-    public WoodDefinition(ModRegister register, String name, Properties woodProperties, Properties plankProperties, ResourceKey<CreativeModeTab> creativeTab) {
+    public WoodDefinition(ModRegister register, String name, LogDefinitionProperties logProperties, Properties plankProperties, ResourceKey<CreativeModeTab> creativeTab) {
         this.name = name;
 
-        this.logs = new LogDefinition(register, name, woodProperties, creativeTab);
+        this.logs = new LogDefinition(register, name, logProperties, creativeTab);
         this.planks = new PlanksDefinition(register, name, plankProperties, creativeTab);
         this.boats = new BoatDefinition(register, name, creativeTab);
     }
@@ -71,19 +72,33 @@ public class WoodDefinition {
         public LogDefinition(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
             this.name = name;
 
-            this.log = PillarBlocks.create(register, name + "_log", creativeTab);
-            this.strippedLog = PillarBlocks.create(register, "stripped_" + name + "_log", creativeTab);
-            this.wood = ModBlocks.create(register, name + "_wood", creativeTab);
-            this.strippedWood = ModBlocks.create(register, "stripped_" + name + "_wood", creativeTab);
+            this.log = PillarBlocks.create(register, name + "_log", Blocks.OAK_LOG, creativeTab);
+            this.strippedLog = PillarBlocks.create(register, "stripped_" + name + "_log", Blocks.STRIPPED_OAK_LOG, creativeTab);
+            this.wood = ModBlocks.create(register, name + "_wood", Blocks.OAK_WOOD, creativeTab);
+            this.strippedWood = ModBlocks.create(register, "stripped_" + name + "_wood", Blocks.STRIPPED_OAK_WOOD, creativeTab);
         }
 
-        public LogDefinition(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
+        public LogDefinition(ModRegister register, String name, LogDefinitionProperties properties, ResourceKey<CreativeModeTab> creativeTab) {
             this.name = name;
 
-            this.log = PillarBlocks.create(register, name + "_log", properties, creativeTab);
-            this.strippedLog = PillarBlocks.create(register, "stripped_" + name + "_log", properties, creativeTab);
-            this.wood = ModBlocks.create(register, name + "_wood", properties, creativeTab);
-            this.strippedWood = ModBlocks.create(register, "stripped_" + name + "_wood", properties, creativeTab);
+            this.log = PillarBlocks.create(register, name + "_log", properties.logProperties, creativeTab);
+            this.strippedLog = PillarBlocks.create(register, "stripped_" + name + "_log", properties.strippedLogProperties, creativeTab);
+            this.wood = ModBlocks.create(register, name + "_wood", properties.woodProperties, creativeTab);
+            this.strippedWood = ModBlocks.create(register, "stripped_" + name + "_wood", properties.strippedWoodProperties, creativeTab);
+        }
+
+        public static class LogDefinitionProperties {
+            public Properties logProperties;
+            public Properties strippedLogProperties;
+            public Properties woodProperties;
+            public Properties strippedWoodProperties;
+
+            public LogDefinitionProperties() {
+                this.logProperties = Properties.ofFullCopy(Blocks.OAK_LOG);
+                this.strippedLogProperties = Properties.ofFullCopy(Blocks.STRIPPED_OAK_LOG);
+                this.woodProperties = Properties.ofFullCopy(Blocks.OAK_WOOD);
+                this.strippedWoodProperties = Properties.ofFullCopy(Blocks.STRIPPED_OAK_WOOD);
+            }
         }
     }
 

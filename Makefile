@@ -8,7 +8,7 @@ publish-local-%:
 	gradle --no-daemon clean build -P$*=true && \
 	mkdir -p ./dist/$* && \
 	cp build/libs/*.jar ./dist/$*/ && \
-	gradle --no-daemon publishToMavenLocal -P$*=true -Dmaven.repo.local=$(CURDIR)/dist/maven-repo
+	gradle --no-daemon publishToMavenLocal
 
 publish-remote-%: SHELL := /bin/bash
 publish-remote-%:
@@ -16,8 +16,8 @@ publish-remote-%:
 	mkdir -p ./dist/$* && \
 	cp build/libs/*.jar ./dist/$*/ && \
 	gradle --no-daemon publish -P$*=true && \
-	gradle --no-daemon publishToMavenLocal -P$*=true -Dmaven.repo.local=$(CURDIR)/dist/maven-repo
-
+	gradle --no-daemon publishToMavenLocal
+	
 deps: SHELL := /bin/bash
 deps:
 	source "${HOME}/.sdkman/bin/sdkman-init.sh" && \

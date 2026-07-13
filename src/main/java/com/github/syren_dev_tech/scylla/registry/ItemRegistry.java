@@ -39,7 +39,7 @@ public class ItemRegistry {
         var def = new ItemDefinition<>(registry, name, newItem);
         this.items.put(name, def);
 
-        this.registry.creativeTabRegistry.useCreativeTab(creativeTab, newItem);
+        this.registry.creativeTabRegistry.useCreativeTab(creativeTab, def);
 
         if (ScyllaCommon.LOGGER.isInfoEnabled()) {
             ScyllaCommon.LOGGER.info(String.format("Registered new item: %s:%s", this.registry.modId, name));

@@ -1,6 +1,7 @@
 package com.github.syren_dev_tech.scylla.dimensions.portals;
 
 import com.mojang.serialization.MapCodec;
+import java.util.Objects;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -30,11 +31,16 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 public class HorizontalPortal extends BaseEntityBlock implements Portal {
     protected static final VoxelShape SHAPE = Block.box(0.0D, 6.0D, 0.0D, 16.0D, 12.0D, 16.0D);
 
-    private ResourceKey<Level> dimension;
+    private final PortalTransit transit;
 
     public HorizontalPortal(Properties properties, ResourceKey<Level> dimension) {
         super(properties);
-        this.dimension = dimension;
+        this.transit = PortalTransit.fixed(dimension);
+    }
+
+    public HorizontalPortal(Properties properties, PortalTransit transit) {
+        super(properties);
+        this.transit = Objects.requireNonNull(transit, "Portal transit cannot be null");
     }
 
     public BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
@@ -79,7 +85,11 @@ public class HorizontalPortal extends BaseEntityBlock implements Portal {
 
     @Override
     public DimensionTransition getPortalDestination(ServerLevel level, Entity entity, BlockPos pos) {
-        ResourceKey<Level> resourcekey = level.dimension() == Level.END ? Level.OVERWORLD : Level.END;
+        ResourceKey<Level> resourcekey = this.transit.destination(level.dimension());
+        if (resourcekey == null) {
+            return null;
+        }
+
         ServerLevel serverlevel = level.getServer().getLevel(resourcekey);
         if (serverlevel == null) {
             return null;

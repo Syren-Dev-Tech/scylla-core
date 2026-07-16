@@ -13,6 +13,10 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
 public class BrushableSands {
 
+    public static Brushables.Builder builder(ModRegister register, String name) {
+        return Brushables.sand(register, name);
+    }
+
     public static BlockDefinition<CustomFallingBrushableBlock> create(ModRegister register, String name, BlockDefinition<Block> dustedBlock) {
         return create(register, name, Properties.ofFullCopy(Blocks.SUSPICIOUS_SAND), dustedBlock);
     }

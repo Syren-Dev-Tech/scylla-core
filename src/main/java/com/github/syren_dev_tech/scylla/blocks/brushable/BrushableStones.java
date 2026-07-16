@@ -12,6 +12,10 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
 public class BrushableStones {
 
+    public static Brushables.Builder builder(ModRegister register, String name) {
+        return Brushables.stone(register, name);
+    }
+
     public static BlockDefinition<CustomBrushableBlock> create(ModRegister register, String name, BlockDefinition<Block> dustedBlock) {
         return create(register, name, dustedBlock.properties(), dustedBlock);
     }

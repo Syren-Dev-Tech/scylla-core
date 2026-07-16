@@ -1,6 +1,7 @@
 package com.github.syren_dev_tech.scylla.dimensions.portals;
 
 import java.util.Optional;
+import java.util.Objects;
 import com.github.syren_dev_tech.scylla.ScyllaCommon;
 import net.minecraft.BlockUtil;
 import net.minecraft.core.BlockPos;
@@ -50,14 +51,19 @@ public class VerticalPortal extends Block implements Portal {
     private SoundEvent ambientSound = SoundEvents.PORTAL_AMBIENT;
     private ParticleOptions particles = ParticleTypes.PORTAL;
 
-    private final Level oldLevel;
-    private final Level newLevel;
+    private final PortalTransit transit;
 
     public VerticalPortal(Level oldLevel, Level newLevel, Properties properties) {
-        super(properties);
+        this(PortalTransit.between(oldLevel.dimension(), newLevel.dimension()), properties);
+    }
 
-        this.oldLevel = oldLevel;
-        this.newLevel = newLevel;
+    public VerticalPortal(ResourceKey<Level> fromDimension, ResourceKey<Level> toDimension, Properties properties) {
+        this(PortalTransit.between(fromDimension, toDimension), properties);
+    }
+
+    public VerticalPortal(PortalTransit transit, Properties properties) {
+        super(properties);
+        this.transit = Objects.requireNonNull(transit, "Portal transit cannot be null");
 
         this.registerDefaultState(this.stateDefinition.any().setValue(AXIS, Direction.Axis.X));
     }
@@ -105,7 +111,7 @@ public class VerticalPortal extends Block implements Portal {
 
     @Override
     public void entityInside(BlockState blockState, Level level, BlockPos blockPos, Entity entity) {
-        if (entity.canChangeDimensions(oldLevel, newLevel) && entity.canUsePortal(false))
+        if (entity.canUsePortal(false) && canTransit(level, entity))
             entity.setAsInsidePortal(this, blockPos);
     }
 
@@ -226,7 +232,11 @@ public class VerticalPortal extends Block implements Portal {
 
     @Override
     public DimensionTransition getPortalDestination(ServerLevel level, Entity entity, BlockPos pos) {
-        ResourceKey<Level> resourcekey = level.dimension() == Level.NETHER ? Level.OVERWORLD : Level.NETHER;
+        ResourceKey<Level> resourcekey = this.transit.destination(level.dimension());
+        if (resourcekey == null) {
+            return null;
+        }
+
         ServerLevel serverlevel = level.getServer().getLevel(resourcekey);
         if (serverlevel == null) {
             return null;
@@ -238,5 +248,23 @@ public class VerticalPortal extends Block implements Portal {
 
             return this.getExitPortal(serverlevel, entity, pos, blockpos, flag, worldborder);
         }
+    }
+
+    private boolean canTransit(Level level, Entity entity) {
+        if (!(level instanceof ServerLevel serverLevel)) {
+            return true;
+        }
+
+        ResourceKey<Level> destinationKey = this.transit.destination(serverLevel.dimension());
+        if (destinationKey == null) {
+            return false;
+        }
+
+        ServerLevel destinationLevel = serverLevel.getServer().getLevel(destinationKey);
+        if (destinationLevel == null) {
+            return false;
+        }
+
+        return entity.canChangeDimensions(serverLevel, destinationLevel);
     }
 }

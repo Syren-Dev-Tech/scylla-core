@@ -7,7 +7,7 @@ This index links to package-level README files under `src/main/java/com/github/s
 - [blocks](src/main/java/com/github/syren_dev_tech/scylla/blocks/README.md) - Block registration helpers, block-set generators, and category-based block APIs.
 - [creative_tabs](src/main/java/com/github/syren_dev_tech/scylla/creative_tabs/README.md) - Creative mode tab creation helper.
 - [crops](src/main/java/com/github/syren_dev_tech/scylla/crops/README.md) - Crop, farmland, stems, and tree feature registration helpers.
-- [dimensions](src/main/java/com/github/syren_dev_tech/scylla/dimensions/README.md) - Custom portal block implementations.
+- [dimensions](src/main/java/com/github/syren_dev_tech/scylla/dimensions/README.md) - Custom dimension key helpers and configurable portal transit implementations.
 - [effects](src/main/java/com/github/syren_dev_tech/scylla/effects/README.md) - Particle-oriented effect types.
 - [husbandry](src/main/java/com/github/syren_dev_tech/scylla/husbandry/README.md) - Egg block families and egg data configuration helpers.
 - [items](src/main/java/com/github/syren_dev_tech/scylla/items/README.md) - Generic item, combat item, tool, and food registration helpers.

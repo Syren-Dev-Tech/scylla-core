@@ -11,37 +11,21 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.BrushableBlock;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BrushableBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.IntegerProperty;
 
-public class CustomBrushableBlock extends BaseEntityBlock {
+public class CustomBrushableBlock extends BrushableBlock {
 
-    public static final MapCodec<CustomBrushableBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(BuiltInRegistries.BLOCK.byNameCodec().fieldOf("turns_into").forGetter(CustomBrushableBlock::getTurnsInto), BuiltInRegistries.SOUND_EVENT.byNameCodec().fieldOf("brush_sound").forGetter(CustomBrushableBlock::getBrushSound), BuiltInRegistries.SOUND_EVENT.byNameCodec().fieldOf("brush_comleted_sound").forGetter(CustomBrushableBlock::getBrushCompletedSound), propertiesCodec()).apply(instance, CustomBrushableBlock::new));
+    public static final MapCodec<CustomBrushableBlock> CUSTOM_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(BuiltInRegistries.BLOCK.byNameCodec().fieldOf("turns_into").forGetter(CustomBrushableBlock::getTurnsInto), BuiltInRegistries.SOUND_EVENT.byNameCodec().fieldOf("brush_sound").forGetter(CustomBrushableBlock::getBrushSound), BuiltInRegistries.SOUND_EVENT.byNameCodec().fieldOf("brush_comleted_sound").forGetter(CustomBrushableBlock::getBrushCompletedSound), propertiesCodec()).apply(instance, CustomBrushableBlock::new));
 
-    private static final IntegerProperty DUSTED = BlockStateProperties.DUSTED;
     public static final int TICK_DELAY = 2;
-    private final Block turnsInto;
-    private final SoundEvent brushSound;
-    private final SoundEvent brushCompletedSound;
 
     public CustomBrushableBlock(Block turnsInto, SoundEvent brushSound, SoundEvent brushCompletedSound, Properties properties) {
-        super(properties);
-        this.turnsInto = turnsInto;
-        this.brushSound = brushSound;
-        this.brushCompletedSound = brushCompletedSound;
-        this.registerDefaultState((this.stateDefinition.any()).setValue(DUSTED, 0));
-    }
-
-    @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(DUSTED);
+        super(turnsInto, brushSound, brushCompletedSound, properties);
     }
 
     @Override
@@ -69,24 +53,14 @@ public class CustomBrushableBlock extends BaseEntityBlock {
         }
     }
 
+    @Override
     public @Nullable BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
         return new BrushableBlockEntity(blockPos, blockState);
     }
 
-    public Block getTurnsInto() {
-        return this.turnsInto;
-    }
-
-    public SoundEvent getBrushSound() {
-        return this.brushSound;
-    }
-
-    public SoundEvent getBrushCompletedSound() {
-        return this.brushCompletedSound;
-    }
-
     @Override
-    protected MapCodec<? extends BaseEntityBlock> codec() {
-        return CODEC;
+    @SuppressWarnings("unchecked")
+    public MapCodec<BrushableBlock> codec() {
+        return (MapCodec<BrushableBlock>) (MapCodec<?>) CUSTOM_CODEC;
     }
 }

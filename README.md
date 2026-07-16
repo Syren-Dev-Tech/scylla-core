@@ -11,6 +11,7 @@ This index links to package-level README files under `src/main/java/com/github/s
 - [effects](src/main/java/com/github/syren_dev_tech/scylla/effects/README.md) - Particle-oriented effect types.
 - [husbandry](src/main/java/com/github/syren_dev_tech/scylla/husbandry/README.md) - Egg block families and egg data configuration helpers.
 - [items](src/main/java/com/github/syren_dev_tech/scylla/items/README.md) - Generic item, combat item, tool, and food registration helpers.
+- [items/combat](src/main/java/com/github/syren_dev_tech/scylla/items/combat/README.md) - Combat-specific helpers, including wearable armour set builder and GeckoLib-ready model configuration.
 - [mobs](src/main/java/com/github/syren_dev_tech/scylla/mobs/README.md) - Creature builder workflow, AI goals, animation, and rendering helpers.
 - [ores](src/main/java/com/github/syren_dev_tech/scylla/ores/README.md) - Fluent ore material builders for gem, dust, and metal pipelines.
 - [registry](src/main/java/com/github/syren_dev_tech/scylla/registry/README.md) - Core registration context, typed registries, definitions, and feature metadata.
@@ -35,6 +36,8 @@ Reference guides live in [json-examples/README.md](json-examples/README.md).
 - [recipes.stonecutting.json.md](json-examples/recipes.stonecutting.json.md) - Stonecutting conversion recipe.
 - [tags.blocks.mineable_pickaxe.json.md](json-examples/tags.blocks.mineable_pickaxe.json.md) - Extend vanilla mineable-by-pickaxe tag.
 - [tags.items.planks.json.md](json-examples/tags.items.planks.json.md) - Extend vanilla planks item tag.
+- [tags.items.swords.json.md](json-examples/tags.items.swords.json.md) - Extend vanilla swords item tag.
+- [tags.items.pickaxes.json.md](json-examples/tags.items.pickaxes.json.md) - Extend vanilla pickaxes item tag.
 - [worldgen.configured_feature.ore.json.md](json-examples/worldgen.configured_feature.ore.json.md) - Ore configured feature definition.
 - [worldgen.placed_feature.ore.json.md](json-examples/worldgen.placed_feature.ore.json.md) - Ore placed feature frequency and height rules.
 - [neoforge.biome_modifier.add_features.json.md](json-examples/neoforge.biome_modifier.add_features.json.md) - NeoForge biome modifier for feature injection.

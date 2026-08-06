@@ -1,8 +1,8 @@
 package com.github.syren_dev_tech.scylla.blocks.redstone;
 
+import com.github.syren_dev_tech.scylla.collections.Triplet;
 import com.github.syren_dev_tech.scylla.registry.ModRegister;
 import com.github.syren_dev_tech.scylla.registry.definitions.BlockDefinition;
-import com.github.syren_dev_tech.scylla.utilities.collections.Triplet;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.Blocks;

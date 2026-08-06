@@ -2,7 +2,7 @@ package com.github.syren_dev_tech.scylla.registry.features;
 
 import java.util.HashMap;
 import java.util.Map;
-import com.github.syren_dev_tech.scylla.utilities.collections.Tuple;
+import com.github.syren_dev_tech.scylla.collections.Tuple;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;

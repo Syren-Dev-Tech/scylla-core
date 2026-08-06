@@ -1,9 +1,9 @@
 package com.github.syren_dev_tech.scylla.mobs.client;
 
+import com.github.syren_dev_tech.scylla.files.ResourcePath;
 import com.github.syren_dev_tech.scylla.mobs.CreatureBuilder;
 import com.github.syren_dev_tech.scylla.mobs.creatures.CreatureState;
 import com.github.syren_dev_tech.scylla.mobs.creatures.CustomCreature;
-import com.github.syren_dev_tech.scylla.utilities.files.ResourcePath;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.model.GeoModel;
 

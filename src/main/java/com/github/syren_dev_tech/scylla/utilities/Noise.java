@@ -1,4 +1,4 @@
-package com.github.syren_dev_tech.scylla.utilities.util;
+package com.github.syren_dev_tech.scylla.utilities;
 
 public class Noise {
 

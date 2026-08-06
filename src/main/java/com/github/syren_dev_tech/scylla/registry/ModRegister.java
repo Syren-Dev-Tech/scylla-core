@@ -1,8 +1,10 @@
 package com.github.syren_dev_tech.scylla.registry;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import com.github.syren_dev_tech.scylla.utilities.config.Config;
+import com.github.syren_dev_tech.scylla.files.TomlBuilder;
+import com.github.syren_dev_tech.scylla.files.TomlConfigManager;
 
 public class ModRegister {
 
@@ -14,7 +16,7 @@ public class ModRegister {
     public final ItemRegistry itemRegistry;
     public final CreativeTabRegistry creativeTabRegistry;
     public final MobRegistry mobRegistry;
-    public final Map<String, Config> configs = new HashMap<>();
+    public final Map<String, TomlConfigManager> configs = new HashMap<>();
 
     public ModRegister(String modId, ModRegistrars registrars) {
         this.modId = modId;
@@ -26,14 +28,16 @@ public class ModRegister {
         this.mobRegistry = new MobRegistry(this, registrars.entityRegistrar);
     }
 
-    public Config createConfig(String name) {
-        Config config = new Config(name, this.modId);
-        this.configs.put(name, config);
-
-        return config;
+    public void loadConfig(String filePath, TomlBuilder tomlBuilder) throws IOException {
+        configs.put(filePath, TomlConfigManager.load(filePath, tomlBuilder));
     }
 
-    public Config getConfig(String name) {
-        return this.configs.get(name);
+    public TomlBuilder getConfig(String filePath) {
+        var config = configs.get(filePath);
+        if (config == null) {
+            return null;
+        }
+
+        return config.getConfig();
     }
 }

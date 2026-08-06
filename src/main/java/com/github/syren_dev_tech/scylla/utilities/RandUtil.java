@@ -1,4 +1,4 @@
-package com.github.syren_dev_tech.scylla.utilities.util;
+package com.github.syren_dev_tech.scylla.utilities;
 
 public class RandUtil {
     private static final java.util.Random RANDOM = new java.util.Random();

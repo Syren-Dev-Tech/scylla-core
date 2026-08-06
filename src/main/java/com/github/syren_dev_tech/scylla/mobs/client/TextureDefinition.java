@@ -1,7 +1,7 @@
 package com.github.syren_dev_tech.scylla.mobs.client;
 
+import com.github.syren_dev_tech.scylla.files.ResourcePath;
 import com.github.syren_dev_tech.scylla.registry.ModRegister;
-import com.github.syren_dev_tech.scylla.utilities.files.ResourcePath;
 
 public class TextureDefinition {
 

@@ -1,4 +1,4 @@
-package com.github.syren_dev_tech.scylla.utilities.util;
+package com.github.syren_dev_tech.scylla.utilities;
 
 import org.apache.commons.lang3.StringUtils;
 

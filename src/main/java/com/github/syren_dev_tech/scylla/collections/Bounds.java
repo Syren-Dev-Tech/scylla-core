@@ -1,4 +1,4 @@
-package com.github.syren_dev_tech.scylla.utilities.collections;
+package com.github.syren_dev_tech.scylla.collections;
 
 public class Bounds {
     private double x1;

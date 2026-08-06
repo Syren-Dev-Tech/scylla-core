@@ -1,4 +1,4 @@
-package com.github.syren_dev_tech.scylla.utilities.collections;
+package com.github.syren_dev_tech.scylla.collections;
 
 public class Quartet<W, X, Y, Z> {
     public final W w;

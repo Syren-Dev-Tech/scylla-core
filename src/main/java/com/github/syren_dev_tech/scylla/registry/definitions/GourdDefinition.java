@@ -1,8 +1,8 @@
 package com.github.syren_dev_tech.scylla.registry.definitions;
 
 import com.github.syren_dev_tech.scylla.blocks.plants.gourds.types.Gourd;
+import com.github.syren_dev_tech.scylla.files.ResourcePath;
 import com.github.syren_dev_tech.scylla.registry.ModRegister;
-import com.github.syren_dev_tech.scylla.utilities.files.ResourcePath;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.block.Block;

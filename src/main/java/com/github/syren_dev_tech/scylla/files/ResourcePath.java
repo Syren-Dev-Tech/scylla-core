@@ -1,4 +1,4 @@
-package com.github.syren_dev_tech.scylla.utilities.files;
+package com.github.syren_dev_tech.scylla.files;
 
 import net.minecraft.resources.ResourceLocation;
 

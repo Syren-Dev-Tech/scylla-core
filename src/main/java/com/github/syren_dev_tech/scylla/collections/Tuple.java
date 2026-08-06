@@ -1,4 +1,4 @@
-package com.github.syren_dev_tech.scylla.utilities.collections;
+package com.github.syren_dev_tech.scylla.collections;
 
 public class Tuple<X, Y> {
     public final X x;

@@ -1,4 +1,4 @@
-package com.github.syren_dev_tech.scylla.utilities.collections;
+package com.github.syren_dev_tech.scylla.collections;
 
 /**
  * A utility class for creating specialized tuples that directly store primitive values without the overhead of boxing/unboxing.

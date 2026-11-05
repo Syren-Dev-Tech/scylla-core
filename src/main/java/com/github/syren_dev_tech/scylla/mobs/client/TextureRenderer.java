@@ -1,17 +1,17 @@
 package com.github.syren_dev_tech.scylla.mobs.client;
 
 import java.util.function.Function;
+import com.github.syren_dev_tech.hydra.animatable.HydraAnimatable;
+import com.github.syren_dev_tech.hydra.renderer.layer.HydraRenderLayer;
 import com.github.syren_dev_tech.scylla.files.ResourcePath;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
-import software.bernie.geckolib.animatable.GeoAnimatable;
-import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
 
-public class TextureRenderer<T extends LivingEntity & GeoAnimatable> extends GeoRenderLayer<T> {
+public class TextureRenderer<T extends LivingEntity & HydraAnimatable> extends HydraRenderLayer<T> {
 
     private Function<T, ResourcePath> textureSupplier;
 
-    public TextureRenderer(ResourcePath resource, CustomGeoRenderer<T> geoRenderer) {
+    public TextureRenderer(ResourcePath resource, CustomHydraRenderer<T> geoRenderer) {
         super(geoRenderer);
 
         this.textureSupplier = t -> resource;

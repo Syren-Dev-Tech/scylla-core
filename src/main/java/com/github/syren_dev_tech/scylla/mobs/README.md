@@ -10,6 +10,7 @@ It covers:
 4. Mask color layers (single, multi-layer, state-driven)
 5. Migration notes from older APIs
 6. Best practices and troubleshooting
+7. Custom NBT schema, selective sync, and NBT-driven tinting
 
 ## Quick Start
 
@@ -267,6 +268,161 @@ builder.clearMaskLayers();
 
 This clears all configured mask layers and legacy `withMasks(...)` state.
 
+## Custom NBT Schema and Synced Trait Data
+
+`CreatureBuilder` now supports defining custom NBT fields (including nested dot paths), selecting which fields sync to clients, and using those synced values for render tinting.
+
+### Define Trait Fields in the Builder
+
+```java
+builder
+    .withNbtField("traits.aggression", "integer")
+    .withNbtField("traits.playfullness", "boolean");
+```
+
+If you want to sync a field to the client immediately, use the sync overload:
+
+```java
+builder
+    .withNbtField("traits.aggression", "integer", true)
+    .withNbtField("traits.playfullness", "boolean", true);
+```
+
+### Define Grouped Fields With Less Boilerplate
+
+```java
+builder.withNbtGroupFromStrings(
+    "traits",
+    Map.of(
+        "aggression", "integer",
+        "playfullness", "boolean"
+    ),
+    true
+);
+```
+
+This creates:
+
+1. `traits.aggression` as `integer`
+2. `traits.playfullness` as `boolean`
+3. Both fields marked for client sync
+
+### Set and Read Custom Values in Entity Logic
+
+```java
+// Server-side updates
+creature.setCustomNbt("traits.aggression", 8);
+creature.setCustomNbt("traits.playfullness", true);
+
+// Typed reads anywhere you have the creature instance
+int aggression = creature.getCustomNbtInt("traits.aggression", 0);
+boolean playful = creature.getCustomNbtBoolean("traits.playfullness", false);
+```
+
+Typed getters available on `CustomCreature`:
+
+1. `getCustomNbtString(path, defaultValue)`
+2. `getCustomNbtInt(path, defaultValue)`
+3. `getCustomNbtBoolean(path, defaultValue)`
+4. `getCustomNbtFloat(path, defaultValue)`
+5. `getCustomNbtDouble(path, defaultValue)`
+6. `getCustomNbtLong(path, defaultValue)`
+7. `getCustomNbtShort(path, defaultValue)`
+8. `getCustomNbtByte(path, defaultValue)`
+
+### NBT-Driven Client Tint Layers for Texture Coloring
+
+Use the new builder helpers to bind synced custom values to mask tint output.
+
+```java
+builder
+    .addNbtRangeTintLayer(
+        new ResourcePath(modRegister.modId, "textures/entity/example_wanderer/mask_aggression.png"),
+        "traits.aggression",
+        0,
+        10,
+        CreatureBuilder.rgba(64, 128, 255, 255),
+        CreatureBuilder.rgba(255, 64, 64, 255)
+    )
+    .addNbtBooleanTintLayer(
+        new ResourcePath(modRegister.modId, "textures/entity/example_wanderer/mask_playful.png"),
+        "traits.playfullness",
+        CreatureBuilder.rgba(120, 120, 120, 255),
+        CreatureBuilder.rgba(255, 220, 120, 255)
+    );
+```
+
+Notes:
+
+1. These tint-layer helpers automatically mark the referenced field for client sync.
+2. Range tint interpolates from `minColor` to `maxColor` as value moves from `minValue` to `maxValue`.
+3. Boolean tint switches directly between the two configured colors.
+
+### Sync Rules
+
+1. Only fields marked as synced are sent through entity synced data.
+2. Updating a non-synced custom field does not send sync packets.
+3. Synced values are available client-side for renderer logic such as mask coloring.
+
+### Copy/Paste Preset: Traits With Client Tint
+
+Use this as a starting template for a creature that exposes trait data, syncs selected fields, and colors mask overlays on the client.
+
+```java
+import java.util.Map;
+import com.github.syren_dev_tech.scylla.files.ResourcePath;
+
+CreatureBuilder<ExampleWanderer> builder = new CreatureBuilder<>(
+    "example_wanderer",
+    modRegister,
+    ExampleWanderer::new
+)
+    .addAnimator("main", state -> AnimationDefinition.loop("idle"))
+    .withNbtGroupFromStrings(
+        "traits",
+        Map.of(
+            "aggression", "integer",
+            "playfullness", "boolean"
+        ),
+        true
+    )
+    .addNbtRangeTintLayer(
+        new ResourcePath(modRegister.modId, "textures/entity/example_wanderer/mask_aggression.png"),
+        "traits.aggression",
+        0,
+        10,
+        CreatureBuilder.rgba(64, 128, 255, 255),
+        CreatureBuilder.rgba(255, 64, 64, 255)
+    )
+    .addNbtBooleanTintLayer(
+        new ResourcePath(modRegister.modId, "textures/entity/example_wanderer/mask_playful.png"),
+        "traits.playfullness",
+        CreatureBuilder.rgba(120, 120, 120, 255),
+        CreatureBuilder.rgba(255, 220, 120, 255)
+    );
+```
+
+Server-side update example:
+
+```java
+// For example, in goal tick/update logic on server side
+creature.setCustomNbt("traits.aggression", aggressionScore);
+creature.setCustomNbt("traits.playfullness", isPlayful);
+```
+
+Client-side read example (for custom render/model logic):
+
+```java
+int aggression = creature.getCustomNbtInt("traits.aggression", 0);
+boolean playful = creature.getCustomNbtBoolean("traits.playfullness", false);
+```
+
+Preset checklist:
+
+1. Keep field paths consistent between schema, updates, and tint layers.
+2. Keep range bounds stable (for example, `0..10`) to avoid color jumps.
+3. Store server-authored values only; let sync mirror them to the client.
+
 ## Animation-Driven Texture and Mask Switching
 
 You can switch both base textures and mask textures from the currently playing animation.
@@ -379,6 +535,12 @@ Use the function overloads when texture depends on animation/state. Use the `Res
 6. `withTexture(Function<CreatureState<T>, ResourcePath>)`, `withTexture(ResourcePath)`
 7. `animationResources(String animatorName, ResourcePath fallback)`
 8. `withMaskLayer(...)`, `withMaskLayers(...)`, `clearMaskLayers()`
+9. `withNbtField(String key, NbtDataType type)`
+10. `withNbtField(String key, String type)`
+11. `withNbtField(String key, String type, boolean syncToClient)`
+12. `withNbtGroup(...)`, `withNbtGroupFromStrings(...)`
+13. `withSyncedNbtField(...)`, `withSyncedNbtFields(...)`
+14. `addNbtRangeTintLayer(...)`, `addNbtBooleanTintLayer(...)`
 
 ### AIGoalDefinition
 

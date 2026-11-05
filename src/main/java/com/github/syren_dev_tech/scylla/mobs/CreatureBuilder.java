@@ -1,9 +1,15 @@
 package com.github.syren_dev_tech.scylla.mobs;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 import java.util.function.Function;
 import com.github.syren_dev_tech.scylla.files.ResourcePath;
 import com.github.syren_dev_tech.scylla.mobs.ai.AIGoal;
@@ -25,8 +31,11 @@ public class CreatureBuilder<T extends CustomCreature> {
     private final CreatureFactory<T> factory;
     private final List<Function<T, AIGoal>> goals = new ArrayList<>();
     private final List<MaskLayer<T>> maskLayers = new ArrayList<>();
+    private final List<NbtMaskTintLayer> nbtMaskTintLayers = new ArrayList<>();
     private final Map<String, AnimationHandler<T>> animators = new HashMap<>();
     private final Map<String, TextureDefinition> textures = new HashMap<>();
+    private final Map<String, NbtDataType> nbtSchema = new LinkedHashMap<>();
+    private final Set<String> syncedNbtFields = new LinkedHashSet<>();
     private final ModRegister register;
     private final TextureDefinition defaultTexture;
     private final String name;
@@ -194,6 +203,10 @@ public class CreatureBuilder<T extends CustomCreature> {
         return maskLayers;
     }
 
+    public List<NbtMaskTintLayer> getNbtMaskTintLayers() {
+        return Collections.unmodifiableList(this.nbtMaskTintLayers);
+    }
+
     public float getShadowSize() {
         return shadowSize;
     }
@@ -212,6 +225,164 @@ public class CreatureBuilder<T extends CustomCreature> {
 
     public TextureDefinition getDefaultTexture() {
         return defaultTexture;
+    }
+
+    public CreatureBuilder<T> withNbtField(String key, NbtDataType expectedType) {
+        if (key == null || key.isBlank() || expectedType == null) {
+            return this;
+        }
+
+        this.nbtSchema.put(key, expectedType);
+        return this;
+    }
+
+    public CreatureBuilder<T> withNbtField(String key, String expectedType) {
+        if (expectedType == null || expectedType.isBlank()) {
+            return this;
+        }
+
+        return this.withNbtField(key, NbtDataType.fromName(expectedType));
+    }
+
+    public CreatureBuilder<T> withNbtField(String key, NbtDataType expectedType, boolean syncToClient) {
+        this.withNbtField(key, expectedType);
+
+        if (syncToClient) {
+            this.withSyncedNbtField(key);
+        }
+
+        return this;
+    }
+
+    public CreatureBuilder<T> withNbtField(String key, String expectedType, boolean syncToClient) {
+        return this.withNbtField(key, NbtDataType.fromName(expectedType), syncToClient);
+    }
+
+    public CreatureBuilder<T> withNbtFields(Map<String, NbtDataType> fields) {
+        if (fields == null || fields.isEmpty()) {
+            return this;
+        }
+
+        fields.forEach(this::withNbtField);
+        return this;
+    }
+
+    public CreatureBuilder<T> withNbtFieldsFromStrings(Map<String, String> fields) {
+        if (fields == null || fields.isEmpty()) {
+            return this;
+        }
+
+        fields.forEach(this::withNbtField);
+        return this;
+    }
+
+    public CreatureBuilder<T> withNbtGroup(String group, Map<String, NbtDataType> fields) {
+        return this.withNbtGroup(group, fields, false);
+    }
+
+    public CreatureBuilder<T> withNbtGroup(String group, Map<String, NbtDataType> fields, boolean syncToClient) {
+        if (group == null || group.isBlank() || fields == null || fields.isEmpty()) {
+            return this;
+        }
+
+        String normalizedGroup = this.normalizeNbtGroup(group);
+        fields.forEach((fieldName, type) -> this.withNbtField(normalizedGroup + fieldName, type, syncToClient));
+        return this;
+    }
+
+    public CreatureBuilder<T> withNbtGroupFromStrings(String group, Map<String, String> fields) {
+        return this.withNbtGroupFromStrings(group, fields, false);
+    }
+
+    public CreatureBuilder<T> withNbtGroupFromStrings(String group, Map<String, String> fields, boolean syncToClient) {
+        if (group == null || group.isBlank() || fields == null || fields.isEmpty()) {
+            return this;
+        }
+
+        String normalizedGroup = this.normalizeNbtGroup(group);
+        fields.forEach((fieldName, type) -> this.withNbtField(normalizedGroup + fieldName, type, syncToClient));
+        return this;
+    }
+
+    public Map<String, NbtDataType> getNbtSchema() {
+        return Collections.unmodifiableMap(this.nbtSchema);
+    }
+
+    public CreatureBuilder<T> withSyncedNbtField(String key) {
+        if (key == null || key.isBlank()) {
+            return this;
+        }
+
+        if (!this.nbtSchema.containsKey(key)) {
+            throw new IllegalArgumentException("Cannot sync undefined NBT schema field: " + key);
+        }
+
+        this.syncedNbtFields.add(key);
+        return this;
+    }
+
+    public CreatureBuilder<T> withSyncedNbtFields(Collection<String> keys) {
+        if (keys == null || keys.isEmpty()) {
+            return this;
+        }
+
+        keys.forEach(this::withSyncedNbtField);
+        return this;
+    }
+
+    public Set<String> getSyncedNbtFields() {
+        return Collections.unmodifiableSet(this.syncedNbtFields);
+    }
+
+    public CreatureBuilder<T> addNbtRangeTintLayer(ResourcePath mask, String fieldPath, int minValue, int maxValue, int minColor, int maxColor) {
+        if (mask == null || fieldPath == null || fieldPath.isBlank()) {
+            return this;
+        }
+
+        this.ensureTintFieldConfigured(fieldPath, NbtDataType.INTEGER);
+        this.nbtMaskTintLayers.add(NbtMaskTintLayer.forRange(mask, fieldPath, minValue, maxValue, minColor, maxColor));
+        return this;
+    }
+
+    public CreatureBuilder<T> addNbtBooleanTintLayer(ResourcePath mask, String fieldPath, int falseColor, int trueColor) {
+        if (mask == null || fieldPath == null || fieldPath.isBlank()) {
+            return this;
+        }
+
+        this.ensureTintFieldConfigured(fieldPath, NbtDataType.BOOLEAN);
+        this.nbtMaskTintLayers.add(NbtMaskTintLayer.forBoolean(mask, fieldPath, falseColor, trueColor));
+        return this;
+    }
+
+    private void ensureTintFieldConfigured(String fieldPath, NbtDataType expectedType) {
+        NbtDataType existingType = this.getNbtFieldType(fieldPath);
+        if (existingType == null) {
+            this.withNbtField(fieldPath, expectedType, true);
+            return;
+        }
+
+        if (existingType != expectedType) {
+            throw new IllegalArgumentException("NBT field '" + fieldPath + "' is configured as " + existingType + " but tint layer requires " + expectedType);
+        }
+
+        this.withSyncedNbtField(fieldPath);
+    }
+
+    private String normalizeNbtGroup(String group) {
+        String normalizedGroup = group.trim();
+        if (!normalizedGroup.endsWith(".")) {
+            normalizedGroup += ".";
+        }
+
+        return normalizedGroup;
+    }
+
+    public NbtDataType getNbtFieldType(String key) {
+        if (key == null || key.isBlank()) {
+            return null;
+        }
+
+        return this.nbtSchema.get(key);
     }
 
     public TextureDefinition getTextureForAnimation(String animation) {
@@ -277,6 +448,88 @@ public class CreatureBuilder<T extends CustomCreature> {
     }
 
     public static record AnimationResource(String animationName, ResourcePath resource) {
+    }
+
+    public enum NbtDataType {
+        STRING, INTEGER, BOOLEAN, FLOAT, DOUBLE, LONG, SHORT, BYTE, LIST, COMPOUND;
+
+        public static NbtDataType fromName(String typeName) {
+            String normalized = Objects.requireNonNull(typeName, "NBT type name cannot be null").trim().toUpperCase();
+
+            return switch (normalized) {
+                case "STRING" -> STRING;
+                case "INTEGER", "INT" -> INTEGER;
+                case "BOOLEAN", "BOOL" -> BOOLEAN;
+                case "FLOAT" -> FLOAT;
+                case "DOUBLE" -> DOUBLE;
+                case "LONG" -> LONG;
+                case "SHORT" -> SHORT;
+                case "BYTE" -> BYTE;
+                case "LIST", "ARRAY" -> LIST;
+                case "COMPOUND", "OBJECT" -> COMPOUND;
+                default -> throw new IllegalArgumentException("Unsupported NBT data type: " + typeName);
+            };
+        }
+    }
+
+    public static class NbtMaskTintLayer {
+        private final ResourcePath mask;
+        private final String fieldPath;
+        private final TintMode mode;
+        private final int minValue;
+        private final int maxValue;
+        private final int minColor;
+        private final int maxColor;
+
+        private NbtMaskTintLayer(ResourcePath mask, String fieldPath, TintMode mode, int minValue, int maxValue, int minColor, int maxColor) {
+            this.mask = mask;
+            this.fieldPath = fieldPath;
+            this.mode = mode;
+            this.minValue = minValue;
+            this.maxValue = maxValue;
+            this.minColor = minColor;
+            this.maxColor = maxColor;
+        }
+
+        public static NbtMaskTintLayer forRange(ResourcePath mask, String fieldPath, int minValue, int maxValue, int minColor, int maxColor) {
+            return new NbtMaskTintLayer(mask, fieldPath, TintMode.RANGE, minValue, maxValue, minColor, maxColor);
+        }
+
+        public static NbtMaskTintLayer forBoolean(ResourcePath mask, String fieldPath, int falseColor, int trueColor) {
+            return new NbtMaskTintLayer(mask, fieldPath, TintMode.BOOLEAN, 0, 1, falseColor, trueColor);
+        }
+
+        public ResourcePath getMask() {
+            return this.mask;
+        }
+
+        public String getFieldPath() {
+            return this.fieldPath;
+        }
+
+        public TintMode getMode() {
+            return this.mode;
+        }
+
+        public int getMinValue() {
+            return this.minValue;
+        }
+
+        public int getMaxValue() {
+            return this.maxValue;
+        }
+
+        public int getMinColor() {
+            return this.minColor;
+        }
+
+        public int getMaxColor() {
+            return this.maxColor;
+        }
+
+        public enum TintMode {
+            RANGE, BOOLEAN
+        }
     }
 
     @SafeVarargs

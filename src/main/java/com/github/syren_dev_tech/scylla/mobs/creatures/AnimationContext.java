@@ -1,6 +1,6 @@
 package com.github.syren_dev_tech.scylla.mobs.creatures;
 
-import software.bernie.geckolib.animation.AnimationState;
+import com.github.syren_dev_tech.hydra.animation.AnimationState;
 import com.github.syren_dev_tech.scylla.mobs.CreatureBuilder;
 
 /**

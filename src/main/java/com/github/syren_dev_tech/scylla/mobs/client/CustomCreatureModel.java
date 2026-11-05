@@ -1,13 +1,13 @@
 package com.github.syren_dev_tech.scylla.mobs.client;
 
+import com.github.syren_dev_tech.hydra.model.HydraModel;
 import com.github.syren_dev_tech.scylla.files.ResourcePath;
 import com.github.syren_dev_tech.scylla.mobs.CreatureBuilder;
 import com.github.syren_dev_tech.scylla.mobs.creatures.CreatureState;
 import com.github.syren_dev_tech.scylla.mobs.creatures.CustomCreature;
 import net.minecraft.resources.ResourceLocation;
-import software.bernie.geckolib.model.GeoModel;
 
-public class CustomCreatureModel<T extends CustomCreature> extends GeoModel<T> {
+public class CustomCreatureModel<T extends CustomCreature> extends HydraModel<T> {
 
     private final CreatureBuilder<T> builder;
 
@@ -24,8 +24,8 @@ public class CustomCreatureModel<T extends CustomCreature> extends GeoModel<T> {
     private void defineResources() {
         var registry = this.builder.getRegister();
 
-        this.model = new ResourcePath(registry.modId, "geo/" + this.builder.getName() + ".geo.json");
-        this.animations = new ResourcePath(registry.modId, "animations/" + this.builder.getName() + ".json");
+        this.model = new ResourcePath(registry.modId, "hydra/" + this.builder.getName() + ".hydra.json");
+        this.animations = new ResourcePath(registry.modId, "animations/" + this.builder.getName() + ".animation.json");
     }
 
     @Override

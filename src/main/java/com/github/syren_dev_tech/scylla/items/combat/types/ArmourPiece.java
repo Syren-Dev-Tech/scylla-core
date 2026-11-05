@@ -1,18 +1,15 @@
 package com.github.syren_dev_tech.scylla.items.combat.types;
 
-import java.util.function.Consumer;
-import com.github.syren_dev_tech.scylla.items.combat.client.WearableArmourRenderers;
+import com.github.syren_dev_tech.hydra.animatable.HydraItem;
+import com.github.syren_dev_tech.hydra.animatable.instance.AnimatableInstanceCache;
+import com.github.syren_dev_tech.hydra.animation.AnimatableManager.ControllerRegistrar;
+import com.github.syren_dev_tech.hydra.util.HydraUtil;
 import net.minecraft.core.Holder;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
-import software.bernie.geckolib.animatable.client.GeoRenderProvider;
-import software.bernie.geckolib.animatable.GeoItem;
-import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.animation.AnimatableManager;
-import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class ArmourPiece extends ArmorItem implements GeoItem {
-    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+public class ArmourPiece extends ArmorItem implements HydraItem {
+    private final AnimatableInstanceCache cache = HydraUtil.createInstanceCache(this);
     private final ArmourModelConfig modelConfig;
 
     public ArmourPiece(Holder<ArmorMaterial> material, Type type, Properties properties) {
@@ -25,18 +22,13 @@ public class ArmourPiece extends ArmorItem implements GeoItem {
     }
 
     @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-
+    public void registerControllers(ControllerRegistrar controllers) {
+        // Unimplemented
     }
 
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return this.cache;
-    }
-
-    @Override
-    public void createGeoRenderer(Consumer<GeoRenderProvider> consumer) {
-        WearableArmourRenderers.createProvider(this, consumer);
     }
 
     public ArmourModelConfig modelConfig() {

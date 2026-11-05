@@ -1,9 +1,9 @@
 package com.github.syren_dev_tech.scylla.mobs.creatures;
 
+import com.github.syren_dev_tech.hydra.animation.AnimationState;
+import com.github.syren_dev_tech.hydra.animation.PlayState;
+import com.github.syren_dev_tech.hydra.animation.RawAnimation;
 import com.github.syren_dev_tech.scylla.mobs.AnimationHandler;
-import software.bernie.geckolib.animation.AnimationState;
-import software.bernie.geckolib.animation.PlayState;
-import software.bernie.geckolib.animation.RawAnimation;
 
 public class Animator<T extends CustomCreature> {
     private final String name;
